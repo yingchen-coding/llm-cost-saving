@@ -1,0 +1,30 @@
+# modelharness config — quota-aware multi-model routing.
+[budget]
+state_file = ".broker-state.json"
+
+# A {prompt} token in `command` is replaced with the prompt as one argument (no shell).
+[providers.claude]
+command = "claude -p {prompt}"
+strengths = ["reasoning", "architecture", "refactor", "debugging", "writing", "review"]
+reset = "5h"                       # cool-down when Claude hits its usage limit
+quota_markers = ["usage limit", "rate limit", "429", "quota", "resets at", "too many requests", "exceeded"]
+
+[providers.codex]
+command = "codex exec {prompt}"
+strengths = ["codegen", "boilerplate", "tests", "quick-edit", "scripts"]
+reset = "1h"
+quota_markers = ["rate limit", "429", "quota", "usage limit", "too many requests", "exceeded"]
+
+[routing]
+default = ["claude", "codex"]      # global fail-over order
+
+[routing.tasks]                    # route by task to the model that's strongest at it
+codegen = ["codex", "claude"]
+boilerplate = ["codex", "claude"]
+tests = ["codex", "claude"]
+reasoning = ["claude", "codex"]
+architecture = ["claude", "codex"]
+refactor = ["claude", "codex"]
+review = ["claude", "codex"]
+writing = ["claude", "codex"]
+debugging = ["claude", "codex"]

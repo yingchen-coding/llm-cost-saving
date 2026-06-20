@@ -1,0 +1,133 @@
+import json
+
+import pytest
+
+from broker import config as cfgmod
+from broker import state as statemod
+from broker.config import ConfigError, parse_duration
+from broker.runner import run_task
+
+TOML = """\
+[budget]
+state_file = ".broker-state.json"
+[providers.claude]
+command = "claude -p {prompt}"
+strengths = ["reasoning"]
+reset = "5h"
+quota_markers = ["usage limit", "429"]
+[providers.codex]
+command = "codex exec {prompt}"
+strengths = ["codegen"]
+reset = "1h"
+quota_markers = ["rate limit", "429"]
+[routing]
+default = ["claude", "codex"]
+[routing.tasks]
+codegen = ["codex", "claude"]
+"""
+
+
+def _cfg(tmp_path):
+    p = tmp_path / "broker.toml"
+    p.write_text(TOML)
+    return cfgmod.load(p)
+
+
+def _state(tmp_path):
+    return statemod.State(path=tmp_path / "state.json")
+
+
+def test_parse_duration():
+    assert parse_duration("5h") == 18000
+    assert parse_duration("30m") == 1800
+    assert parse_duration("weekly") == 7 * 86400
+    with pytest.raises(ConfigError):
+        parse_duration("soon")
+
+
+def test_routing_order_default_and_by_task(tmp_path):
+    cfg = _cfg(tmp_path)
+    assert cfg.order_for(None) == ["claude", "codex"]
+    assert cfg.order_for("codegen") == ["codex", "claude"]   # routed to its strength
+    assert cfg.order_for("unknown-task") == ["claude", "codex"]  # falls back to default
+
+
+def test_config_rejects_unknown_provider_in_routing(tmp_path):
+    bad = TOML.replace('default = ["claude", "codex"]', 'default = ["claude", "ghost"]')
+    p = tmp_path / "bad.toml"
+    p.write_text(bad)
+    with pytest.raises(ConfigError, match="ghost"):
+        cfgmod.load(p)
+
+
+def test_failover_when_primary_hits_quota(tmp_path):
+    cfg, state = _cfg(tmp_path), _state(tmp_path)
+    calls = []
+
+    def executor(argv, stdin):
+        calls.append(argv[0])
+        if argv[0] == "claude":
+            return 1, "Error: usage limit reached, resets at 3pm"
+        return 0, "codex did the work"
+
+    result = run_task(cfg, state, "build X", task="reasoning", executor=executor, now_fn=lambda: 1000.0)
+    assert calls == ["claude", "codex"]               # tried claude, failed over to codex
+    assert result.provider == "codex"
+    assert [a.provider for a in result.attempts] == ["claude", "codex"]
+    assert result.attempts[0].quota_hit is True
+    # claude is now cooled down for 5h
+    assert state.get("claude").available(1000.0) is False
+    assert state.get("claude").cooldown_remaining(1000.0) == 18000
+
+
+def test_cooled_down_provider_is_skipped(tmp_path):
+    cfg, state = _cfg(tmp_path), _state(tmp_path)
+    state.cool_down("claude", until=5000.0)           # claude unavailable until t=5000
+    used = []
+
+    def executor(argv, stdin):
+        used.append(argv[0])
+        return 0, "ok"
+
+    result = run_task(cfg, state, "x", task="reasoning", executor=executor, now_fn=lambda: 1000.0)
+    assert used == ["codex"]                          # claude skipped entirely, no wasted call
+    assert result.provider == "codex"
+
+
+def test_resume_after_cooldown_expires(tmp_path):
+    cfg, state = _cfg(tmp_path), _state(tmp_path)
+    state.cool_down("claude", until=2000.0)
+    result = run_task(cfg, state, "x", task="reasoning", executor=lambda a, s: (0, "ok"),
+                      now_fn=lambda: 2001.0)           # past cooldown
+    assert result.provider == "claude"                # back to the preferred model
+
+
+def test_all_exhausted(tmp_path):
+    cfg, state = _cfg(tmp_path), _state(tmp_path)
+    result = run_task(cfg, state, "x", task="reasoning",
+                      executor=lambda a, s: (1, "429 too many requests"), now_fn=lambda: 1000.0)
+    assert result.provider is None and result.exhausted is True
+    assert "exhausted" in result.output
+
+
+def test_prompt_passed_as_single_arg_not_shell(tmp_path):
+    cfg, state = _cfg(tmp_path), _state(tmp_path)
+    seen = {}
+
+    def executor(argv, stdin):
+        seen["argv"] = argv
+        return 0, "ok"
+
+    run_task(cfg, state, "rm -rf / ; echo pwned", task="reasoning", executor=executor, now_fn=lambda: 1.0)
+    assert seen["argv"] == ["claude", "-p", "rm -rf / ; echo pwned"]   # one arg, no injection
+
+
+def test_state_round_trips(tmp_path):
+    state = _state(tmp_path)
+    state.cool_down("claude", until=9999.0)
+    state.record_run("codex", now=100.0)
+    state.save()
+    reloaded = statemod.load(state.path)
+    assert reloaded.get("claude").cooldown_until == 9999.0
+    assert reloaded.get("codex").runs == 1
+    assert json.loads(state.path.read_text())  # valid JSON
