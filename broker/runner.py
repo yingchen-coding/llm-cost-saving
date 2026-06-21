@@ -16,12 +16,25 @@ from .state import State, now
 Executor = Callable[[list[str], str | None], "tuple[int, str]"]
 
 
+_CMD_NOT_FOUND = 127       # provider CLI is missing/uninstalled
+_UNAVAILABLE_COOLDOWN = 60  # short cooldown for a missing CLI (not a quota window)
+
+
 @dataclass
 class Attempt:
     provider: str
     exit_code: int
     quota_hit: bool
     seconds: float = 0.0
+    unavailable: bool = False   # the provider CLI was missing (exit 127) — failed over like quota
+
+    def label(self) -> str:
+        """Provider name annotated with why it failed over (for status/trace lines)."""
+        if self.quota_hit:
+            return f"{self.provider}(quota)"
+        if self.unavailable:
+            return f"{self.provider}(unavailable)"
+        return self.provider
 
 
 @dataclass
@@ -90,10 +103,15 @@ def run_task(
         code, output = exec_fn(argv, stdin_text)
         elapsed = round(time.monotonic() - before, 3)
         quota = code != 0 and provider.matches_quota_error(output)
-        result.attempts.append(Attempt(provider=name, exit_code=code, quota_hit=quota, seconds=elapsed))
-        if quota:
-            state.cool_down(name, started + provider.reset_seconds)
-            continue  # fail over to the next provider
+        unavailable = code == _CMD_NOT_FOUND
+        result.attempts.append(Attempt(provider=name, exit_code=code, quota_hit=quota,
+                                       seconds=elapsed, unavailable=unavailable))
+        if quota or unavailable:
+            # a quota-exhausted OR missing-CLI provider is cooled down and we fail over to the next,
+            # so a broken/uninstalled model doesn't stall the whole run
+            cooldown = provider.reset_seconds if quota else _UNAVAILABLE_COOLDOWN
+            state.cool_down(name, started + cooldown)
+            continue
         state.record_run(name, started)
         result.provider, result.exit_code, result.output = name, code, output
         return result

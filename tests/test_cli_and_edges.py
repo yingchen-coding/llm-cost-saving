@@ -123,6 +123,22 @@ def test_failover_chains_through_three(monkeypatch, tmp_path):
 
 # ---- quota matcher + now snapshot ----
 
+def test_missing_cli_fails_over_like_quota(tmp_path):
+    # a provider whose CLI is missing (exit 127) must fail over, not stall the run
+    cfg = cfgmod.load(_write_cfg(tmp_path, THREE))
+    state = statemod.State(path=tmp_path / "s.json")
+
+    def executor(argv, stdin):
+        if argv[0] == "claude":
+            return 127, "command not found: claude"
+        return 0, "codex handled it"
+
+    r = run_task(cfg, state, "x", task="reasoning", executor=executor, now_fn=lambda: 1000.0)
+    assert r.provider == "codex"
+    assert r.attempts[0].unavailable is True and r.attempts[0].label() == "claude(unavailable)"
+    assert state.get("claude").cooldown_remaining(1000.0) == 60   # short cooldown, not a quota window
+
+
 def test_empty_prompt_spends_no_provider_call(tmp_path):
     cfg = cfgmod.load(_write_cfg(tmp_path, THREE))
     state = statemod.State(path=tmp_path / "s.json")

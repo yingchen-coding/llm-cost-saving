@@ -85,19 +85,20 @@ def _cmd_run(args: argparse.Namespace) -> int:
         "exhausted": result.exhausted,
         "seconds": round(sum(a.seconds for a in result.attempts), 3),
         "attempts": [
-            {"provider": a.provider, "exit_code": a.exit_code, "quota_hit": a.quota_hit, "seconds": a.seconds}
+            {"provider": a.provider, "exit_code": a.exit_code, "quota_hit": a.quota_hit,
+             "unavailable": a.unavailable, "seconds": a.seconds}
             for a in result.attempts
         ],
     })
+
     if result.provider is None:
         print(f"broker: {result.output}", file=sys.stderr)
         if result.attempts:
-            tried = ", ".join(f"{a.provider}(quota)" if a.quota_hit else a.provider for a in result.attempts)
-            print(f"  tried: {tried}", file=sys.stderr)
+            print(f"  tried: {', '.join(a.label() for a in result.attempts)}", file=sys.stderr)
         return 1
-    failovers = [a.provider for a in result.attempts if a.quota_hit]
+    failovers = [a.label() for a in result.attempts if a.quota_hit or a.unavailable]
     if failovers:
-        print(f"broker: {', '.join(failovers)} out of quota → used {result.provider}", file=sys.stderr)
+        print(f"broker: {', '.join(failovers)} → used {result.provider}", file=sys.stderr)
     print(result.output, end="" if result.output.endswith("\n") else "\n")
     return result.exit_code
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+- **Fail over when a provider CLI is missing.** A provider that exits 127 (command not found —
+  uninstalled/broken CLI) now cools down briefly and fails over to the next, instead of stalling the
+  whole run. Found by dogfooding. Trace + status lines label it `name(unavailable)`.
+- **Refuse empty prompts** before spending any provider call (cost control at the input).
+
 ## 0.2.0 — 2026-06-20
 
 - **`broker trace`** — every `run` now appends a JSONL trace (provider, exit, quota events,

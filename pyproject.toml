@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "modelbroker"
-version = "0.2.0"
+version = "0.2.1"
 description = "Quota-aware multi-model router: route each task to the strongest model, fail over when one runs out of quota, resume when it frees up."
 readme = "README.md"
 requires-python = ">=3.11"
