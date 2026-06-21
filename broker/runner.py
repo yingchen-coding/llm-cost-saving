@@ -68,6 +68,10 @@ def run_task(
     timeout: float | None = None,
 ) -> RunResult:
     """Try providers in routing order, failing over on quota errors. Mutates + (the caller) saves state."""
+    if not prompt.strip():
+        # cost control starts here: never spend a provider call on an empty prompt
+        return RunResult(provider=None, exit_code=2, output="empty prompt — nothing to run")
+
     exec_fn = executor or _subprocess_executor(timeout)
     started = now_fn()  # one logical timestamp per invocation — keeps routing decisions consistent
     p = plan(config, state, task, started)

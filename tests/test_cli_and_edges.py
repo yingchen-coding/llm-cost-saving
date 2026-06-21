@@ -123,6 +123,15 @@ def test_failover_chains_through_three(monkeypatch, tmp_path):
 
 # ---- quota matcher + now snapshot ----
 
+def test_empty_prompt_spends_no_provider_call(tmp_path):
+    cfg = cfgmod.load(_write_cfg(tmp_path, THREE))
+    state = statemod.State(path=tmp_path / "s.json")
+    called = []
+    r = run_task(cfg, state, "   \n", executor=lambda a, s: called.append(a) or (0, "x"),
+                 now_fn=lambda: 1.0)
+    assert r.provider is None and r.exit_code == 2 and called == []   # no provider invoked
+
+
 def test_matches_quota_error_is_case_insensitive():
     p = Provider(name="x", command="c", quota_markers=["Usage Limit", "429"])
     assert p.matches_quota_error("ERROR: usage LIMIT reached") is True
