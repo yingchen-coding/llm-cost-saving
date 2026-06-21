@@ -17,8 +17,10 @@ from .state import State, now
 Executor = Callable[[list[str], str | None], "tuple[int, str]"]
 
 
-_CMD_NOT_FOUND = 127       # provider CLI is missing/uninstalled
+_CMD_NOT_FOUND = 127        # provider CLI is missing/uninstalled
+_TIMEOUT = 124              # _subprocess_executor's timeout exit code — always transient
 _UNAVAILABLE_COOLDOWN = 60  # short cooldown for a missing CLI (not a quota window)
+_TRANSIENT_COOLDOWN = 30    # brief cooldown for a retryable provider-side fault
 
 
 @dataclass
@@ -28,6 +30,7 @@ class Attempt:
     quota_hit: bool
     seconds: float = 0.0
     unavailable: bool = False   # the provider CLI was missing (exit 127) — failed over like quota
+    transient: bool = False     # a retryable fault (timeout/network/5xx/crash) — failed over
 
     def label(self) -> str:
         """Provider name annotated with why it failed over (for status/trace lines)."""
@@ -35,7 +38,19 @@ class Attempt:
             return f"{self.provider}(quota)"
         if self.unavailable:
             return f"{self.provider}(unavailable)"
+        if self.transient:
+            return f"{self.provider}(transient)"
         return self.provider
+
+
+def _classify_transient(provider: Provider, code: int, output: str) -> bool:
+    """A non-quota, non-127 nonzero exit that we should fail over on rather than return as-is:
+    a timeout, a crash (negative code = killed by signal), or output matching a transient marker
+    (network / 5xx). Everything else — a generic exit 1, a content/policy refusal, a bad prompt —
+    is a TERMINAL client error and is returned honestly so the caller sees the real failure."""
+    if code == 0:
+        return False
+    return code == _TIMEOUT or code < 0 or provider.matches_transient_error(output)
 
 
 @dataclass
@@ -120,12 +135,18 @@ def run_task(
         elapsed = round(time.monotonic() - before, 3)
         quota = code != 0 and provider.matches_quota_error(output)
         unavailable = code == _CMD_NOT_FOUND
+        # a transient fault is classified only after ruling out quota/missing-CLI, so those keep
+        # their own (longer) cooldowns and labels
+        transient = not quota and not unavailable and _classify_transient(provider, code, output)
         result.attempts.append(Attempt(provider=name, exit_code=code, quota_hit=quota,
-                                       seconds=elapsed, unavailable=unavailable))
-        if quota or unavailable:
-            # a quota-exhausted OR missing-CLI provider is cooled down and we fail over to the next,
-            # so a broken/uninstalled model doesn't stall the whole run
-            cooldown = provider.reset_seconds if quota else _UNAVAILABLE_COOLDOWN
+                                       seconds=elapsed, unavailable=unavailable, transient=transient))
+        if quota or unavailable or transient:
+            # quota-exhausted, missing-CLI, OR a retryable provider-side fault: cool the provider
+            # down and fail over to the next, so one model's hiccup doesn't end the whole run. A
+            # generic/terminal nonzero (bad prompt, policy refusal) falls through and is returned.
+            cooldown = (provider.reset_seconds if quota
+                        else _UNAVAILABLE_COOLDOWN if unavailable
+                        else _TRANSIENT_COOLDOWN)
             state.cool_down(name, started + cooldown)
             continue
         state.record_run(name, started)

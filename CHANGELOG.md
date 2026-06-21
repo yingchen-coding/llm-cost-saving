@@ -2,6 +2,14 @@
 
 ## 0.2.1
 
+- **Fail over on transient faults, return terminal errors honestly.** A non-quota, non-127 nonzero
+  exit used to be returned as-is — so a timeout, network blip, 5xx, or CLI crash on the first
+  provider ended the whole run instead of trying the next, defeating the point of a router. Now a
+  retryable fault (timeout exit 124, negative/killed code, or output matching per-provider
+  `transient_markers`) cools the provider down briefly (30s) and fails over; a genuine terminal
+  error (bad prompt, policy refusal, generic exit 1) is still returned honestly so you see the real
+  cause. Trace/status label it `name(transient)`. The trace failover count now also reflects
+  missing-CLI and transient failovers, not just quota.
 - **`broker doctor`** — preflight that checks each provider's CLI is installed / on PATH (via
   `shutil.which`, no prompt run), so you catch a missing model before a run silently fails over to
   it. Exits non-zero if any are missing.

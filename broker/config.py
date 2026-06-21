@@ -33,10 +33,17 @@ class Provider:
     strengths: list[str] = field(default_factory=list)
     reset_seconds: int = 3600          # how long a quota-exhausted provider stays cooled down
     quota_markers: list[str] = field(default_factory=list)  # substrings that mean "out of quota"
+    transient_markers: list[str] = field(default_factory=list)  # substrings that mean "retry elsewhere"
 
     def matches_quota_error(self, output: str) -> bool:
         low = output.lower()
         return any(marker.lower() in low for marker in self.quota_markers)
+
+    def matches_transient_error(self, output: str) -> bool:
+        """A retryable provider-side fault (timeout, network, 5xx, crash) — fail over rather than
+        return as-is. Quota is handled separately; terminal client errors must NOT match here."""
+        low = output.lower()
+        return any(marker.lower() in low for marker in self.transient_markers)
 
 
 @dataclass
@@ -83,6 +90,9 @@ def load(path: str | Path = DEFAULT_CONFIG) -> Config:
             reset_seconds=parse_duration(str(spec.get("reset", "1h"))),
             quota_markers=_coerce_str_list(spec.get("quota_markers"))
             or ["rate limit", "usage limit", "quota", "429", "too many requests"],
+            transient_markers=_coerce_str_list(spec.get("transient_markers"))
+            or ["timeout", "timed out", "connection reset", "connection refused", "network",
+                "temporarily unavailable", "503", "502", "504", "500", "bad gateway"],
         )
 
     routing = data.get("routing", {})

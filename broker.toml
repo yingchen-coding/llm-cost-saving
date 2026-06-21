@@ -3,6 +3,8 @@
 state_file = ".broker-state.json"
 
 # A {prompt} token in `command` is replaced with the prompt as one argument (no shell).
+# Each provider also has sensible default `transient_markers` (timeout / network / 5xx) that trigger
+# fail-over rather than returning the error as-is; override per-provider if your CLI words them differently.
 [providers.claude]
 command = "claude -p {prompt}"
 strengths = ["reasoning", "architecture", "refactor", "debugging", "writing", "review"]

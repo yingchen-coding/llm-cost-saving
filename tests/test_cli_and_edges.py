@@ -161,6 +161,48 @@ def test_missing_cli_fails_over_like_quota(tmp_path):
     assert state.get("claude").cooldown_remaining(1000.0) == 60   # short cooldown, not a quota window
 
 
+def test_timeout_fails_over_then_succeeds(tmp_path):
+    # a timeout (exit 124) on the first provider is transient — fail over, don't return it as-is
+    cfg = cfgmod.load(_write_cfg(tmp_path, THREE))
+    state = statemod.State(path=tmp_path / "s.json")
+
+    def executor(argv, stdin):
+        return (124, "timeout") if argv[0] == "claude" else (0, "codex handled it")
+
+    r = run_task(cfg, state, "x", task="reasoning", executor=executor, now_fn=lambda: 1000.0)
+    assert r.provider == "codex"
+    assert r.attempts[0].transient is True and r.attempts[0].label() == "claude(transient)"
+    assert state.get("claude").cooldown_remaining(1000.0) == 30  # short transient window, not 5h quota
+
+
+def test_network_error_fails_over(tmp_path):
+    cfg = cfgmod.load(_write_cfg(tmp_path, THREE))
+    state = statemod.State(path=tmp_path / "s.json")
+
+    def executor(argv, stdin):
+        return (1, "Error: connection reset by peer") if argv[0] == "claude" else (0, "ok")
+
+    r = run_task(cfg, state, "x", task="reasoning", executor=executor, now_fn=lambda: 1000.0)
+    assert r.provider == "codex" and r.attempts[0].transient is True
+
+
+def test_generic_nonzero_is_returned_not_failed_over(tmp_path):
+    # a terminal client error (bad prompt / policy refusal) is NOT transient: return it honestly,
+    # don't burn every provider re-incurring the same deterministic failure
+    cfg = cfgmod.load(_write_cfg(tmp_path, THREE))
+    state = statemod.State(path=tmp_path / "s.json")
+    calls = []
+
+    def executor(argv, stdin):
+        calls.append(argv[0])
+        return 1, "Error: prompt rejected by content policy"
+
+    r = run_task(cfg, state, "x", task="reasoning", executor=executor, now_fn=lambda: 1000.0)
+    assert r.provider == "claude" and r.exit_code == 1   # returned as-is
+    assert calls == ["claude"]                            # did NOT fail over to codex
+    assert r.attempts[0].transient is False
+
+
 def test_empty_prompt_spends_no_provider_call(tmp_path):
     cfg = cfgmod.load(_write_cfg(tmp_path, THREE))
     state = statemod.State(path=tmp_path / "s.json")

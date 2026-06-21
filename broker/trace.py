@@ -58,7 +58,9 @@ def summarize(path: str | Path) -> TraceSummary:
             attempts = rec.get("attempts") or []
             quota_hits = sum(1 for a in attempts if a.get("quota_hit"))
             quota_events += quota_hits
-            if quota_hits:
+            # a failover is any run where a provider was abandoned mid-chain — for quota, a missing
+            # CLI, or a transient fault — not just quota
+            if any(a.get("quota_hit") or a.get("unavailable") or a.get("transient") for a in attempts):
                 failovers += 1
             prov = rec.get("provider")
             if prov:
