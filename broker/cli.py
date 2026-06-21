@@ -51,20 +51,29 @@ def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="broker", description="Quota-aware multi-model task router.")
     p.add_argument("--version", action="version", version=f"modelbroker {__version__}")
     p.add_argument("-c", "--config", default=cfgmod.DEFAULT_CONFIG, help="path to broker.toml")
+    # Accept -c AFTER the subcommand too (`broker run -c X`), not just before it. SUPPRESS default so
+    # a subcommand only overrides the global value when -c is explicitly given — never resets it.
+    cfg_after = argparse.ArgumentParser(add_help=False)
+    cfg_after.add_argument("-c", "--config", default=argparse.SUPPRESS, help="path to broker.toml")
     sub = p.add_subparsers(dest="command", required=True)
 
-    run = sub.add_parser("run", help="run a prompt on the strongest available model (with fail-over)")
+    run = sub.add_parser("run", parents=[cfg_after],
+                         help="run a prompt on the strongest available model (with fail-over)")
     run.add_argument("prompt", help="the prompt / task text")
     run.add_argument("-t", "--task", default=None, help="task type (codegen, reasoning, tests, ...)")
     run.add_argument("--timeout", type=float, default=None, help="per-provider timeout (seconds)")
 
-    route = sub.add_parser("route", help="show which model a task would go to (no execution)")
+    route = sub.add_parser("route", parents=[cfg_after],
+                           help="show which model a task would go to (no execution)")
     route.add_argument("-t", "--task", default=None)
 
-    sub.add_parser("status", help="show each provider's availability / cooldown / usage")
-    sub.add_parser("doctor", help="check each provider's CLI is installed/on PATH (no prompt run)")
-    sub.add_parser("trace", help="summarize the run trace (routing, failovers, quota events, time)")
-    sub.add_parser("init", help="write a starter broker.toml")
+    sub.add_parser("status", parents=[cfg_after],
+                   help="show each provider's availability / cooldown / usage")
+    sub.add_parser("doctor", parents=[cfg_after],
+                   help="check each provider's CLI is installed/on PATH (no prompt run)")
+    sub.add_parser("trace", parents=[cfg_after],
+                   help="summarize the run trace (routing, failovers, quota events, time)")
+    sub.add_parser("init", parents=[cfg_after], help="write a starter broker.toml")
     return p
 
 

@@ -2,6 +2,9 @@
 
 ## 0.2.1
 
+- **`-c/--config` is accepted after the subcommand too** (`broker run -t codegen -c X`), not only
+  before it — matching how people actually type the command. A subcommand only overrides the global
+  config when `-c` is explicitly given.
 - **Fail over on transient faults, return terminal errors honestly.** A non-quota, non-127 nonzero
   exit used to be returned as-is — so a timeout, network blip, 5xx, or CLI crash on the first
   provider ended the whole run instead of trying the next, defeating the point of a router. Now a

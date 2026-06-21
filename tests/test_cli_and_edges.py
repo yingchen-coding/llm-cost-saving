@@ -60,6 +60,16 @@ def test_cli_run_uses_executor(monkeypatch, tmp_path, capsys):
     assert "hi from claude" in capsys.readouterr().out
 
 
+def test_cli_accepts_config_after_subcommand(tmp_path, capsys):
+    # -c may appear before OR after the subcommand: `broker route -t codegen -c X` works like
+    # `broker -c X route -t codegen`. A subcommand only overrides when -c is explicitly given.
+    cfg = _write_cfg(tmp_path, THREE)
+    assert cli.main(["route", "-t", "codegen", "-c", str(cfg)]) == 0
+    assert "codex" in capsys.readouterr().out
+    assert cli.main(["-c", str(cfg), "route", "-t", "codegen"]) == 0  # before still works
+    assert "codex" in capsys.readouterr().out
+
+
 def test_cli_missing_config_is_clean_error(tmp_path, capsys):
     missing = tmp_path / "nope.toml"
     assert cli.main(["-c", str(missing), "route"]) == 2
