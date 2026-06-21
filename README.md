@@ -1,9 +1,10 @@
 # modelbroker
 
 > **Run out of Claude quota? Keep working on Codex. Quota back? Switch back.**
-> A quota-aware multi-model harness: route each task to the model that's strongest at it, fail over
+> A quota-aware multi-model router: route each task to the model that's strongest at it, fail over
 > when one runs out of quota, and resume the moment its window resets.
 
+[![CI](https://github.com/yingchen-coding/modelbroker/actions/workflows/ci.yml/badge.svg)](https://github.com/yingchen-coding/modelbroker/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -28,7 +29,7 @@ keys (it drives the CLIs you already have).
 
 ```bash
 pip install -e .          # or: pip install git+https://github.com/yingchen-coding/modelbroker
-broker init              # write a starter harness.toml (claude + codex)
+broker init              # write a starter broker.toml (claude + codex)
 
 broker route -t codegen  # → would use: codex
 broker route -t reasoning# → would use: claude
@@ -40,7 +41,7 @@ broker run -t codegen "write a quicksort in python"
 
 ## How a config looks
 
-`harness.toml` — providers (with strengths + how they signal "out of quota") and a routing policy:
+`broker.toml` — providers (with strengths + how they signal "out of quota") and a routing policy:
 
 ```toml
 [providers.claude]
