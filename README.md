@@ -34,6 +34,7 @@ broker init              # write a starter broker.toml (claude + codex)
 broker route -t codegen  # → would use: codex
 broker route -t reasoning# → would use: claude
 broker status            # availability / cooldown / usage per provider
+broker doctor            # check each provider's CLI is installed / on PATH (no prompt run)
 
 broker run -t codegen "write a quicksort in python"
 # claude out of quota → uses codex; claude back in window → uses claude. automatically.

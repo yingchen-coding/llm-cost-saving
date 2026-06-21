@@ -2,6 +2,9 @@
 
 ## 0.2.1
 
+- **`broker doctor`** — preflight that checks each provider's CLI is installed / on PATH (via
+  `shutil.which`, no prompt run), so you catch a missing model before a run silently fails over to
+  it. Exits non-zero if any are missing.
 - **Fail over when a provider CLI is missing.** A provider that exits 127 (command not found —
   uninstalled/broken CLI) now cools down briefly and fails over to the next, instead of stalling the
   whole run. Found by dogfooding. Trace + status lines label it `name(unavailable)`.

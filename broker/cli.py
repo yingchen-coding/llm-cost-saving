@@ -11,7 +11,7 @@ from . import state as statemod
 from . import trace as tracemod
 from .config import ConfigError
 from .router import plan
-from .runner import run_task
+from .runner import probe_provider, run_task
 
 _DEFAULT_TOML = """\
 # modelbroker config — quota-aware multi-model routing.
@@ -62,6 +62,7 @@ def _build_parser() -> argparse.ArgumentParser:
     route.add_argument("-t", "--task", default=None)
 
     sub.add_parser("status", help="show each provider's availability / cooldown / usage")
+    sub.add_parser("doctor", help="check each provider's CLI is installed/on PATH (no prompt run)")
     sub.add_parser("trace", help="summarize the run trace (routing, failovers, quota events, time)")
     sub.add_parser("init", help="write a starter broker.toml")
     return p
@@ -126,6 +127,20 @@ def _cmd_status(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_doctor(args: argparse.Namespace) -> int:
+    cfg = cfgmod.load(args.config)
+    all_ok = True
+    for name, prov in cfg.providers.items():
+        ok, detail = probe_provider(prov)
+        mark = "ok " if ok else "MISSING"
+        print(f"{name:<10} {mark:<8} {detail}")
+        all_ok = all_ok and ok
+    if not all_ok:
+        print("broker: some provider CLIs are not installed — those models will be skipped on run",
+              file=sys.stderr)
+    return 0 if all_ok else 1
+
+
 def _cmd_trace(args: argparse.Namespace) -> int:
     cfg = cfgmod.load(args.config)
     print(tracemod.summarize(_trace_path(cfg)).render())
@@ -145,7 +160,7 @@ def _cmd_init(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     dispatch = {"run": _cmd_run, "route": _cmd_route, "status": _cmd_status,
-                "trace": _cmd_trace, "init": _cmd_init}
+                "doctor": _cmd_doctor, "trace": _cmd_trace, "init": _cmd_init}
     try:
         return dispatch[args.command](args)
     except ConfigError as exc:

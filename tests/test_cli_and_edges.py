@@ -6,7 +6,7 @@ from broker import cli
 from broker import config as cfgmod
 from broker import state as statemod
 from broker.config import Provider
-from broker.runner import _argv_and_stdin, _subprocess_executor, run_task
+from broker.runner import _argv_and_stdin, _subprocess_executor, probe_provider, run_task
 
 THREE = """\
 [providers.claude]
@@ -81,6 +81,28 @@ def test_executor_runs_real_command():
 def test_executor_timeout():
     code, out = _subprocess_executor(0.05)(["sleep", "5"], None)
     assert code == 124 and out == "timeout"
+
+
+# ---- provider probe / doctor ----
+
+def test_probe_provider_found():
+    ok, detail = probe_provider(Provider(name="py", command="python -c {prompt}"))
+    assert ok is True and detail.endswith("python") or "python" in detail
+
+def test_probe_provider_missing():
+    ok, detail = probe_provider(Provider(name="x", command="definitely-not-a-real-cmd-xyz -p {prompt}"))
+    assert ok is False and "not on PATH" in detail
+
+def test_probe_provider_empty_command():
+    ok, detail = probe_provider(Provider(name="x", command="   "))
+    assert ok is False and detail == "empty command"
+
+def test_cli_doctor_reports_missing(tmp_path, capsys):
+    cfg = _write_cfg(tmp_path, THREE)  # claude/codex/gemini — none installed in CI
+    rc = cli.main(["-c", str(cfg), "doctor"])
+    out = capsys.readouterr()
+    assert "MISSING" in out.out
+    assert rc == 1 and "will be skipped" in out.err
 
 
 # ---- argv building ----

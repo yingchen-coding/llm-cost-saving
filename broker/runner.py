@@ -3,6 +3,7 @@ and fail over to the next — so work keeps moving instead of stalling on one mo
 from __future__ import annotations
 
 import shlex
+import shutil
 import subprocess
 import time
 from collections.abc import Callable
@@ -53,6 +54,21 @@ def _argv_and_stdin(provider: Provider, prompt: str) -> tuple[list[str], str | N
     if "{prompt}" in tokens:
         return [prompt if tok == "{prompt}" else tok for tok in tokens], None
     return tokens, prompt
+
+
+def probe_provider(provider: Provider) -> tuple[bool, str]:
+    """Check whether a provider's CLI is installed/reachable WITHOUT running a prompt.
+
+    Returns (ok, detail): (True, resolved-path) if the command's executable is on PATH,
+    else (False, reason). Lets `broker doctor` catch a missing model before a run fails over to it.
+    """
+    tokens = shlex.split(provider.command)
+    if not tokens:
+        return False, "empty command"
+    resolved = shutil.which(tokens[0])
+    if resolved is None:
+        return False, f"{tokens[0]!r} not on PATH"
+    return True, resolved
 
 
 def _subprocess_executor(timeout: float | None) -> Executor:
