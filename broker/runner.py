@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import shlex
 import subprocess
+import time
 from collections.abc import Callable
 from dataclasses import dataclass, field
 
@@ -20,6 +21,7 @@ class Attempt:
     provider: str
     exit_code: int
     quota_hit: bool
+    seconds: float = 0.0
 
 
 @dataclass
@@ -80,9 +82,11 @@ def run_task(
         if not state.get(name).available(started):
             continue  # still cooling down — skip
         argv, stdin_text = _argv_and_stdin(provider, prompt)
+        before = time.monotonic()  # latency uses a monotonic clock, independent of the cooldown now_fn
         code, output = exec_fn(argv, stdin_text)
+        elapsed = round(time.monotonic() - before, 3)
         quota = code != 0 and provider.matches_quota_error(output)
-        result.attempts.append(Attempt(provider=name, exit_code=code, quota_hit=quota))
+        result.attempts.append(Attempt(provider=name, exit_code=code, quota_hit=quota, seconds=elapsed))
         if quota:
             state.cool_down(name, started + provider.reset_seconds)
             continue  # fail over to the next provider

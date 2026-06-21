@@ -37,6 +37,11 @@ broker status            # availability / cooldown / usage per provider
 
 broker run -t codegen "write a quicksort in python"
 # claude out of quota → uses codex; claude back in window → uses claude. automatically.
+
+broker trace             # see your real routing / failover / cost behavior over time
+# runs: 42 · failovers: 7 · quota events: 9 · unresolved: 0
+#   claude  handled 31
+#   codex   handled 11
 ```
 
 ## How a config looks

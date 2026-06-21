@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 — 2026-06-20
+
+- **`broker trace`** — every `run` now appends a JSONL trace (provider, exit, quota events,
+  per-attempt latency); `broker trace` summarizes routing / failover / quota / wall-time so you can
+  see real cost behavior over time.
+- **Fix:** default `codex` command now passes `--skip-git-repo-check`, so `broker run` works outside
+  a trusted git dir (found by dogfooding — codex aborted otherwise).
+- Per-attempt latency recorded via a monotonic clock, independent of the cooldown clock.
+
 ## 0.1.0 — 2026-06-20
 
 Initial release. Quota-aware multi-model router (`broker`):

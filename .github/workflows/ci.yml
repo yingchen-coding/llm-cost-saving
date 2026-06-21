@@ -37,3 +37,4 @@ jobs:
           broker route -t codegen
           broker route -t reasoning
           broker status
+          broker trace

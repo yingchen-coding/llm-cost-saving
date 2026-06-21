@@ -8,6 +8,7 @@ from pathlib import Path
 from . import __version__
 from . import config as cfgmod
 from . import state as statemod
+from . import trace as tracemod
 from .config import ConfigError
 from .router import plan
 from .runner import run_task
@@ -25,7 +26,7 @@ reset = "5h"                       # cool-down when Claude hits its usage limit
 quota_markers = ["usage limit", "rate limit", "429", "quota", "resets at", "too many requests", "exceeded"]
 
 [providers.codex]
-command = "codex exec {prompt}"
+command = "codex exec --skip-git-repo-check {prompt}"
 strengths = ["codegen", "boilerplate", "tests", "quick-edit", "scripts"]
 reset = "1h"
 quota_markers = ["rate limit", "429", "quota", "usage limit", "too many requests", "exceeded"]
@@ -61,8 +62,15 @@ def _build_parser() -> argparse.ArgumentParser:
     route.add_argument("-t", "--task", default=None)
 
     sub.add_parser("status", help="show each provider's availability / cooldown / usage")
+    sub.add_parser("trace", help="summarize the run trace (routing, failovers, quota events, time)")
     sub.add_parser("init", help="write a starter broker.toml")
     return p
+
+
+def _trace_path(cfg: cfgmod.Config) -> str:
+    # trace lives next to the state file
+    base = Path(cfg.state_file).parent
+    return str(base / tracemod.DEFAULT_TRACE)
 
 
 def _cmd_run(args: argparse.Namespace) -> int:
@@ -70,6 +78,17 @@ def _cmd_run(args: argparse.Namespace) -> int:
     state = statemod.load(cfg.state_file)
     result = run_task(cfg, state, args.prompt, task=args.task, timeout=args.timeout)
     state.save()
+    tracemod.append(_trace_path(cfg), {
+        "task": args.task,
+        "provider": result.provider,
+        "exit_code": result.exit_code,
+        "exhausted": result.exhausted,
+        "seconds": round(sum(a.seconds for a in result.attempts), 3),
+        "attempts": [
+            {"provider": a.provider, "exit_code": a.exit_code, "quota_hit": a.quota_hit, "seconds": a.seconds}
+            for a in result.attempts
+        ],
+    })
     if result.provider is None:
         print(f"broker: {result.output}", file=sys.stderr)
         if result.attempts:
@@ -106,6 +125,12 @@ def _cmd_status(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_trace(args: argparse.Namespace) -> int:
+    cfg = cfgmod.load(args.config)
+    print(tracemod.summarize(_trace_path(cfg)).render())
+    return 0
+
+
 def _cmd_init(args: argparse.Namespace) -> int:
     dest = Path(args.config)
     if dest.exists():
@@ -118,7 +143,8 @@ def _cmd_init(args: argparse.Namespace) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
-    dispatch = {"run": _cmd_run, "route": _cmd_route, "status": _cmd_status, "init": _cmd_init}
+    dispatch = {"run": _cmd_run, "route": _cmd_route, "status": _cmd_status,
+                "trace": _cmd_trace, "init": _cmd_init}
     try:
         return dispatch[args.command](args)
     except ConfigError as exc:
