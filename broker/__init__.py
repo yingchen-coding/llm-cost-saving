@@ -1,4 +1,4 @@
-"""modelbroker — a quota-aware multi-model harness.
+"""modelbroker — a quota-aware multi-model router.
 
 Route each task to the model that's strongest at it; when a provider runs out of quota, cool it
 down and fail over to the next; resume using it the moment its window resets. Cost control by never

@@ -1,4 +1,4 @@
-# modelharness config — quota-aware multi-model routing.
+# modelbroker config — quota-aware multi-model routing.
 [budget]
 state_file = ".broker-state.json"
 

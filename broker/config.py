@@ -1,4 +1,4 @@
-"""Parse the harness config: providers (with their strengths, quota markers, and reset window) and
+"""Parse the broker config: providers (with their strengths, quota markers, and reset window) and
 the routing policy that maps a task type to an ordered list of preferred providers."""
 from __future__ import annotations
 

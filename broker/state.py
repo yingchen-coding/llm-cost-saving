@@ -1,6 +1,6 @@
 """Persistent provider state across invocations: when a provider is cooled down (out of quota) and
 how many runs it's served. The whole point of cost control is that this survives between commands —
-the harness must *remember* that Claude is rate-limited until 3pm so it keeps routing to Codex."""
+the broker must *remember* that Claude is rate-limited until 3pm so it keeps routing to Codex."""
 from __future__ import annotations
 
 import json
