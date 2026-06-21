@@ -67,7 +67,8 @@ def run_task(
 ) -> RunResult:
     """Try providers in routing order, failing over on quota errors. Mutates + (the caller) saves state."""
     exec_fn = executor or _subprocess_executor(timeout)
-    p = plan(config, state, task, now_fn())
+    started = now_fn()  # one logical timestamp per invocation — keeps routing decisions consistent
+    p = plan(config, state, task, started)
     result = RunResult(provider=None, exit_code=1, output="")
 
     if not p.order:
@@ -76,22 +77,22 @@ def run_task(
 
     for name in p.order:
         provider = config.providers[name]
-        if not state.get(name).available(now_fn()):
+        if not state.get(name).available(started):
             continue  # still cooling down — skip
         argv, stdin_text = _argv_and_stdin(provider, prompt)
         code, output = exec_fn(argv, stdin_text)
         quota = code != 0 and provider.matches_quota_error(output)
         result.attempts.append(Attempt(provider=name, exit_code=code, quota_hit=quota))
         if quota:
-            state.cool_down(name, now_fn() + provider.reset_seconds)
+            state.cool_down(name, started + provider.reset_seconds)
             continue  # fail over to the next provider
-        state.record_run(name, now_fn())
+        state.record_run(name, started)
         result.provider, result.exit_code, result.output = name, code, output
         return result
 
     # everyone was cooled down or hit quota this pass
     result.exhausted = True
-    p2 = plan(config, state, task, now_fn())
+    p2 = plan(config, state, task, started)
     if p2.soonest is not None:
         result.output = (
             f"all providers exhausted; {p2.soonest} frees up in {int(p2.soonest_eta)}s"
