@@ -23,7 +23,7 @@ def append(path: str | Path, record: dict[str, object]) -> None:
 class TraceSummary:
     runs: int
     by_provider: dict[str, int]      # provider -> times it ultimately handled a run
-    failovers: int                   # runs where at least one provider was skipped on quota
+    failovers: int                   # runs where ≥1 provider was abandoned (quota / missing-CLI / transient)
     quota_events: int                # total provider-level quota hits
     unresolved: int                  # runs no provider could handle
     total_seconds: float
