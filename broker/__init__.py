@@ -9,6 +9,7 @@ from importlib.metadata import PackageNotFoundError, version
 from .config import Config, ConfigError, Provider, load
 from .router import Plan, plan
 from .runner import RunResult, run_task
+from .skills import Skill, apply_skill, apply_skills, skill_names
 from .state import State
 
 try:
@@ -22,9 +23,13 @@ __all__ = [
     "Plan",
     "Provider",
     "RunResult",
+    "Skill",
     "State",
     "__version__",
+    "apply_skill",
+    "apply_skills",
     "load",
     "plan",
     "run_task",
+    "skill_names",
 ]

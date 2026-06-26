@@ -10,6 +10,7 @@ from broker import config as cfgmod
 from broker import state as statemod
 from broker.config import Provider
 from broker.runner import _argv_and_stdin, _subprocess_executor, probe_provider, run_task
+from broker.skills import apply_skill, skill_names
 
 THREE = """\
 [providers.claude]
@@ -72,6 +73,73 @@ def test_cli_run_uses_executor(monkeypatch, tmp_path, capsys):
     monkeypatch.setattr("broker.runner.subprocess.run", _fake_run({"claude": (0, "hi from claude")}))
     assert cli.main(["-c", str(cfg), "run", "-t", "reasoning", "hello"]) == 0
     assert "hi from claude" in capsys.readouterr().out
+
+
+def test_stop_slop_skill_wraps_prompt():
+    wrapped = apply_skill("write the README", "stop-slop")
+    assert "Use the stop-slop quality contract" in wrapped
+    assert "User request:\nwrite the README" in wrapped
+    assert "generic framing" in wrapped
+    assert skill_names() == ["context-window", "stop-slop"]
+
+
+def test_context_window_skill_wraps_prompt():
+    wrapped = apply_skill("fix the failing test", "context-window")
+    assert "Use the context-window optimization method" in wrapped
+    assert "If code alone is enough, use code only" in wrapped
+    assert "/compact" in wrapped
+    assert "User request:\nfix the failing test" in wrapped
+
+
+def test_cli_run_applies_stop_slop_skill(monkeypatch, tmp_path, capsys):
+    cfg = _write_cfg(tmp_path, THREE)
+    seen = {}
+
+    def fake_run(argv, **kwargs):
+        seen["prompt"] = argv[-1]
+
+        class _Proc:
+            returncode = 0
+            stdout = "ok"
+            stderr = ""
+
+        return _Proc()
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("broker.runner.subprocess.run", fake_run)
+    assert cli.main(["-c", str(cfg), "run", "--skill", "stop-slop", "-t", "reasoning",
+                     "make this better"]) == 0
+    assert "Use the stop-slop quality contract" in seen["prompt"]
+    assert "User request:\nmake this better" in seen["prompt"]
+    assert "ok" in capsys.readouterr().out
+
+
+def test_cli_run_applies_multiple_skills(monkeypatch, tmp_path):
+    cfg = _write_cfg(tmp_path, THREE)
+    seen = {}
+
+    def fake_run(argv, **kwargs):
+        seen["prompt"] = argv[-1]
+
+        class _Proc:
+            returncode = 0
+            stdout = "ok"
+            stderr = ""
+
+        return _Proc()
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("broker.runner.subprocess.run", fake_run)
+    assert cli.main(["-c", str(cfg), "run", "--skill", "context-window", "--skill", "stop-slop",
+                     "-t", "reasoning", "ship it"]) == 0
+    assert "Use the context-window optimization method" in seen["prompt"]
+    assert "Use the stop-slop quality contract" in seen["prompt"]
+    assert "ship it" in seen["prompt"]
+
+
+def test_cli_lists_skills(capsys):
+    assert cli.main(["skills"]) == 0
+    assert "stop-slop" in capsys.readouterr().out
 
 
 def test_cli_accepts_config_after_subcommand(tmp_path, capsys):

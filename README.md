@@ -47,6 +47,14 @@ broker doctor            # check each provider's CLI is installed / on PATH (no 
 broker run -t codegen "write a quicksort in python"
 # claude out of quota → uses codex; claude back in window → uses claude. automatically.
 
+broker skills
+broker run -t writing --skill stop-slop "rewrite this README section"
+# adds a low-fluff quality contract before routing to the best available provider.
+
+broker run -t codegen --skill context-window "fix the failing test"
+# tells the model to pass only the smallest useful context, code-only when possible, and compact
+# before long-context drift.
+
 broker trace             # see your real routing / failover / cost behavior over time
 # runs: 42 · failovers: 7 · quota events: 9 · unresolved: 0
 #   claude  handled 31
@@ -86,6 +94,28 @@ local model via `ollama run`, …).
 matches, the same prompt is tried on the next provider, the attempt is traced as `refusal`, and the
 first provider remains available for unrelated requests. Keep the markers narrow: broad phrases
 such as `cannot` can also occur in valid answers.
+
+## Prompt Skills
+
+`--skill stop-slop` is for prompts where the real problem is output quality, not model choice. It
+wraps your request with a strict response contract: answer directly, use concrete evidence, remove
+generic filler, state uncertainty precisely, and keep the final response tight.
+
+`--skill context-window` is for long tasks. It tells the model to pass the smallest sufficient
+context for the current step, use code-only context when code is enough, delay bulky logs/data until
+the step that needs them, and compact or summarize before the context window gets unstable. If the
+environment supports a slash command such as `/compact`, the skill explicitly tells the model to use
+it at checkpoints.
+
+```bash
+broker run -t review --skill stop-slop "review this PR"
+broker run -t writing --skill stop-slop "make this launch copy sharper"
+broker run -t codegen --skill context-window "continue this implementation"
+broker run -t architecture --skill context-window --skill stop-slop "design the next slice"
+```
+
+Skills are applied before routing, so they work with the same quota fail-over and trace behavior as
+normal runs. Use `broker skills` to list available skills.
 
 ## How fail-over works
 

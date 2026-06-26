@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add `broker run --skill stop-slop ...` and `broker skills`. The built-in prompt skill wraps a
+  request with a concrete, low-fluff quality contract before routing it through the normal provider
+  policy.
+- Add `--skill context-window` for long tasks: prefer smallest sufficient context, code-only context
+  when possible, defer bulky data until the final responsible step, and compact/summarize before
+  context-window drift.
 - Add opt-in policy-refusal failover that retries the current task on another provider without
   incorrectly cooling down a healthy model.
 

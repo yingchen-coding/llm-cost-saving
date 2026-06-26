@@ -12,6 +12,7 @@ from . import trace as tracemod
 from .config import ConfigError
 from .router import plan
 from .runner import probe_provider, run_task
+from .skills import apply_skills, get_skill, skill_names
 
 _DEFAULT_TOML = """\
 # modelbroker config — quota-aware multi-model routing.
@@ -61,6 +62,8 @@ def _build_parser() -> argparse.ArgumentParser:
                          help="run a prompt on the strongest available model (with fail-over)")
     run.add_argument("prompt", help="the prompt / task text")
     run.add_argument("-t", "--task", default=None, help="task type (codegen, reasoning, tests, ...)")
+    run.add_argument("--skill", action="append", choices=skill_names(),
+                     help="apply a prompt skill before routing; may be repeated")
     run.add_argument("--timeout", type=float, default=None, help="per-provider timeout (seconds)")
 
     route = sub.add_parser("route", parents=[cfg_after],
@@ -73,6 +76,7 @@ def _build_parser() -> argparse.ArgumentParser:
                    help="check each provider's CLI is installed/on PATH (no prompt run)")
     sub.add_parser("trace", parents=[cfg_after],
                    help="summarize the run trace (routing, failovers, quota events, time)")
+    sub.add_parser("skills", help="list built-in prompt skills")
     sub.add_parser("init", parents=[cfg_after], help="write a starter broker.toml")
     return p
 
@@ -86,10 +90,12 @@ def _trace_path(cfg: cfgmod.Config) -> str:
 def _cmd_run(args: argparse.Namespace) -> int:
     cfg = cfgmod.load(args.config)
     state = statemod.load(cfg.state_file)
-    result = run_task(cfg, state, args.prompt, task=args.task, timeout=args.timeout)
+    prompt = apply_skills(args.prompt, args.skill)
+    result = run_task(cfg, state, prompt, task=args.task, timeout=args.timeout)
     state.save()
     tracemod.append(_trace_path(cfg), {
         "task": args.task,
+        "skills": args.skill or [],
         "provider": result.provider,
         "exit_code": result.exit_code,
         "exhausted": result.exhausted,
@@ -158,6 +164,14 @@ def _cmd_trace(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_skills(args: argparse.Namespace) -> int:
+    del args
+    for name in skill_names():
+        skill = get_skill(name)
+        print(f"{skill.name:<12} {skill.summary}")
+    return 0
+
+
 def _cmd_init(args: argparse.Namespace) -> int:
     dest = Path(args.config)
     if dest.exists():
@@ -171,7 +185,8 @@ def _cmd_init(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     dispatch = {"run": _cmd_run, "route": _cmd_route, "status": _cmd_status,
-                "doctor": _cmd_doctor, "trace": _cmd_trace, "init": _cmd_init}
+                "doctor": _cmd_doctor, "trace": _cmd_trace, "skills": _cmd_skills,
+                "init": _cmd_init}
     try:
         return dispatch[args.command](args)
     except ConfigError as exc:
