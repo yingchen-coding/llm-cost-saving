@@ -30,6 +30,8 @@ resets. Zero dependencies, no API keys; it drives the CLIs you already have.
   call, no manual switch.
 - **It remembers.** The cooldown is persisted, so the *next* command still knows Claude is limited
   until 4pm and keeps routing to Codex — then flips back when the window resets.
+- **Cost visibility.** Add optional `cost_per_run_usd` estimates per provider and `broker trace`
+  rolls up spend by provider. It does not invent token counts your CLIs did not expose.
 - **Safe by construction.** The prompt is passed as a single argument (or stdin), never interpolated
   into a shell — no injection from prompt text.
 
@@ -71,6 +73,7 @@ command = "claude -p {prompt}"     # {prompt} = the task, passed as one argument
 strengths = ["reasoning", "architecture", "refactor", "review"]
 reset = "5h"                       # cool down this long after a usage-limit error
 quota_markers = ["usage limit", "rate limit", "429", "resets at"]
+cost_per_run_usd = 0.0              # optional estimate for broker trace summaries
 # Optional and deliberately provider-specific: retry this request elsewhere without marking
 # Claude unhealthy or cooling it down.
 refusal_markers = ["classified as a policy risk", "cannot assist with this request"]
@@ -79,6 +82,7 @@ refusal_markers = ["classified as a policy risk", "cannot assist with this reque
 command = "codex exec {prompt}"
 strengths = ["codegen", "boilerplate", "tests"]
 reset = "1h"
+cost_per_run_usd = 0.0
 
 [routing]
 default = ["claude", "codex"]      # global fail-over order
@@ -89,6 +93,10 @@ reasoning = ["claude", "codex"]
 
 Any CLI works — add a `[providers.<name>]` with its command and quota markers (gemini, aider, a
 local model via `ollama run`, …).
+
+Cost optimization is policy-driven: set `cost_per_run_usd`, inspect `broker trace`, then route cheap
+tasks to cheaper providers in `[routing.tasks]` while reserving expensive models for the work they
+actually win.
 
 `refusal_markers` handles over-refusal separately from outages and quota. When a configured phrase
 matches, the same prompt is tried on the next provider, the attempt is traced as `refusal`, and the

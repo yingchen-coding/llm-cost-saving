@@ -15,11 +15,13 @@ command = "claude -p {prompt}"
 strengths = ["reasoning"]
 reset = "5h"
 quota_markers = ["usage limit", "429"]
+cost_per_run_usd = 0.03
 [providers.codex]
 command = "codex exec {prompt}"
 strengths = ["codegen"]
 reset = "1h"
 quota_markers = ["rate limit", "429"]
+cost_per_run_usd = 0.01
 [routing]
 default = ["claude", "codex"]
 [routing.tasks]
@@ -50,6 +52,8 @@ def test_routing_order_default_and_by_task(tmp_path):
     assert cfg.order_for(None) == ["claude", "codex"]
     assert cfg.order_for("codegen") == ["codex", "claude"]   # routed to its strength
     assert cfg.order_for("unknown-task") == ["claude", "codex"]  # falls back to default
+    assert cfg.providers["claude"].cost_per_run_usd == 0.03
+    assert cfg.providers["codex"].cost_per_run_usd == 0.01
 
 
 def test_config_rejects_unknown_provider_in_routing(tmp_path):

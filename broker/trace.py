@@ -27,6 +27,8 @@ class TraceSummary:
     quota_events: int                # total provider-level quota hits
     unresolved: int                  # runs no provider could handle
     total_seconds: float
+    estimated_cost_usd: float = 0.0
+    cost_by_provider: dict[str, float] | None = None
 
     def render(self) -> str:
         if self.runs == 0:
@@ -37,6 +39,10 @@ class TraceSummary:
             lines.append(f"  {prov:<10} handled {n}")
         if self.total_seconds:
             lines.append(f"total provider wall-time: {self.total_seconds:.1f}s")
+        if self.estimated_cost_usd:
+            lines.append(f"estimated provider cost: ${self.estimated_cost_usd:.4f}")
+            for prov, cost in sorted((self.cost_by_provider or {}).items(), key=lambda kv: -kv[1]):
+                lines.append(f"  {prov:<10} estimated ${cost:.4f}")
         return "\n".join(lines)
 
 
@@ -44,7 +50,9 @@ def summarize(path: str | Path) -> TraceSummary:
     p = Path(path)
     runs = failovers = quota_events = unresolved = 0
     by_provider: dict[str, int] = {}
+    cost_by_provider: dict[str, float] = {}
     total_seconds = 0.0
+    estimated_cost_usd = 0.0
     if p.exists():
         for line in p.read_text(encoding="utf-8").splitlines():
             line = line.strip()
@@ -65,8 +73,22 @@ def summarize(path: str | Path) -> TraceSummary:
                 failovers += 1
             prov = rec.get("provider")
             if prov:
-                by_provider[prov] = by_provider.get(prov, 0) + 1
+                provider_name = str(prov)
+                by_provider[provider_name] = by_provider.get(provider_name, 0) + 1
+                cost = float(rec.get("estimated_cost_usd") or 0.0)
+                if cost:
+                    cost_by_provider[provider_name] = cost_by_provider.get(provider_name, 0.0) + cost
+                    estimated_cost_usd += cost
             else:
                 unresolved += 1
             total_seconds += float(rec.get("seconds") or 0.0)
-    return TraceSummary(runs, by_provider, failovers, quota_events, unresolved, round(total_seconds, 2))
+    return TraceSummary(
+        runs,
+        by_provider,
+        failovers,
+        quota_events,
+        unresolved,
+        round(total_seconds, 2),
+        round(estimated_cost_usd, 6),
+        {name: round(cost, 6) for name, cost in cost_by_provider.items()},
+    )

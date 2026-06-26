@@ -35,6 +35,7 @@ class Provider:
     quota_markers: list[str] = field(default_factory=list)  # substrings that mean "out of quota"
     transient_markers: list[str] = field(default_factory=list)  # substrings that mean "retry elsewhere"
     refusal_markers: list[str] = field(default_factory=list)  # policy refusal: retry, but do not cool down
+    cost_per_run_usd: float = 0.0  # optional estimate for trace-level cost accounting
 
     def matches_quota_error(self, output: str) -> bool:
         low = output.lower()
@@ -102,6 +103,7 @@ def load(path: str | Path = DEFAULT_CONFIG) -> Config:
             # Empty by default: refusal wording varies by provider and broad defaults can turn a
             # legitimate answer containing words such as "cannot" into an unwanted retry.
             refusal_markers=_coerce_str_list(spec.get("refusal_markers")),
+            cost_per_run_usd=float(spec.get("cost_per_run_usd", 0.0) or 0.0),
         )
 
     routing = data.get("routing", {})

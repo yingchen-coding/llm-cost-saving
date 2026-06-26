@@ -29,6 +29,8 @@ jobs:
       - run: ruff check .
       - run: mypy broker
       - run: pytest -q
+      - run: python -m build --sdist --wheel
+      - run: python -m twine check dist/*
       - name: CLI smoke (entry point; no provider CLIs required)
         run: |
           work="$(mktemp -d)"; cd "$work"

@@ -25,12 +25,14 @@ command = "claude -p {prompt}"
 strengths = ["reasoning", "architecture", "refactor", "debugging", "writing", "review"]
 reset = "5h"                       # cool-down when Claude hits its usage limit
 quota_markers = ["usage limit", "rate limit", "429", "quota", "resets at", "too many requests", "exceeded"]
+cost_per_run_usd = 0.0              # optional local estimate used by `broker trace`
 
 [providers.codex]
 command = "codex exec --skip-git-repo-check {prompt}"
 strengths = ["codegen", "boilerplate", "tests", "quick-edit", "scripts"]
 reset = "1h"
 quota_markers = ["rate limit", "429", "quota", "usage limit", "too many requests", "exceeded"]
+cost_per_run_usd = 0.0
 
 [routing]
 default = ["claude", "codex"]      # global fail-over order
@@ -93,6 +95,9 @@ def _cmd_run(args: argparse.Namespace) -> int:
     prompt = apply_skills(args.prompt, args.skill)
     result = run_task(cfg, state, prompt, task=args.task, timeout=args.timeout)
     state.save()
+    estimated_cost = 0.0
+    if result.provider:
+        estimated_cost = cfg.providers[result.provider].cost_per_run_usd
     tracemod.append(_trace_path(cfg), {
         "task": args.task,
         "skills": args.skill or [],
@@ -100,6 +105,7 @@ def _cmd_run(args: argparse.Namespace) -> int:
         "exit_code": result.exit_code,
         "exhausted": result.exhausted,
         "seconds": round(sum(a.seconds for a in result.attempts), 3),
+        "estimated_cost_usd": estimated_cost,
         "attempts": [
             {"provider": a.provider, "exit_code": a.exit_code, "quota_hit": a.quota_hit,
              "unavailable": a.unavailable, "transient": a.transient, "refusal": a.refusal,

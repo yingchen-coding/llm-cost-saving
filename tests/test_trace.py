@@ -7,10 +7,12 @@ THREE = """\
 [providers.claude]
 command = "claude -p {prompt}"
 quota_markers = ["usage limit"]
+cost_per_run_usd = 0.05
 [providers.codex]
 command = "codex exec {prompt}"
 reset = "1h"
 quota_markers = ["rate limit"]
+cost_per_run_usd = 0.01
 [routing]
 default = ["claude", "codex"]
 """
@@ -29,8 +31,17 @@ def _fake_run(by_first_arg):
 
 def test_append_and_summarize_roundtrip(tmp_path):
     t = tmp_path / "trace.jsonl"
-    tracemod.append(t, {"provider": "codex", "seconds": 2.0, "attempts": [{"quota_hit": False}]})
+    tracemod.append(
+        t,
+        {
+            "provider": "codex",
+            "seconds": 2.0,
+            "estimated_cost_usd": 0.01,
+            "attempts": [{"quota_hit": False}],
+        },
+    )
     tracemod.append(t, {"provider": "claude", "seconds": 3.0,
+                        "estimated_cost_usd": 0.05,
                         "attempts": [{"quota_hit": True}, {"quota_hit": False}]})
     tracemod.append(t, {"provider": None, "seconds": 0.0, "attempts": [{"quota_hit": True}]})
     s = tracemod.summarize(t)
@@ -40,6 +51,9 @@ def test_append_and_summarize_roundtrip(tmp_path):
     assert s.quota_events == 2
     assert s.unresolved == 1
     assert s.total_seconds == 5.0
+    assert s.estimated_cost_usd == 0.06
+    assert s.cost_by_provider == {"codex": 0.01, "claude": 0.05}
+    assert "estimated provider cost: $0.0600" in s.render()
 
 
 def test_refusal_counts_as_failover(tmp_path):
@@ -75,3 +89,4 @@ def test_run_writes_trace_and_trace_cmd_reads_it(monkeypatch, tmp_path, capsys):
     assert cli.main(["-c", str(cfg), "trace"]) == 0
     out = capsys.readouterr().out
     assert "runs: 1" in out and "claude" in out
+    assert "estimated provider cost: $0.0500" in out

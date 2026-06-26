@@ -10,12 +10,14 @@ command = "claude -p {prompt}"
 strengths = ["reasoning", "architecture", "refactor", "debugging", "writing", "review"]
 reset = "5h"                       # cool-down when Claude hits its usage limit
 quota_markers = ["usage limit", "rate limit", "429", "quota", "resets at", "too many requests", "exceeded"]
+cost_per_run_usd = 0.0              # optional local estimate used by `broker trace`
 
 [providers.codex]
 command = "codex exec --skip-git-repo-check {prompt}"
 strengths = ["codegen", "boilerplate", "tests", "quick-edit", "scripts"]
 reset = "1h"
 quota_markers = ["rate limit", "429", "quota", "usage limit", "too many requests", "exceeded"]
+cost_per_run_usd = 0.0
 
 [routing]
 default = ["claude", "codex"]      # global fail-over order
