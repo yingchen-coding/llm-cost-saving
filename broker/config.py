@@ -59,12 +59,19 @@ class Config:
     default_order: list[str]
     task_order: dict[str, list[str]]
     state_file: str = DEFAULT_STATE
+    max_cost_per_run_usd: float = 0.0
 
     def order_for(self, task: str | None) -> list[str]:
         """The ordered candidate providers for a task (task override, else default)."""
         if task and task in self.task_order:
             return list(self.task_order[task])
         return list(self.default_order)
+
+    def within_cost_ceiling(self, provider_name: str) -> bool:
+        if self.max_cost_per_run_usd <= 0:
+            return True
+        provider = self.providers[provider_name]
+        return provider.cost_per_run_usd <= self.max_cost_per_run_usd
 
 
 def _coerce_str_list(value: object) -> list[str]:
@@ -118,5 +125,7 @@ def load(path: str | Path = DEFAULT_CONFIG) -> Config:
         if name not in providers:
             raise ConfigError(f"routing references unknown provider {name!r}")
 
-    state_file = str(data.get("budget", {}).get("state_file", DEFAULT_STATE))
-    return Config(providers, default_order, task_order, state_file)
+    budget = data.get("budget", {})
+    state_file = str(budget.get("state_file", DEFAULT_STATE))
+    max_cost_per_run_usd = float(budget.get("max_cost_per_run_usd", 0.0) or 0.0)
+    return Config(providers, default_order, task_order, state_file, max_cost_per_run_usd)

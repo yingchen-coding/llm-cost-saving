@@ -98,6 +98,17 @@ Cost optimization is policy-driven: set `cost_per_run_usd`, inspect `broker trac
 tasks to cheaper providers in `[routing.tasks]` while reserving expensive models for the work they
 actually win.
 
+For a hard ceiling, add this under `[budget]`:
+
+```toml
+[budget]
+state_file = ".broker-state.json"
+max_cost_per_run_usd = 0.02
+```
+
+Providers whose `cost_per_run_usd` exceeds the ceiling are skipped before execution. Set the value
+to `0.0` to disable cost filtering.
+
 `refusal_markers` handles over-refusal separately from outages and quota. When a configured phrase
 matches, the same prompt is tried on the next provider, the attempt is traced as `refusal`, and the
 first provider remains available for unrelated requests. Keep the markers narrow: broad phrases

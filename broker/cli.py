@@ -18,6 +18,7 @@ _DEFAULT_TOML = """\
 # modelbroker config — quota-aware multi-model routing.
 [budget]
 state_file = ".broker-state.json"
+max_cost_per_run_usd = 0.0           # 0 disables per-run cost filtering
 
 # A {prompt} token in `command` is replaced with the prompt as one argument (no shell).
 [providers.claude]

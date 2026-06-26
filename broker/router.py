@@ -18,7 +18,11 @@ class Plan:
 
 
 def plan(config: Config, state: State, task: str | None, now: float) -> Plan:
-    order = [n for n in config.order_for(task) if n in config.providers]
+    order = [
+        n
+        for n in config.order_for(task)
+        if n in config.providers and config.within_cost_ceiling(n)
+    ]
     available = [n for n in order if state.get(n).available(now)]
     chosen = available[0] if available else None
 

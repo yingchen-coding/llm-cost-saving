@@ -5,6 +5,7 @@ import pytest
 from broker import config as cfgmod
 from broker import state as statemod
 from broker.config import ConfigError, parse_duration
+from broker.router import plan
 from broker.runner import run_task
 
 TOML = """\
@@ -54,6 +55,21 @@ def test_routing_order_default_and_by_task(tmp_path):
     assert cfg.order_for("unknown-task") == ["claude", "codex"]  # falls back to default
     assert cfg.providers["claude"].cost_per_run_usd == 0.03
     assert cfg.providers["codex"].cost_per_run_usd == 0.01
+
+
+def test_cost_ceiling_skips_expensive_provider(tmp_path):
+    config_text = TOML.replace(
+        '[budget]\nstate_file = ".broker-state.json"',
+        '[budget]\nstate_file = ".broker-state.json"\nmax_cost_per_run_usd = 0.02',
+    )
+    path = tmp_path / "broker.toml"
+    path.write_text(config_text)
+    cfg = cfgmod.load(path)
+    state = _state(tmp_path)
+
+    routed = plan(cfg, state, "reasoning", now=1000.0)
+    assert routed.order == ["codex"]
+    assert routed.chosen == "codex"
 
 
 def test_config_rejects_unknown_provider_in_routing(tmp_path):
