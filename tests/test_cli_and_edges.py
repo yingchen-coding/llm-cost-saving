@@ -1,6 +1,9 @@
 """Coverage for the CLI layer, the real subprocess executor, multi-provider failover, and the
 quota-marker matcher — the surfaces test_broker.py doesn't reach."""
+from __future__ import annotations
 
+import subprocess
+import sys
 
 from broker import cli
 from broker import config as cfgmod
@@ -36,6 +39,17 @@ def _write_cfg(tmp_path, body):
 
 
 # ---- CLI ----
+
+def test_python_module_entrypoint_shows_help():
+    proc = subprocess.run(
+        [sys.executable, "-m", "broker", "--help"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert proc.returncode == 0
+    assert "Quota-aware multi-model task router" in proc.stdout
+
 
 def test_cli_init_then_route_status(tmp_path, capsys):
     cfg = tmp_path / "broker.toml"
