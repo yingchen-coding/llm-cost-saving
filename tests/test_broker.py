@@ -72,6 +72,31 @@ def test_cost_ceiling_skips_expensive_provider(tmp_path):
     assert routed.chosen == "codex"
 
 
+def test_cost_strategy_cheapest_reorders_candidates(tmp_path):
+    config_text = TOML.replace(
+        '[budget]\nstate_file = ".broker-state.json"',
+        '[budget]\nstate_file = ".broker-state.json"\ncost_strategy = "cheapest"',
+    )
+    path = tmp_path / "broker.toml"
+    path.write_text(config_text)
+    cfg = cfgmod.load(path)
+    routed = plan(cfg, _state(tmp_path), "reasoning", now=1000.0)
+    assert routed.order == ["codex", "claude"]
+    assert routed.chosen == "codex"
+
+
+def test_cost_strategy_balanced_keeps_task_fit_then_cost(tmp_path):
+    config_text = TOML.replace(
+        '[budget]\nstate_file = ".broker-state.json"',
+        '[budget]\nstate_file = ".broker-state.json"\ncost_strategy = "balanced"',
+    )
+    path = tmp_path / "broker.toml"
+    path.write_text(config_text)
+    cfg = cfgmod.load(path)
+    assert plan(cfg, _state(tmp_path), "reasoning", now=1000.0).chosen == "claude"
+    assert plan(cfg, _state(tmp_path), "codegen", now=1000.0).chosen == "codex"
+
+
 def test_config_rejects_unknown_provider_in_routing(tmp_path):
     bad = TOML.replace('default = ["claude", "codex"]', 'default = ["claude", "ghost"]')
     p = tmp_path / "bad.toml"

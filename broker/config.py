@@ -60,6 +60,7 @@ class Config:
     task_order: dict[str, list[str]]
     state_file: str = DEFAULT_STATE
     max_cost_per_run_usd: float = 0.0
+    cost_strategy: str = "ordered"
 
     def order_for(self, task: str | None) -> list[str]:
         """The ordered candidate providers for a task (task override, else default)."""
@@ -72,6 +73,30 @@ class Config:
             return True
         provider = self.providers[provider_name]
         return provider.cost_per_run_usd <= self.max_cost_per_run_usd
+
+    def optimized_order_for(self, task: str | None) -> list[str]:
+        """Routing order after cost policy. `ordered` preserves configured order. `cheapest`
+        prioritizes lower estimated cost. `balanced` keeps task-strength fit ahead of cost, then
+        chooses the cheaper provider among comparable candidates."""
+        order = self.order_for(task)
+        if self.cost_strategy == "ordered":
+            return order
+        indexed = {name: index for index, name in enumerate(order)}
+        if self.cost_strategy == "cheapest":
+            return sorted(
+                order,
+                key=lambda name: (self.providers[name].cost_per_run_usd, indexed[name]),
+            )
+        if self.cost_strategy == "balanced":
+            return sorted(
+                order,
+                key=lambda name: (
+                    0 if task and task in self.providers[name].strengths else 1,
+                    self.providers[name].cost_per_run_usd,
+                    indexed[name],
+                ),
+            )
+        raise ConfigError(f"unknown cost_strategy {self.cost_strategy!r}")
 
 
 def _coerce_str_list(value: object) -> list[str]:
@@ -128,4 +153,14 @@ def load(path: str | Path = DEFAULT_CONFIG) -> Config:
     budget = data.get("budget", {})
     state_file = str(budget.get("state_file", DEFAULT_STATE))
     max_cost_per_run_usd = float(budget.get("max_cost_per_run_usd", 0.0) or 0.0)
-    return Config(providers, default_order, task_order, state_file, max_cost_per_run_usd)
+    cost_strategy = str(budget.get("cost_strategy", "ordered")).strip().lower()
+    if cost_strategy not in {"ordered", "cheapest", "balanced"}:
+        raise ConfigError("budget.cost_strategy must be one of: ordered, cheapest, balanced")
+    return Config(
+        providers,
+        default_order,
+        task_order,
+        state_file,
+        max_cost_per_run_usd,
+        cost_strategy,
+    )

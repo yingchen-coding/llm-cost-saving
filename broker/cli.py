@@ -19,6 +19,7 @@ _DEFAULT_TOML = """\
 [budget]
 state_file = ".broker-state.json"
 max_cost_per_run_usd = 0.0           # 0 disables per-run cost filtering
+cost_strategy = "ordered"            # ordered | cheapest | balanced
 
 # A {prompt} token in `command` is replaced with the prompt as one argument (no shell).
 [providers.claude]
@@ -133,6 +134,12 @@ def _cmd_route(args: argparse.Namespace) -> int:
     state = statemod.load(cfg.state_file)
     pl = plan(cfg, state, args.task, statemod.now())
     print(f"task: {args.task or '(default)'}  order: {' → '.join(pl.order)}")
+    print(f"cost_strategy: {cfg.cost_strategy}")
+    if pl.order:
+        costs = ", ".join(
+            f"{name}=${cfg.providers[name].cost_per_run_usd:.4f}" for name in pl.order
+        )
+        print(f"estimated_costs: {costs}")
     if pl.chosen:
         print(f"  → would use: {pl.chosen}")
     else:

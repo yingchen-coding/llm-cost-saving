@@ -60,7 +60,9 @@ def test_cli_init_then_route_status(tmp_path, capsys):
     assert cli.main(["-c", str(cfg), "init"]) == 2
 
     assert cli.main(["-c", str(cfg), "route", "-t", "codegen"]) == 0
-    assert "codex" in capsys.readouterr().out  # codegen routes to codex first
+    out = capsys.readouterr().out
+    assert "codex" in out  # codegen routes to codex first
+    assert "cost_strategy" in out
 
     assert cli.main(["-c", str(cfg), "status"]) == 0
     out = capsys.readouterr().out

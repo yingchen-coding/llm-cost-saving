@@ -32,6 +32,8 @@ resets. Zero dependencies, no API keys; it drives the CLIs you already have.
   until 4pm and keeps routing to Codex — then flips back when the window resets.
 - **Cost visibility.** Add optional `cost_per_run_usd` estimates per provider and `broker trace`
   rolls up spend by provider. It does not invent token counts your CLIs did not expose.
+- **Cost-aware routing.** Keep your hand-tuned routing order, force cheapest-first routing, or use a
+  balanced policy that keeps task fit first and then picks the cheaper comparable provider.
 - **Safe by construction.** The prompt is passed as a single argument (or stdin), never interpolated
   into a shell — no injection from prompt text.
 
@@ -104,10 +106,15 @@ For a hard ceiling, add this under `[budget]`:
 [budget]
 state_file = ".broker-state.json"
 max_cost_per_run_usd = 0.02
+cost_strategy = "balanced"            # ordered | cheapest | balanced
 ```
 
 Providers whose `cost_per_run_usd` exceeds the ceiling are skipped before execution. Set the value
-to `0.0` to disable cost filtering.
+to `0.0` to disable cost filtering. `cost_strategy` controls the remaining candidates:
+
+- `ordered`: preserve your configured routing order.
+- `cheapest`: route to the lowest estimated `cost_per_run_usd` first.
+- `balanced`: prefer providers whose `strengths` include the task, then choose the cheaper one.
 
 `refusal_markers` handles over-refusal separately from outages and quota. When a configured phrase
 matches, the same prompt is tried on the next provider, the attempt is traced as `refusal`, and the
