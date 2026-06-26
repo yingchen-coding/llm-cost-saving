@@ -8,16 +8,18 @@
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-You pay for two or three coding assistants (Claude Code, Codex, …), each with its own usage limit.
-When one hits its limit you either stop, or babysit a manual switch. modelbroker does the switch
-for you — and routes each kind of task to whichever model is best at it. Zero dependencies, no API
-keys (it drives the CLIs you already have).
+Stop babysitting model quotas.
+
+You pay for two or three coding assistants (Claude Code, Codex, ...), each with its own usage limit.
+When one hits its limit you either stop, or manually switch. modelbroker does the switch for you,
+routes each kind of task to whichever model is best at it, and flips back when the quota window
+resets. Zero dependencies, no API keys; it drives the CLIs you already have.
 
 ## Star This If
 
 - You use multiple AI coding CLIs and lose time when one hits quota.
 - You want task-based routing instead of one default model for every job.
-- You need local traces showing which provider handled each task and why failover happened.
+- You need local traces showing which provider handled each task, why failover happened, and when it recovered.
 
 ## What it does
 
