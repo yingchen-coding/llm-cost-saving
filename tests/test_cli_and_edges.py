@@ -69,6 +69,39 @@ def test_cli_init_then_route_status(tmp_path, capsys):
     assert "claude" in out and "available" in out
 
 
+def test_cli_cost_radar_reports_recommendations(monkeypatch, tmp_path, capsys):
+    cfg = _write_cfg(tmp_path, """\
+[budget]
+state_file = "state.json"
+cost_strategy = "ordered"
+[providers.expensive]
+command = "expensive {prompt}"
+strengths = ["reasoning"]
+reset = "1h"
+cost_per_run_usd = 0.20
+[providers.cheap]
+command = "cheap {prompt}"
+strengths = ["reasoning"]
+reset = "1h"
+cost_per_run_usd = 0.01
+[routing]
+default = ["expensive", "cheap"]
+[routing.tasks]
+reasoning = ["expensive", "cheap"]
+""")
+    trace = tmp_path / ".broker-trace.jsonl"
+    trace.write_text(
+        '{"provider":"expensive","estimated_cost_usd":0.2,"seconds":1.0,"attempts":[]}\n',
+        encoding="utf-8",
+    )
+
+    monkeypatch.chdir(tmp_path)
+    assert cli.main(["-c", str(cfg), "cost"]) == 0
+    out = capsys.readouterr().out
+    assert "estimated_cost: $0.2000" in out
+    assert "task 'reasoning': cheap is cheaper" in out
+
+
 def test_cli_run_uses_executor(monkeypatch, tmp_path, capsys):
     cfg = _write_cfg(tmp_path, THREE)
     monkeypatch.chdir(tmp_path)  # the run-state file is written relative to cwd

@@ -63,6 +63,11 @@ broker trace             # see your real routing / failover / cost behavior over
 # runs: 42 · failovers: 7 · quota events: 9 · unresolved: 0
 #   claude  handled 31
 #   codex   handled 11
+
+broker cost              # see spend risk and cheaper routing recommendations
+# estimated_cost: $1.2400
+# recommendations:
+#   set [budget].cost_strategy = "balanced" ...
 ```
 
 ## How a config looks
@@ -120,6 +125,19 @@ to `0.0` to disable cost filtering. `cost_strategy` controls the remaining candi
 matches, the same prompt is tried on the next provider, the attempt is traced as `refusal`, and the
 first provider remains available for unrelated requests. Keep the markers narrow: broad phrases
 such as `cannot` can also occur in valid answers.
+
+## Cost Radar
+
+`broker cost` turns trace history and provider price estimates into an operational cost report:
+
+- total estimated spend and average cost per run
+- provider-level spend split
+- providers over the configured per-run ceiling
+- routing recommendations when a cheaper comparable provider exists
+- warnings when failovers or unresolved runs show the policy is too brittle
+
+This is deliberately estimate-based. modelbroker does not invent token counts your CLIs did not
+emit; it uses the `cost_per_run_usd` numbers you configure so routing decisions stay auditable.
 
 ## Prompt Skills
 

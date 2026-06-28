@@ -10,6 +10,7 @@ from . import config as cfgmod
 from . import state as statemod
 from . import trace as tracemod
 from .config import ConfigError
+from .cost import cost_radar
 from .router import plan
 from .runner import probe_provider, run_task
 from .skills import apply_skills, get_skill, skill_names
@@ -80,6 +81,8 @@ def _build_parser() -> argparse.ArgumentParser:
                    help="check each provider's CLI is installed/on PATH (no prompt run)")
     sub.add_parser("trace", parents=[cfg_after],
                    help="summarize the run trace (routing, failovers, quota events, time)")
+    sub.add_parser("cost", parents=[cfg_after],
+                   help="show cost radar and routing optimization recommendations")
     sub.add_parser("skills", help="list built-in prompt skills")
     sub.add_parser("init", parents=[cfg_after], help="write a starter broker.toml")
     return p
@@ -178,6 +181,12 @@ def _cmd_trace(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_cost(args: argparse.Namespace) -> int:
+    cfg = cfgmod.load(args.config)
+    print(cost_radar(cfg, tracemod.summarize(_trace_path(cfg))).render())
+    return 0
+
+
 def _cmd_skills(args: argparse.Namespace) -> int:
     del args
     for name in skill_names():
@@ -199,7 +208,7 @@ def _cmd_init(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     dispatch = {"run": _cmd_run, "route": _cmd_route, "status": _cmd_status,
-                "doctor": _cmd_doctor, "trace": _cmd_trace, "skills": _cmd_skills,
+                "doctor": _cmd_doctor, "trace": _cmd_trace, "cost": _cmd_cost, "skills": _cmd_skills,
                 "init": _cmd_init}
     try:
         return dispatch[args.command](args)
