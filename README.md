@@ -69,6 +69,10 @@ broker cost              # see spend risk and cheaper routing recommendations
 # recommendations:
 #   set [budget].cost_strategy = "balanced" ...
 
+broker runtime           # see token throughput / cost-hour / error-rate from traces
+# tokens_per_second: 122.50
+# cost_per_1k_tokens: $0.0180
+
 broker evidence add glm-example --source-url https://example.com --article "launch note"
 broker evidence verify glm-example --command "python eval.py" --passed
 broker evidence check glm-example
@@ -142,6 +146,20 @@ such as `cannot` can also occur in valid answers.
 
 This is deliberately estimate-based. modelbroker does not invent token counts your CLIs did not
 emit; it uses the `cost_per_run_usd` numbers you configure so routing decisions stay auditable.
+
+## Runtime Radar
+
+`broker runtime` is for token-factory style operational questions:
+
+- tokens per second
+- cost per 1k tokens
+- estimated cost per runtime hour
+- error rate
+- provider-level throughput and cost split
+
+It reads optional `tokens`, `total_tokens`, or `input_tokens` + `output_tokens` fields from the
+local trace. If your provider CLI does not expose token counts, the report warns instead of treating
+usage volume as throughput evidence.
 
 ## Model Evidence Gate
 

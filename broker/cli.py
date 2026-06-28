@@ -26,6 +26,7 @@ from .evidence import (
 )
 from .router import plan
 from .runner import probe_provider, run_task
+from .runtime import runtime_report
 from .skills import apply_skills, get_skill, skill_names
 
 _DEFAULT_TOML = """\
@@ -96,6 +97,8 @@ def _build_parser() -> argparse.ArgumentParser:
                    help="summarize the run trace (routing, failovers, quota events, time)")
     sub.add_parser("cost", parents=[cfg_after],
                    help="show cost radar and routing optimization recommendations")
+    sub.add_parser("runtime", parents=[cfg_after],
+                   help="show token throughput, cost/hour, and runtime reliability from traces")
     evidence_parent = argparse.ArgumentParser(add_help=False)
     evidence_parent.add_argument("--evidence", default=DEFAULT_EVIDENCE, help="path to evidence registry JSON")
     evidence = sub.add_parser("evidence", parents=[evidence_parent], help="manage model evidence gates")
@@ -232,6 +235,12 @@ def _cmd_cost(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_runtime(args: argparse.Namespace) -> int:
+    cfg = cfgmod.load(args.config)
+    print(runtime_report(_trace_path(cfg)).render())
+    return 0
+
+
 def _cmd_skills(args: argparse.Namespace) -> int:
     del args
     for name in skill_names():
@@ -304,8 +313,9 @@ def _cmd_init(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     dispatch = {"run": _cmd_run, "route": _cmd_route, "status": _cmd_status,
-                "doctor": _cmd_doctor, "trace": _cmd_trace, "cost": _cmd_cost, "skills": _cmd_skills,
-                "evidence": _cmd_evidence, "init": _cmd_init}
+                "doctor": _cmd_doctor, "trace": _cmd_trace, "cost": _cmd_cost,
+                "runtime": _cmd_runtime, "skills": _cmd_skills, "evidence": _cmd_evidence,
+                "init": _cmd_init}
     try:
         return dispatch[args.command](args)
     except (ConfigError, EvidenceError) as exc:
