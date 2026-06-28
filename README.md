@@ -68,6 +68,10 @@ broker cost              # see spend risk and cheaper routing recommendations
 # estimated_cost: $1.2400
 # recommendations:
 #   set [budget].cost_strategy = "balanced" ...
+
+broker evidence add glm-example --source-url https://example.com --article "launch note"
+broker evidence verify glm-example --command "python eval.py" --passed
+broker evidence check glm-example
 ```
 
 ## How a config looks
@@ -138,6 +142,27 @@ such as `cannot` can also occur in valid answers.
 
 This is deliberately estimate-based. modelbroker does not invent token counts your CLIs did not
 emit; it uses the `cost_per_run_usd` numbers you configure so routing decisions stay auditable.
+
+## Model Evidence Gate
+
+`broker evidence` keeps hyped new models out of automatic routing until they pass your local checks.
+The registry is local by default in `.broker-evidence.json` and is ignored by git.
+
+```bash
+broker evidence add new-model \
+  --source-url https://example.com/model-card \
+  --article "vendor launch note" \
+  --requirement ollama
+
+broker evidence verify new-model --command "python eval.py --model new-model" --passed
+broker evidence incident new-model --severity high --title "unsafe jailbreak regression" \
+  --mitigation "disable auto routing until patched"
+broker evidence check new-model
+```
+
+A model is blocked when it has not passed local verification, required local runtimes are missing,
+or it has a high/critical incident. Low and medium incidents stay visible without automatically
+blocking routing.
 
 ## Prompt Skills
 

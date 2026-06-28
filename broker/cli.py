@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -11,6 +12,18 @@ from . import state as statemod
 from . import trace as tracemod
 from .config import ConfigError
 from .cost import cost_radar
+from .evidence import (
+    DEFAULT_EVIDENCE,
+    EvidenceError,
+    add_incident,
+    add_model,
+)
+from .evidence import (
+    load as load_evidence,
+)
+from .evidence import (
+    save as save_evidence,
+)
 from .router import plan
 from .runner import probe_provider, run_task
 from .skills import apply_skills, get_skill, skill_names
@@ -83,6 +96,38 @@ def _build_parser() -> argparse.ArgumentParser:
                    help="summarize the run trace (routing, failovers, quota events, time)")
     sub.add_parser("cost", parents=[cfg_after],
                    help="show cost radar and routing optimization recommendations")
+    evidence_parent = argparse.ArgumentParser(add_help=False)
+    evidence_parent.add_argument("--evidence", default=DEFAULT_EVIDENCE, help="path to evidence registry JSON")
+    evidence = sub.add_parser("evidence", parents=[evidence_parent], help="manage model evidence gates")
+    evidence_sub = evidence.add_subparsers(dest="evidence_command", required=True)
+
+    evidence_add = evidence_sub.add_parser("add", help="add or replace a model candidate")
+    evidence_add.add_argument("model_id")
+    evidence_add.add_argument("--source-url", required=True)
+    evidence_add.add_argument("--article", required=True)
+    evidence_add.add_argument("--requirement", action="append", default=[])
+    evidence_add.add_argument("--notes", default="")
+
+    evidence_verify = evidence_sub.add_parser("verify", help="record local verification")
+    evidence_verify.add_argument("model_id")
+    evidence_verify.add_argument("--command", dest="verification_command", required=True)
+    evidence_verify.add_argument("--passed", action="store_true")
+    evidence_verify.add_argument("--notes", default="")
+
+    evidence_incident = evidence_sub.add_parser("incident", help="record a model incident")
+    evidence_incident.add_argument("model_id")
+    evidence_incident.add_argument("--title", required=True)
+    evidence_incident.add_argument("--source-url", default="")
+    evidence_incident.add_argument("--severity", choices=["low", "medium", "high", "critical"], required=True)
+    evidence_incident.add_argument("--mitigation", required=True)
+
+    evidence_check = evidence_sub.add_parser("check", help="check whether a model may be auto-routed")
+    evidence_check.add_argument("model_id")
+
+    evidence_show = evidence_sub.add_parser("show", help="show one model evidence record")
+    evidence_show.add_argument("model_id")
+
+    evidence_sub.add_parser("list", help="list model evidence records")
     sub.add_parser("skills", help="list built-in prompt skills")
     sub.add_parser("init", parents=[cfg_after], help="write a starter broker.toml")
     return p
@@ -195,6 +240,57 @@ def _cmd_skills(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_evidence(args: argparse.Namespace) -> int:
+    registry = load_evidence(args.evidence)
+    if args.evidence_command == "add":
+        record = add_model(
+            registry,
+            args.model_id,
+            source_url=args.source_url,
+            article=args.article,
+            requirements=args.requirement,
+            notes=args.notes,
+        )
+        save_evidence(args.evidence, registry)
+        print(json.dumps(record.to_dict(), indent=2, sort_keys=True))
+        return 0
+    if args.evidence_command == "verify":
+        record = registry.require_model(args.model_id)
+        record.add_verification(args.verification_command, args.passed, args.notes)
+        save_evidence(args.evidence, registry)
+        print(f"{args.model_id}: {'verified' if args.passed else 'not verified'}")
+        return 0
+    if args.evidence_command == "incident":
+        incident = add_incident(
+            registry,
+            model=args.model_id,
+            title=args.title,
+            source_url=args.source_url,
+            severity=args.severity,
+            mitigation=args.mitigation,
+        )
+        save_evidence(args.evidence, registry)
+        print(json.dumps(incident.to_dict(), indent=2, sort_keys=True))
+        return 0
+    if args.evidence_command == "check":
+        record = registry.require_model(args.model_id)
+        allowed, reasons = record.route_decision(registry.incidents)
+        print(f"{args.model_id}: {'route-allowed' if allowed else 'blocked'}")
+        for reason in reasons:
+            print(f"  - {reason}")
+        return 0 if allowed else 1
+    if args.evidence_command == "show":
+        print(json.dumps(registry.require_model(args.model_id).to_dict(), indent=2, sort_keys=True))
+        return 0
+    if args.evidence_command == "list":
+        for model_id, record in sorted(registry.models.items()):
+            allowed, reasons = record.route_decision(registry.incidents)
+            reason = "; ".join(reasons) if reasons else "ok"
+            print(f"{model_id}: status={record.status} route={allowed} reason={reason}")
+        return 0
+    raise AssertionError(args.evidence_command)
+
+
 def _cmd_init(args: argparse.Namespace) -> int:
     dest = Path(args.config)
     if dest.exists():
@@ -209,10 +305,10 @@ def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     dispatch = {"run": _cmd_run, "route": _cmd_route, "status": _cmd_status,
                 "doctor": _cmd_doctor, "trace": _cmd_trace, "cost": _cmd_cost, "skills": _cmd_skills,
-                "init": _cmd_init}
+                "evidence": _cmd_evidence, "init": _cmd_init}
     try:
         return dispatch[args.command](args)
-    except ConfigError as exc:
+    except (ConfigError, EvidenceError) as exc:
         print(f"broker: {exc}", file=sys.stderr)
         return 2
 

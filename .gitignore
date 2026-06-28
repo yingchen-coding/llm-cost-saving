@@ -8,3 +8,4 @@ dist/
 .ruff_cache/
 .broker-state.json
 .broker-trace.jsonl
+.broker-evidence.json

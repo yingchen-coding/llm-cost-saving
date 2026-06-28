@@ -102,6 +102,52 @@ reasoning = ["expensive", "cheap"]
     assert "task 'reasoning': cheap is cheaper" in out
 
 
+def test_cli_evidence_blocks_until_verified_then_incident_blocks(tmp_path, capsys):
+    evidence = tmp_path / "evidence.json"
+    assert cli.main([
+        "evidence",
+        "--evidence",
+        str(evidence),
+        "add",
+        "example-model",
+        "--source-url",
+        "https://example.com/model",
+        "--article",
+        "Example launch note",
+    ]) == 0
+    assert cli.main(["evidence", "--evidence", str(evidence), "check", "example-model"]) == 1
+    assert "blocked" in capsys.readouterr().out
+
+    assert cli.main([
+        "evidence",
+        "--evidence",
+        str(evidence),
+        "verify",
+        "example-model",
+        "--command",
+        "pytest eval",
+        "--passed",
+    ]) == 0
+    assert cli.main(["evidence", "--evidence", str(evidence), "check", "example-model"]) == 0
+    assert "route-allowed" in capsys.readouterr().out
+
+    assert cli.main([
+        "evidence",
+        "--evidence",
+        str(evidence),
+        "incident",
+        "example-model",
+        "--title",
+        "unsafe regression",
+        "--severity",
+        "critical",
+        "--mitigation",
+        "disable routing",
+    ]) == 0
+    assert cli.main(["evidence", "--evidence", str(evidence), "check", "example-model"]) == 1
+    assert "critical incident" in capsys.readouterr().out
+
+
 def test_cli_run_uses_executor(monkeypatch, tmp_path, capsys):
     cfg = _write_cfg(tmp_path, THREE)
     monkeypatch.chdir(tmp_path)  # the run-state file is written relative to cwd
