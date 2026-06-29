@@ -24,6 +24,7 @@ from .evidence import (
 from .evidence import (
     save as save_evidence,
 )
+from .quota import quota_report
 from .router import plan
 from .runner import probe_provider, run_task
 from .runtime import runtime_report
@@ -99,6 +100,8 @@ def _build_parser() -> argparse.ArgumentParser:
                    help="show cost radar and routing optimization recommendations")
     sub.add_parser("runtime", parents=[cfg_after],
                    help="show token throughput, cost/hour, and runtime reliability from traces")
+    sub.add_parser("quota", parents=[cfg_after],
+                   help="show provider quota pressure and fallback recommendations from traces")
     evidence_parent = argparse.ArgumentParser(add_help=False)
     evidence_parent.add_argument("--evidence", default=DEFAULT_EVIDENCE, help="path to evidence registry JSON")
     evidence = sub.add_parser("evidence", parents=[evidence_parent], help="manage model evidence gates")
@@ -241,6 +244,12 @@ def _cmd_runtime(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_quota(args: argparse.Namespace) -> int:
+    cfg = cfgmod.load(args.config)
+    print(quota_report(_trace_path(cfg)).render())
+    return 0
+
+
 def _cmd_skills(args: argparse.Namespace) -> int:
     del args
     for name in skill_names():
@@ -314,7 +323,8 @@ def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     dispatch = {"run": _cmd_run, "route": _cmd_route, "status": _cmd_status,
                 "doctor": _cmd_doctor, "trace": _cmd_trace, "cost": _cmd_cost,
-                "runtime": _cmd_runtime, "skills": _cmd_skills, "evidence": _cmd_evidence,
+                "runtime": _cmd_runtime, "quota": _cmd_quota,
+                "skills": _cmd_skills, "evidence": _cmd_evidence,
                 "init": _cmd_init}
     try:
         return dispatch[args.command](args)

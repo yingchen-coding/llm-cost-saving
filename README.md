@@ -73,6 +73,9 @@ broker runtime           # see token throughput / cost-hour / error-rate from tr
 # tokens_per_second: 122.50
 # cost_per_1k_tokens: $0.0180
 
+broker quota             # see quota-hit pressure and fallback recommendations from traces
+# claude       attempts=10 handled=6 quota_hits=3 quota_rate=30.0%
+
 broker evidence add glm-example --source-url https://example.com --article "launch note"
 broker evidence verify glm-example --command "python eval.py" --passed
 broker evidence check glm-example
@@ -160,6 +163,21 @@ emit; it uses the `cost_per_run_usd` numbers you configure so routing decisions 
 It reads optional `tokens`, `total_tokens`, or `input_tokens` + `output_tokens` fields from the
 local trace. If your provider CLI does not expose token counts, the report warns instead of treating
 usage volume as throughput evidence.
+
+## Quota Radar
+
+`broker quota` is for the boring operational question that matters during real coding work: which
+provider is actually reliable right now?
+
+It reads the local trace and reports:
+
+- quota-hit rate per provider
+- failover pressure from quota, missing CLIs, transient errors, and policy refusals
+- unresolved runs where every provider failed
+- whether a provider should stay primary, move behind a fallback, or be demoted until stable
+
+This is intentionally trace-based. A headline about quota problems is not enough; modelbroker looks
+at your own local runs before changing routing policy.
 
 ## Model Evidence Gate
 
