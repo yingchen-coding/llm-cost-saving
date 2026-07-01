@@ -9,5 +9,3 @@ dist/
 .broker-state.json
 .broker-trace.jsonl
 .broker-evidence.json
-
-scripts/pr_review_check.sh
