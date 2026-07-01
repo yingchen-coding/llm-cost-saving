@@ -237,8 +237,3 @@ broker run -t reasoning "refactor this module"
 
 MIT © Ying Chen
 
-## Local Review
-
-```bash
-scripts/pr_review_check.sh
-```
