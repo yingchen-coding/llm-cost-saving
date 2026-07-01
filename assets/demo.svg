@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="386" viewBox="0 0 760 386" role="img" aria-label="modelbroker terminal demo: quota failover and auto-resume">
+  <rect width="760" height="386" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <rect width="760" height="40" rx="10" fill="#161b22"/>
+  <rect y="30" width="760" height="10" fill="#161b22"/>
+  <circle cx="18" cy="20" r="6" fill="#ff5f56"/><circle cx="38" cy="20" r="6" fill="#ffbd2e"/><circle cx="58" cy="20" r="6" fill="#27c93f"/>
+  <text x="380" y="24" fill="#8b949e" font-family="monospace" font-size="12" text-anchor="middle">broker — quota-aware routing</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13.5">
+    <text x="22" y="58" fill="#e6edf3" xml:space="preserve">$ broker run -t reasoning &quot;refactor the auth module&quot;</text><text x="22" y="80" fill="#f85149" xml:space="preserve">  → claude   ✗ usage limit reached, resets 4pm  — cooling down 5h</text><text x="22" y="102" fill="#3fb950" xml:space="preserve">  → codex    ✓ done                              (auto-failover)</text><text x="22" y="146" fill="#e6edf3" xml:space="preserve">$ broker run -t codegen &quot;add the missing tests&quot;</text><text x="22" y="168" fill="#3fb950" xml:space="preserve">  → codex    ✓ done                              (codex is strongest here)</text><text x="22" y="212" fill="#e6edf3" xml:space="preserve">$ broker status</text><text x="22" y="234" fill="#8b949e" xml:space="preserve">  claude   cooling 4h58m   — every command skips it until the window resets</text><text x="22" y="256" fill="#8b949e" xml:space="preserve">  codex    available</text><text x="22" y="300" fill="#8b949e" xml:space="preserve"># … 4pm, claude&#x27;s quota window resets …</text><text x="22" y="322" fill="#e6edf3" xml:space="preserve">$ broker run -t reasoning &quot;finish the refactor&quot;</text><text x="22" y="344" fill="#3fb950" xml:space="preserve">  → claude   ✓ done                              (auto-resumed, no manual switch)</text>
+  </g>
+</svg>

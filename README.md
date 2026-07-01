@@ -8,6 +8,8 @@
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
+![modelbroker: run out of Claude quota, keep working on Codex, and auto-resume the moment the window resets](assets/demo.svg)
+
 Stop babysitting model quotas.
 
 You pay for two or three coding assistants (Claude Code, Codex, ...), each with its own usage limit.
