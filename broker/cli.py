@@ -29,6 +29,7 @@ from .router import plan
 from .runner import probe_provider, run_task
 from .runtime import runtime_report
 from .skills import apply_skills, get_skill, skill_names
+from .usage import analyze as usage_analyze
 
 _DEFAULT_TOML = """\
 # modelbroker config — quota-aware multi-model routing.
@@ -138,6 +139,12 @@ def _build_parser() -> argparse.ArgumentParser:
 
     evidence_sub.add_parser("list", help="list model evidence records")
     sub.add_parser("skills", help="list built-in prompt skills")
+    usage = sub.add_parser(
+        "usage", help="estimate real token cost + mechanical waste from agent-CLI transcripts")
+    usage.add_argument("paths", nargs="+",
+                       help="transcript file(s) or directory(ies) of JSONL with per-message usage")
+    usage.add_argument("--cheap-tier", default="haiku", choices=["haiku", "sonnet"],
+                       help="tier to re-cost mechanical work against (default: haiku)")
     sub.add_parser("init", parents=[cfg_after], help="write a starter broker.toml")
     return p
 
@@ -247,6 +254,11 @@ def _cmd_runtime(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_usage(args: argparse.Namespace) -> int:
+    print(usage_analyze(args.paths, cheap_tier=args.cheap_tier).render())
+    return 0
+
+
 def _cmd_quota(args: argparse.Namespace) -> int:
     cfg = cfgmod.load(args.config)
     print(quota_report(_trace_path(cfg)).render())
@@ -328,7 +340,7 @@ def main(argv: list[str] | None = None) -> int:
                 "doctor": _cmd_doctor, "trace": _cmd_trace, "cost": _cmd_cost,
                 "runtime": _cmd_runtime, "quota": _cmd_quota,
                 "skills": _cmd_skills, "evidence": _cmd_evidence,
-                "init": _cmd_init}
+                "usage": _cmd_usage, "init": _cmd_init}
     try:
         return dispatch[args.command](args)
     except (ConfigError, EvidenceError) as exc:

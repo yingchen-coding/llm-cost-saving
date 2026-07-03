@@ -181,6 +181,29 @@ overpay_by_task:
 This is deliberately estimate-based. modelbroker does not invent token counts your CLIs did not
 emit; it uses the `cost_per_run_usd` numbers you configure so routing decisions stay auditable.
 
+## Usage audit: what am I actually spending, and how much is waste?
+
+`broker usage` reads your real agent-CLI transcripts (Claude-Code-style JSONL with per-message
+`usage` token counts), costs them at list prices by model tier, and estimates how much of the spend
+is **mechanical work** (search / scan / read orchestration) that ran on a premium model when a cheap
+one would do.
+
+```bash
+broker usage ~/.claude/projects
+# sessions: 123 · assistant turns: 18,631
+# estimated cost (list prices): $12,156.77
+#   opus    $ 11,801.45   (5,663.3M tokens)
+#   sonnet  $    355.32   (699.5M tokens)
+#
+# mechanical work on a premium model: 5,894 turns · $3,151.54 now vs $244.17 on haiku
+# → recoverable: $2,907.37 (24% of total)
+# BEFORE $12,156.77   AFTER $9,249.40
+```
+
+It classifies a turn as mechanical when it's dominated by search/scan/read tool calls with little
+generated text — the exact work `mechanical_tasks` routing sends to a cheap tier. Real transcripts,
+real token counts, list prices you can read in `broker/usage.py`; nothing is invented.
+
 ## Runtime Radar
 
 `broker runtime` is for token-factory style operational questions:
@@ -230,6 +253,11 @@ broker evidence check new-model
 A model is blocked when it has not passed local verification, required local runtimes are missing,
 or it has a high/critical incident. Low and medium incidents stay visible without automatically
 blocking routing.
+
+Provider news can feed this gate, but it should never directly rewrite active routing. Convert
+frontier-lab strategy, model-release, benchmark, quota, and pricing news into evidence records, then
+verify them locally before changing task-specific routes. See
+[`docs/provider-intelligence.md`](docs/provider-intelligence.md).
 
 ## Prompt Skills
 
