@@ -78,6 +78,9 @@ broker runtime           # see token throughput / cost-hour / error-rate from tr
 broker quota             # see quota-hit pressure and fallback recommendations from traces
 # claude       attempts=10 handled=6 quota_hits=3 quota_rate=30.0%
 
+broker dashboard         # write a self-contained HTML dashboard (spend, overpay, quota) → open it
+broker dashboard --usage ~/.claude/projects   # add a token-usage panel from your transcripts
+
 broker evidence add glm-example --source-url https://example.com --article "launch note"
 broker evidence verify glm-example --command "python eval.py" --passed
 broker evidence check glm-example
@@ -213,6 +216,21 @@ broker usage ~/.claude/projects --today --threshold 20
 # … BEFORE $393.44 …
 # ⚠ OVER: estimated $393.44 exceeds threshold $20.00        # (exits 2)
 ```
+
+## Dashboard
+
+`broker dashboard` renders everything above into one **self-contained HTML file** — inline CSS and
+inline SVG bars, no JS libraries, no server, no external requests, so it opens offline. It reuses the
+same analyses as the CLI, so the dashboard and the terminal never disagree.
+
+```bash
+broker dashboard                              # → broker-dashboard.html
+broker dashboard -o ~/broker.html --usage ~/.claude/projects   # add a token-usage panel
+```
+
+Panels: runs / spend / failovers / mechanical-waste cards, spend-by-provider bars, overpay-by-task
+(waste vs quality-tradeoff), quota pressure per provider, and — with `--usage` — cost by model tier
+with the before/after.
 
 ## Runtime Radar
 

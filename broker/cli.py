@@ -13,6 +13,7 @@ from . import state as statemod
 from . import trace as tracemod
 from .config import ConfigError
 from .cost import cost_radar
+from .dashboard import write_dashboard
 from .evidence import (
     DEFAULT_EVIDENCE,
     EvidenceError,
@@ -107,6 +108,12 @@ def _build_parser() -> argparse.ArgumentParser:
                    help="show token throughput, cost/hour, and runtime reliability from traces")
     sub.add_parser("quota", parents=[cfg_after],
                    help="show provider quota pressure and fallback recommendations from traces")
+    dash = sub.add_parser("dashboard", parents=[cfg_after],
+                          help="write a self-contained HTML dashboard from the trace")
+    dash.add_argument("-o", "--output", default="broker-dashboard.html",
+                      help="output HTML path (default: broker-dashboard.html)")
+    dash.add_argument("--usage", nargs="+", default=None,
+                      help="also include a usage panel from these transcript path(s)")
     evidence_parent = argparse.ArgumentParser(add_help=False)
     evidence_parent.add_argument("--evidence", default=DEFAULT_EVIDENCE, help="path to evidence registry JSON")
     evidence = sub.add_parser("evidence", parents=[evidence_parent], help="manage model evidence gates")
@@ -259,6 +266,18 @@ def _cmd_runtime(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_dashboard(args: argparse.Namespace) -> int:
+    cfg = cfgmod.load(args.config)
+    if args.usage:
+        missing = [p for p in args.usage if not Path(p).exists()]
+        if missing:
+            print(f"broker: no such path: {', '.join(missing)}", file=sys.stderr)
+            return 2
+    out = write_dashboard(cfg, _trace_path(cfg), args.output, usage_paths=args.usage)
+    print(f"wrote {out}")
+    return 0
+
+
 def _cmd_usage(args: argparse.Namespace) -> int:
     missing = [p for p in args.paths if not Path(p).exists()]
     if missing:
@@ -355,7 +374,7 @@ def main(argv: list[str] | None = None) -> int:
                 "doctor": _cmd_doctor, "trace": _cmd_trace, "cost": _cmd_cost,
                 "runtime": _cmd_runtime, "quota": _cmd_quota,
                 "skills": _cmd_skills, "evidence": _cmd_evidence,
-                "usage": _cmd_usage, "init": _cmd_init}
+                "usage": _cmd_usage, "dashboard": _cmd_dashboard, "init": _cmd_init}
     try:
         return dispatch[args.command](args)
     except (ConfigError, EvidenceError) as exc:
