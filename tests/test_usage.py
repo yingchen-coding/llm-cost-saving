@@ -42,3 +42,10 @@ def test_analyze_end_to_end(tmp_path):
     assert rep.total_cost > 0
     assert rep.recoverable > 0                # opus search -> haiku saves money
     assert rep.cost_after < rep.total_cost
+
+
+def test_usage_cli_errors_on_missing_path(capsys):
+    from broker.cli import main
+    rc = main(["usage", "/no/such/path/xyz.jsonl"])
+    assert rc == 2
+    assert "no such path" in capsys.readouterr().err

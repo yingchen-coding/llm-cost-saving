@@ -255,6 +255,10 @@ def _cmd_runtime(args: argparse.Namespace) -> int:
 
 
 def _cmd_usage(args: argparse.Namespace) -> int:
+    missing = [p for p in args.paths if not Path(p).exists()]
+    if missing:
+        print(f"broker: no such path: {', '.join(missing)}", file=sys.stderr)
+        return 2
     print(usage_analyze(args.paths, cheap_tier=args.cheap_tier).render())
     return 0
 
