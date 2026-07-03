@@ -204,6 +204,16 @@ It classifies a turn as mechanical when it's dominated by search/scan/read tool 
 generated text — the exact work `mechanical_tasks` routing sends to a cheap tier. Real transcripts,
 real token counts, list prices you can read in `broker/usage.py`; nothing is invented.
 
+**Daily budget alert.** Add `--today` to count only today's turns and `--threshold` to exit nonzero
+when you're over — so any alerting mechanism (a cron + desktop notification, CI, a webhook) can hook
+it. No platform-specific notification is baked in; the exit code is the signal.
+
+```bash
+broker usage ~/.claude/projects --today --threshold 20
+# … BEFORE $393.44 …
+# ⚠ OVER: estimated $393.44 exceeds threshold $20.00        # (exits 2)
+```
+
 ## Runtime Radar
 
 `broker runtime` is for token-factory style operational questions:

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 from . import __version__
@@ -145,6 +146,10 @@ def _build_parser() -> argparse.ArgumentParser:
                        help="transcript file(s) or directory(ies) of JSONL with per-message usage")
     usage.add_argument("--cheap-tier", default="haiku", choices=["haiku", "sonnet"],
                        help="tier to re-cost mechanical work against (default: haiku)")
+    usage.add_argument("--today", action="store_true",
+                       help="count only turns from today (local date) — for a daily budget check")
+    usage.add_argument("--threshold", type=float, default=None,
+                       help="exit nonzero + print an alert if estimated cost exceeds this USD amount")
     sub.add_parser("init", parents=[cfg_after], help="write a starter broker.toml")
     return p
 
@@ -259,7 +264,13 @@ def _cmd_usage(args: argparse.Namespace) -> int:
     if missing:
         print(f"broker: no such path: {', '.join(missing)}", file=sys.stderr)
         return 2
-    print(usage_analyze(args.paths, cheap_tier=args.cheap_tier).render())
+    report = usage_analyze(args.paths, cheap_tier=args.cheap_tier,
+                           on_date=date.today() if args.today else None)
+    print(report.render())
+    if args.threshold is not None and report.total_cost > args.threshold:
+        print(f"\N{WARNING SIGN} OVER: estimated ${report.total_cost:,.2f} exceeds threshold "
+              f"${args.threshold:,.2f}", file=sys.stderr)
+        return 2
     return 0
 
 

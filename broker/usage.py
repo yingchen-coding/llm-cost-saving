@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 from collections.abc import Iterable
 from dataclasses import dataclass
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -114,7 +115,9 @@ class UsageReport:
         return "\n".join(lines)
 
 
-def _iter_assistant_messages(path: Path) -> Iterable[dict[str, Any]]:
+def _iter_assistant_records(path: Path) -> Iterable[dict[str, Any]]:
+    """Yield full transcript records whose message is a costed assistant turn (keeps the top-level
+    `timestamp` so callers can filter by day)."""
     try:
         fh = path.open(encoding="utf-8")
     except OSError:
@@ -130,21 +133,39 @@ def _iter_assistant_messages(path: Path) -> Iterable[dict[str, Any]]:
                 continue
             msg = rec.get("message")
             if isinstance(msg, dict) and msg.get("role") == "assistant" and msg.get("usage"):
-                yield msg
+                yield rec
 
 
-def analyze(paths: Iterable[str | Path], cheap_tier: str = "haiku") -> UsageReport:
+def _on_local_date(rec: dict[str, Any], on_date: date, tz: Any) -> bool:
+    ts = rec.get("timestamp")
+    if not isinstance(ts, str):
+        return False
+    try:
+        when = datetime.fromisoformat(ts.replace("Z", "+00:00")).astimezone(tz)
+    except ValueError:
+        return False
+    return when.date() == on_date
+
+
+def analyze(paths: Iterable[str | Path], cheap_tier: str = "haiku",
+            on_date: date | None = None) -> UsageReport:
+    """Estimate cost across transcripts. If `on_date` is given, count only turns from that local date
+    (for a daily budget check)."""
     files = []
     for p in paths:
         p = Path(p)
         files.extend(sorted(p.rglob("*.jsonl")) if p.is_dir() else [p])
+    tz = datetime.now().astimezone().tzinfo
     cost_by_tier: dict[str, float] = {}
     tokens_by_tier: dict[str, int] = {}
     mech_turns = 0
     mech_now = mech_cheap = 0.0
     turns = 0
     for fp in files:
-        for msg in _iter_assistant_messages(fp):
+        for rec in _iter_assistant_records(fp):
+            if on_date is not None and not _on_local_date(rec, on_date, tz):
+                continue
+            msg = rec["message"]
             usage = msg["usage"]
             t = tier_of(msg.get("model", ""))
             c = message_cost(t, usage)

@@ -1,5 +1,6 @@
 """Token-cost + mechanical-waste estimation from transcripts."""
 import json
+from datetime import UTC
 
 from broker.usage import analyze, is_mechanical_turn, message_cost, tier_of
 
@@ -49,3 +50,35 @@ def test_usage_cli_errors_on_missing_path(capsys):
     rc = main(["usage", "/no/such/path/xyz.jsonl"])
     assert rc == 2
     assert "no such path" in capsys.readouterr().err
+
+
+def test_usage_today_filter(tmp_path):
+    from datetime import date, datetime
+    today = datetime.now(UTC).isoformat()
+    old = "2020-01-01T00:00:00Z"
+    rows = [
+        {"timestamp": today, "message": {"role": "assistant", "model": "claude-opus-4-8",
+                                         "usage": {"output_tokens": 1000}}},
+        {"timestamp": old, "message": {"role": "assistant", "model": "claude-opus-4-8",
+                                       "usage": {"output_tokens": 999999}}},
+    ]
+    f = tmp_path / "s.jsonl"
+    import json
+    f.write_text("\n".join(json.dumps(r) for r in rows))
+    all_rep = analyze([tmp_path])
+    today_rep = analyze([tmp_path], on_date=date.today())
+    assert all_rep.turns == 2
+    assert today_rep.turns == 1                       # only today's turn
+    assert today_rep.total_cost < all_rep.total_cost  # the big old turn is excluded
+
+
+def test_usage_cli_threshold_exit(tmp_path, capsys):
+    import json
+
+    from broker.cli import main
+    f = tmp_path / "s.jsonl"
+    f.write_text(json.dumps({"message": {"role": "assistant", "model": "claude-opus-4-8",
+                                         "usage": {"output_tokens": 1_000_000}}}))
+    assert main(["usage", str(f), "--threshold", "10"]) == 2      # $75 > $10
+    assert "OVER" in capsys.readouterr().err
+    assert main(["usage", str(f), "--threshold", "1000"]) == 0    # under
