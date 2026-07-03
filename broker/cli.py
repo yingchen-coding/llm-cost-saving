@@ -36,6 +36,9 @@ _DEFAULT_TOML = """\
 state_file = ".broker-state.json"
 max_cost_per_run_usd = 0.0           # 0 disables per-run cost filtering
 cost_strategy = "ordered"            # ordered | cheapest | balanced
+# Low-difficulty task types that must NEVER burn a premium model — they route to the cheapest
+# capable provider, and `broker cost` flags any premium spend on them as pure waste.
+mechanical_tasks = ["search", "scan", "count", "summarize", "boilerplate"]
 
 # A {prompt} token in `command` is replaced with the prompt as one argument (no shell).
 [providers.claude]

@@ -29,6 +29,8 @@ class TraceSummary:
     total_seconds: float
     estimated_cost_usd: float = 0.0
     cost_by_provider: dict[str, float] | None = None
+    runs_by_task: dict[str, int] | None = None       # task type -> resolved runs
+    cost_by_task: dict[str, float] | None = None      # task type -> actual spend (for overpay analysis)
 
     def render(self) -> str:
         if self.runs == 0:
@@ -51,6 +53,8 @@ def summarize(path: str | Path) -> TraceSummary:
     runs = failovers = quota_events = unresolved = 0
     by_provider: dict[str, int] = {}
     cost_by_provider: dict[str, float] = {}
+    runs_by_task: dict[str, int] = {}
+    cost_by_task: dict[str, float] = {}
     total_seconds = 0.0
     estimated_cost_usd = 0.0
     if p.exists():
@@ -79,6 +83,9 @@ def summarize(path: str | Path) -> TraceSummary:
                 if cost:
                     cost_by_provider[provider_name] = cost_by_provider.get(provider_name, 0.0) + cost
                     estimated_cost_usd += cost
+                task = str(rec.get("task") or "(none)")
+                runs_by_task[task] = runs_by_task.get(task, 0) + 1
+                cost_by_task[task] = cost_by_task.get(task, 0.0) + cost
             else:
                 unresolved += 1
             total_seconds += float(rec.get("seconds") or 0.0)
@@ -91,4 +98,6 @@ def summarize(path: str | Path) -> TraceSummary:
         round(total_seconds, 2),
         round(estimated_cost_usd, 6),
         {name: round(cost, 6) for name, cost in cost_by_provider.items()},
+        runs_by_task,
+        {task: round(cost, 6) for task, cost in cost_by_task.items()},
     )

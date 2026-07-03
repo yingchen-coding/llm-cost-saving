@@ -61,6 +61,9 @@ class Config:
     state_file: str = DEFAULT_STATE
     max_cost_per_run_usd: float = 0.0
     cost_strategy: str = "ordered"
+    # Low-difficulty task types (search, scan, count, boilerplate) that must NOT burn the premium
+    # provider — this is where cost actually leaks: paying a top-tier model for work a cheap tier does.
+    mechanical_tasks: list[str] = field(default_factory=list)
 
     def order_for(self, task: str | None) -> list[str]:
         """The ordered candidate providers for a task (task override, else default)."""
@@ -79,9 +82,14 @@ class Config:
         prioritizes lower estimated cost. `balanced` keeps task-strength fit ahead of cost, then
         chooses the cheaper provider among comparable candidates."""
         order = self.order_for(task)
+        indexed = {name: index for index, name in enumerate(order)}
+        # Cost guard (highest priority): a mechanical / low-difficulty task must never burn the
+        # premium provider — route it cheapest-first regardless of cost_strategy. This is the single
+        # biggest real cost leak: a top-tier model doing search/scan/count/boilerplate work.
+        if task and task in self.mechanical_tasks:
+            return sorted(order, key=lambda name: (self.providers[name].cost_per_run_usd, indexed[name]))
         if self.cost_strategy == "ordered":
             return order
-        indexed = {name: index for index, name in enumerate(order)}
         if self.cost_strategy == "cheapest":
             return sorted(
                 order,
@@ -156,6 +164,7 @@ def load(path: str | Path = DEFAULT_CONFIG) -> Config:
     cost_strategy = str(budget.get("cost_strategy", "ordered")).strip().lower()
     if cost_strategy not in {"ordered", "cheapest", "balanced"}:
         raise ConfigError("budget.cost_strategy must be one of: ordered, cheapest, balanced")
+    mechanical_tasks = _coerce_str_list(budget.get("mechanical_tasks"))
     return Config(
         providers,
         default_order,
@@ -163,4 +172,5 @@ def load(path: str | Path = DEFAULT_CONFIG) -> Config:
         state_file,
         max_cost_per_run_usd,
         cost_strategy,
+        mechanical_tasks,
     )

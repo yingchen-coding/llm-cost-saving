@@ -145,9 +145,38 @@ such as `cannot` can also occur in valid answers.
 
 - total estimated spend and average cost per run
 - provider-level spend split
+- **overpay by task** — for each task type, what you actually spent vs the cheapest provider that
+  could have done it
 - providers over the configured per-run ceiling
 - routing recommendations when a cheaper comparable provider exists
 - warnings when failovers or unresolved runs show the policy is too brittle
+
+### Cost tiers: stop paying a premium model for mechanical work
+
+The single biggest real cost leak isn't a bad price — it's running **low-difficulty work** (search,
+scan, count, boilerplate) on a **premium model**. List those task types under `[budget]`:
+
+```toml
+[budget]
+mechanical_tasks = ["search", "scan", "count", "summarize", "boilerplate"]
+```
+
+Two things happen:
+
+1. **Routing guard** — a mechanical task always routes to the *cheapest capable* provider, even if
+   your order or `cost_strategy` would have sent it to the premium one.
+2. **Waste report** — `broker cost` splits overpay into **mechanical waste** (a cheap task billed to
+   a premium model — pure waste, always fix) and a **quality tradeoff** (a hard task where a cheaper
+   option exists — only route down if quality holds). It will not give the naive advice "route your
+   reasoning to the cheapest model"; premium is worth it where difficulty is real.
+
+```text
+⚠ mechanical_waste: $54.6700 — low-difficulty work billed to a premium model. Route it cheaper, always.
+possible_savings (quality tradeoff): $5.6800 — harder tasks where a cheaper provider exists.
+overpay_by_task:
+  search  400 run(s)  spent $30.0000  vs $1.6000 on haiku  → overpaid $28.4000  ⚠ MECHANICAL WASTE
+  reasoning 80 run(s)  spent $6.0000  vs $0.3200 on haiku  → overpaid $5.6800  (quality tradeoff)
+```
 
 This is deliberately estimate-based. modelbroker does not invent token counts your CLIs did not
 emit; it uses the `cost_per_run_usd` numbers you configure so routing decisions stay auditable.
