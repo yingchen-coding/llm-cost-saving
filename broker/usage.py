@@ -12,6 +12,7 @@ import json
 from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 # Anthropic list prices, USD per 1M tokens: (input, output). cache-read ≈ 0.1x input, cache-write ≈ 1.25x input.
 TIER_PRICES: dict[str, tuple[float, float]] = {
@@ -35,7 +36,7 @@ def tier_of(model: str) -> str:
     return "sonnet"  # sonnet or unknown -> standard tier
 
 
-def message_cost(tier: str, usage: dict) -> float:
+def message_cost(tier: str, usage: dict[str, Any]) -> float:
     inp, out = TIER_PRICES.get(tier, TIER_PRICES["sonnet"])
     it = usage.get("input_tokens", 0) or 0
     ct = usage.get("cache_creation_input_tokens", 0) or 0
@@ -113,7 +114,7 @@ class UsageReport:
         return "\n".join(lines)
 
 
-def _iter_assistant_messages(path: Path) -> Iterable[dict]:
+def _iter_assistant_messages(path: Path) -> Iterable[dict[str, Any]]:
     try:
         fh = path.open(encoding="utf-8")
     except OSError:
