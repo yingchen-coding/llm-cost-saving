@@ -161,7 +161,7 @@ def test_stop_slop_skill_wraps_prompt():
     assert "Use the stop-slop quality contract" in wrapped
     assert "User request:\nwrite the README" in wrapped
     assert "generic framing" in wrapped
-    assert skill_names() == ["context-window", "stop-slop"]
+    assert skill_names() == ["context-window", "llm-cost-saving", "stop-slop"]
 
 
 def test_context_window_skill_wraps_prompt():
@@ -170,6 +170,14 @@ def test_context_window_skill_wraps_prompt():
     assert "If code alone is enough, use code only" in wrapped
     assert "/compact" in wrapped
     assert "User request:\nfix the failing test" in wrapped
+
+
+def test_llm_cost_saving_skill_wraps_prompt():
+    wrapped = apply_skill("analyze the alerts parquet", "llm-cost-saving")
+    assert "cost-saving rules" in wrapped
+    assert "Opus" in wrapped
+    assert "run_in_background" in wrapped
+    assert "User request:\nanalyze the alerts parquet" in wrapped
 
 
 def test_cli_run_applies_stop_slop_skill(monkeypatch, tmp_path, capsys):

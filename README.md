@@ -299,11 +299,19 @@ the step that needs them, and compact or summarize before the context window get
 environment supports a slash command such as `/compact`, the skill explicitly tells the model to use
 it at checkpoints.
 
+`--skill llm-cost-saving` cuts LLM spend by routing each unit of work to the cheapest tier: Opus
+for genuine judgment, Sonnet subagent for search/grep/summarize, Haiku for mechanical bulk work,
+plain scripts for zero-model tasks (counting rows, checking job status, diffing files). For data
+analysis it enforces code-first (generate a script, user runs it, paste the result) over loading
+large datasets into context. For background jobs it blocks sleep-poll loops in favor of
+`run_in_background=True`.
+
 ```bash
 broker run -t review --skill stop-slop "review this PR"
 broker run -t writing --skill stop-slop "make this launch copy sharper"
 broker run -t codegen --skill context-window "continue this implementation"
 broker run -t architecture --skill context-window --skill stop-slop "design the next slice"
+broker run -t reasoning --skill llm-cost-saving "analyze this 500K-row dataset"
 ```
 
 Skills are applied before routing, so they work with the same quota fail-over and trace behavior as

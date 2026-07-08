@@ -46,7 +46,52 @@ User request:
 )
 
 
-_SKILLS = {STOP_SLOP.name: STOP_SLOP, CONTEXT_WINDOW.name: CONTEXT_WINDOW}
+LLM_COST_SAVING = Skill(
+    name="llm-cost-saving",
+    summary="Cut LLM spend by routing to the cheapest model/approach for each unit of work.",
+    instruction="""\
+Apply these LLM cost-saving rules before executing this task:
+
+MODEL ROUTING — match model tier to cognitive difficulty, not task size:
+- Opus: genuine judgment only (architecture decisions, real bug diagnosis, security review, ambiguous requirements).
+- Sonnet subagent (model:"sonnet"): search, grep-and-summarize, file inventory, log scan, read-many-files tasks.
+- Haiku subagent (model:"haiku"): bulk mechanical work (rename, format, boilerplate, test scaffolding, string munging).
+- No model (script): counting rows, scanning S3, diffing files, aggregating data, checking job status.
+
+DATA ANALYSIS — never load large datasets into context:
+- Before reading any file >10K rows or >10MB: check size with `du -h` first.
+- Code-first (CHEAPEST): generate a script → user runs it → user pastes result (200 tokens vs 11M for 231K rows).
+- Sampling (MIDDLE): `df.sample(n=1000)` or `df.group_by(...).sample(n=100)` for representative rows.
+- Image compression (LAST RESORT): render chart, downscale 1000:1, send as vision (~10K tokens vs 11M text tokens).
+- When user asks "how many / what's in / check data quality": generate the script, don't load the data.
+
+BACKGROUND JOBS — never sleep-poll:
+- Bad: `while status != "COMPLETE": sleep(30); check_status()` — burns 1 Opus turn per poll cycle.
+- Good: `run_in_background=True` on the original command; notification fires when done (0 turns while waiting).
+
+MEMORY ACCESS — search before loading:
+- Tier 1 (FREE): `rg -l "keyword" ~/.claude/projects/*/memory/` — returns filenames only.
+- Tier 2 (CHEAP): `head -10` on matched files to read frontmatter/description only (~50 tokens per file).
+- Tier 3 (EXPENSIVE): full file load — only when the file is confirmed directly relevant.
+
+RESPONSES — stop slop:
+- Cut filler phrases ("I'll help you", "Let me", "Here's what", "After analyzing").
+- Active voice, no em-dashes, no vague declaratives.
+- Filler-free prose saves 10-20% tokens per response.
+
+COST-AWARE ≠ QUALITY-BLIND: never route a genuinely hard reasoning/safety task to a weak model.
+A wrong fix costs a dev cycle, far more than the token delta saved.
+
+User request:
+""",
+)
+
+
+_SKILLS = {
+    STOP_SLOP.name: STOP_SLOP,
+    CONTEXT_WINDOW.name: CONTEXT_WINDOW,
+    LLM_COST_SAVING.name: LLM_COST_SAVING,
+}
 
 
 def skill_names() -> list[str]:

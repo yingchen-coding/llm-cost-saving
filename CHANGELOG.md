@@ -8,6 +8,10 @@
 - Add `--skill context-window` for long tasks: prefer smallest sufficient context, code-only context
   when possible, defer bulky data until the final responsible step, and compact/summarize before
   context-window drift.
+- Add `--skill llm-cost-saving`: route each unit of work to the cheapest model tier (Opus for
+  judgment, Sonnet for search/summarize, Haiku for mechanical, script for zero-model work); never
+  load large datasets into context (code-first → sampling → image); never sleep-poll background
+  jobs.
 - Add opt-in policy-refusal failover that retries the current task on another provider without
   incorrectly cooling down a healthy model.
 - **Report an all-refusal run honestly instead of as "exhausted".** When every provider answers
