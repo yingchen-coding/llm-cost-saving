@@ -44,3 +44,24 @@ def test_render_html_empty_trace_is_graceful(tmp_path):
 def test_write_dashboard_creates_file(tmp_path):
     out = write_dashboard(_cfg(), _trace(tmp_path), tmp_path / "d.html")
     assert out.exists() and out.read_text().startswith("<!doctype html>")
+
+
+def test_render_html_usage_panel_no_duplicate_total(tmp_path):
+    # The usage panel must show total_spend, mechanical_waste, after_rerouting, turns — not
+    # two cards both showing the same total ("total" and "before" were identical in the old bug).
+    import json
+    transcript = tmp_path / "session.jsonl"
+    rec = {"message": {"role": "assistant", "model": "claude-opus-4",
+                        "content": [{"type": "tool_use", "name": "Grep", "input": {"command": "grep foo"}}],
+                        "usage": {"input_tokens": 100, "output_tokens": 20,
+                                  "cache_creation_input_tokens": 0, "cache_read_input_tokens": 0}},
+           "timestamp": "2026-01-01T12:00:00Z"}
+    transcript.write_text(json.dumps(rec) + "\n", encoding="utf-8")
+    html = render_html(_cfg(), tmp_path / "missing.jsonl",
+                       usage=__import__("broker.usage", fromlist=["analyze"]).analyze([transcript]))
+    # "before" was the duplicate card label — must not appear, "total spend" and "after rerouting" must
+    assert "total spend" in html
+    assert "after rerouting" in html
+    assert "turns analyzed" in html
+    # old duplicate label must be gone
+    assert ">before<" not in html

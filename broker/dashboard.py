@@ -100,10 +100,10 @@ def render_html(config: Config, trace_path: str | Path, usage: UsageReport | Non
         usage_section = f"""
     <h2>Usage (transcripts)</h2>
     <div class="cards">
-      {_card("total", f"${usage.total_cost:,.2f}")}
+      {_card("total spend", f"${usage.total_cost:,.2f}")}
       {_card("mechanical waste", f"${usage.recoverable:,.2f}", "warn" if usage.recoverable > 0 else "ok")}
-      {_card("before", f"${usage.total_cost:,.2f}")}
-      {_card("after", f"${usage.cost_after:,.2f}", "ok")}
+      {_card("after rerouting", f"${usage.cost_after:,.2f}", "ok")}
+      {_card("turns analyzed", f"{usage.turns:,}")}
     </div>
     <table style="margin-top:12px"><tr><th>tier</th><th class="n">cost</th><th class="n">tokens</th></tr>
     {tier_rows}</table>"""
