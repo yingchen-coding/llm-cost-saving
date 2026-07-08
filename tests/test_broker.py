@@ -214,6 +214,28 @@ def test_refusal_detection_is_opt_in(tmp_path):
     assert result.attempts[0].refusal is False
 
 
+def test_quota_takes_priority_over_refusal_when_both_match(tmp_path):
+    # If output matches BOTH quota_markers AND refusal_markers, quota wins: the provider must be
+    # cooled so the next run doesn't route straight back to the rate-limited model.
+    config_text = TOML.replace(
+        'quota_markers = ["usage limit", "429"]',
+        'quota_markers = ["usage limit", "429"]\nrefusal_markers = ["usage limit"]',
+    )
+    path = tmp_path / "broker.toml"
+    path.write_text(config_text)
+    cfg, state = cfgmod.load(path), _state(tmp_path)
+
+    result = run_task(cfg, state, "x", task="reasoning",
+                      executor=lambda a, s: (1, "usage limit reached"),
+                      now_fn=lambda: 1000.0)
+
+    assert result.attempts[0].quota_hit is True
+    assert result.attempts[0].refusal is True
+    # quota must have applied the cooldown — not skipped because refusal matched too
+    assert state.get("claude").available(1000.0) is False
+    assert state.get("claude").cooldown_remaining(1000.0) == 18000  # 5h quota window
+
+
 def test_cooled_down_provider_is_skipped(tmp_path):
     cfg, state = _cfg(tmp_path), _state(tmp_path)
     state.cool_down("claude", until=5000.0)           # claude unavailable until t=5000

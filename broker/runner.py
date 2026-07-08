@@ -150,8 +150,10 @@ def run_task(
         if quota or unavailable or transient or refusal:
             # quota-exhausted, missing-CLI, OR a retryable provider-side fault: cool the provider
             # down and fail over to the next, so one model's hiccup doesn't end the whole run. A
-            # generic/terminal nonzero (bad prompt, policy refusal) falls through and is returned.
-            if refusal:
+            # policy refusal is not cooled — the provider will answer other prompts fine — UNLESS
+            # the output also matches a quota marker, in which case quota takes priority so the
+            # provider gets cooled and the next call routes around it correctly.
+            if refusal and not quota:
                 last_refusal = (name, code, output)
             else:
                 cooldown = (provider.reset_seconds if quota
