@@ -77,7 +77,7 @@ def runtime_report(path: str | Path) -> RuntimeReport:
     by_provider: dict[str, dict[str, float | int]] = {}
     for provider, provider_rows in by_provider_raw.items():
         provider_tokens = sum(_tokens(row) for row in provider_rows)
-        provider_seconds = sum(_num(row.get("seconds")) for row in provider_rows)
+        provider_seconds = sum(_resolved_seconds(row) for row in provider_rows)
         provider_cost = sum(_num(row.get("estimated_cost_usd")) for row in provider_rows)
         by_provider[provider] = {
             "runs": len(provider_rows),
@@ -124,6 +124,17 @@ def _load_rows(path: Path) -> list[dict[str, Any]]:
         if isinstance(row, dict):
             rows.append(row)
     return rows
+
+
+def _resolved_seconds(row: dict[str, Any]) -> float:
+    """Seconds for the attempt that actually resolved the run, not time burned on failed attempts
+    before it. Falls back to top-level seconds for old-format traces without an attempts array."""
+    provider = row.get("provider")
+    if provider:
+        for attempt in (row.get("attempts") or []):
+            if attempt.get("provider") == provider:
+                return _num(attempt.get("seconds"))
+    return _num(row.get("seconds"))
 
 
 def _num(value: Any) -> float:

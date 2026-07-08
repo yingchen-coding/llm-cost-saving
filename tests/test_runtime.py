@@ -92,3 +92,29 @@ def test_runtime_report_survives_malformed_numeric_fields(tmp_path):
     assert report.total_tokens == 400          # the bad row contributes 0, not a crash
     assert report.total_seconds == 4.0
     assert report.by_provider["a"]["tokens"] == 0
+
+
+def test_by_provider_seconds_excludes_failed_attempt_time(tmp_path):
+    # When a run fails over (claude times out 30s → codex resolves in 2s), codex's per-provider
+    # seconds must use only the codex attempt's 2s, not the total 32s wall time.
+    trace = tmp_path / ".broker-trace.jsonl"
+    append(
+        trace,
+        {
+            "provider": "codex",
+            "seconds": 32.0,           # total: 30s claude timeout + 2s codex
+            "total_tokens": 200,
+            "estimated_cost_usd": 0.01,
+            "exit_code": 0,
+            "attempts": [
+                {"provider": "claude", "seconds": 30.0, "quota_hit": True},
+                {"provider": "codex",  "seconds": 2.0,  "quota_hit": False},
+            ],
+        },
+    )
+    report = runtime_report(trace)
+    # per-provider: codex gets only its own 2s, not the full 32s wall time
+    assert report.by_provider["codex"]["seconds"] == 2.0
+    assert report.by_provider["codex"]["tokens_per_second"] == 100.0  # 200 tokens / 2s
+    # global total_seconds is still the full wall time (actual latency experienced)
+    assert report.total_seconds == 32.0

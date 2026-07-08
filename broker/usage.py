@@ -23,7 +23,7 @@ TIER_PRICES: dict[str, tuple[float, float]] = {
 }
 
 # tool calls that are pure search/scan/read orchestration — a cheap model handles these fine
-_MECH_TOOLS = {"Grep", "Glob", "LS", "Read"}
+_MECH_TOOLS = {"Grep", "Glob", "Read"}
 _MECH_BASH = ("grep", "ls ", "cat ", "find ", "head ", "tail ", "wc ", "sed -n", "rg ",
               "git log", "git status", "git diff", "git show", "awk ", "sort", "uniq")
 

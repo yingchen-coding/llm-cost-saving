@@ -23,6 +23,9 @@ def test_is_mechanical_turn():
     assert is_mechanical_turn(bash_mech) is True
     bash_real = [{"type": "tool_use", "name": "Bash", "input": {"command": "python train.py"}}]
     assert is_mechanical_turn(bash_real) is False
+    # "LS" is not a real Claude Code tool — listing goes through Bash; must not count as mechanical
+    ls_tool = [{"type": "tool_use", "name": "LS", "input": {}}]
+    assert is_mechanical_turn(ls_tool) is False
 
 
 def test_analyze_end_to_end(tmp_path):
