@@ -247,6 +247,26 @@ def test_cli_missing_config_is_clean_error(tmp_path, capsys):
     assert "broker:" in capsys.readouterr().err
 
 
+def test_cli_route_no_providers_due_to_cost_ceiling(tmp_path, capsys):
+    # When all providers exceed the per-run cost ceiling, order is empty and soonest is None.
+    # The route command must not print "None frees up in 0s".
+    cfg = _write_cfg(tmp_path, """\
+[budget]
+state_file = "state.json"
+max_cost_per_run_usd = 0.001
+[providers.expensive]
+command = "expensive {prompt}"
+reset = "1h"
+cost_per_run_usd = 0.10
+[routing]
+default = ["expensive"]
+""")
+    assert cli.main(["-c", str(cfg), "route"]) == 0
+    out = capsys.readouterr().out
+    assert "None" not in out
+    assert "no providers available" in out
+
+
 # ---- real subprocess executor ----
 
 def test_executor_command_not_found():

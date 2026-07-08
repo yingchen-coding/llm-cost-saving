@@ -218,8 +218,11 @@ def _cmd_route(args: argparse.Namespace) -> int:
         print(f"estimated_costs: {costs}")
     if pl.chosen:
         print(f"  → would use: {pl.chosen}")
-    else:
+    elif pl.soonest:
         print(f"  → all cooled down; {pl.soonest} frees up in {int(pl.soonest_eta)}s")
+    else:
+        task_label = pl.task or "(default)"
+        print(f"  → no providers available for task {task_label!r} (cost ceiling or empty order)")
     return 0
 
 
