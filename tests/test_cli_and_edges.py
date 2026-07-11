@@ -177,6 +177,7 @@ def test_llm_cost_saving_skill_wraps_prompt():
     assert "cost-saving rules" in wrapped
     assert "Opus" in wrapped
     assert "run_in_background" in wrapped
+    assert "Minimum outward print" in wrapped
     assert "User request:\nanalyze the alerts parquet" in wrapped
 
 
@@ -224,6 +225,33 @@ def test_cli_run_applies_multiple_skills(monkeypatch, tmp_path):
     assert "Use the context-window optimization method" in seen["prompt"]
     assert "Use the stop-slop quality contract" in seen["prompt"]
     assert "ship it" in seen["prompt"]
+
+
+def test_cli_run_quiet_suppresses_failover_chatter(monkeypatch, tmp_path, capsys):
+    cfg = _write_cfg(tmp_path, THREE)
+    calls = []
+
+    def fake_run(argv, **kwargs):
+        calls.append(argv[0])
+
+        class _Proc:
+            stderr = ""
+
+        proc = _Proc()
+        if len(calls) == 1:
+            proc.returncode = 1
+            proc.stdout = "usage limit"
+        else:
+            proc.returncode = 0
+            proc.stdout = "ok"
+        return proc
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("broker.runner.subprocess.run", fake_run)
+    assert cli.main(["-c", str(cfg), "run", "--quiet", "-t", "reasoning", "do it"]) == 0
+    captured = capsys.readouterr()
+    assert captured.out == "ok\n"
+    assert captured.err == ""
 
 
 def test_cli_lists_skills(capsys):

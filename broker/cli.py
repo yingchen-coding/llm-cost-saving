@@ -91,6 +91,8 @@ def _build_parser() -> argparse.ArgumentParser:
     run.add_argument("--skill", action="append", choices=skill_names(),
                      help="apply a prompt skill before routing; may be repeated")
     run.add_argument("--timeout", type=float, default=None, help="per-provider timeout (seconds)")
+    run.add_argument("--quiet", action="store_true",
+                     help="suppress broker routing chatter; print only provider output or errors")
 
     route = sub.add_parser("route", parents=[cfg_after],
                            help="show which model a task would go to (no execution)")
@@ -199,7 +201,7 @@ def _cmd_run(args: argparse.Namespace) -> int:
         return 1
     failovers = [a.label() for a in result.attempts
                  if a.quota_hit or a.unavailable or a.transient or a.refusal]
-    if failovers:
+    if failovers and not args.quiet:
         print(f"broker: {', '.join(failovers)} → used {result.provider}", file=sys.stderr)
     print(result.output, end="" if result.output.endswith("\n") else "\n")
     return result.exit_code

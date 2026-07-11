@@ -53,6 +53,9 @@ broker doctor            # check each provider's CLI is installed / on PATH (no 
 broker run -t codegen "write a quicksort in python"
 # claude out of quota → uses codex; claude back in window → uses claude. automatically.
 
+broker run --quiet -t codegen "write a quicksort in python"
+# suppresses broker routing chatter; prints only provider output unless the run fails.
+
 broker skills
 broker run -t writing --skill stop-slop "rewrite this README section"
 # adds a low-fluff quality contract before routing to the best available provider.
