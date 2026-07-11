@@ -177,7 +177,7 @@ def test_llm_cost_saving_skill_wraps_prompt():
     assert "cost-saving rules" in wrapped
     assert "Opus" in wrapped
     assert "run_in_background" in wrapped
-    assert "Mute outward print" in wrapped
+    assert "Silent execution mode" in wrapped
     assert "User request:\nanalyze the alerts parquet" in wrapped
 
 
@@ -286,6 +286,45 @@ def test_cli_run_env_mute_suppresses_success_output(monkeypatch, tmp_path, capsy
 
     monkeypatch.chdir(tmp_path)
     monkeypatch.setenv("MODELBROKER_MUTE", "1")
+    monkeypatch.setattr("broker.runner.subprocess.run", fake_run)
+    assert cli.main(["-c", str(cfg), "run", "-t", "reasoning", "do it"]) == 0
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err == ""
+
+
+def test_cli_run_silent_alias_suppresses_success_output(monkeypatch, tmp_path, capsys):
+    cfg = _write_cfg(tmp_path, THREE)
+
+    def fake_run(argv, **kwargs):
+        class _Proc:
+            returncode = 0
+            stdout = "large provider output"
+            stderr = ""
+
+        return _Proc()
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("broker.runner.subprocess.run", fake_run)
+    assert cli.main(["-c", str(cfg), "run", "--silent", "-t", "reasoning", "do it"]) == 0
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err == ""
+
+
+def test_cli_run_env_silent_suppresses_success_output(monkeypatch, tmp_path, capsys):
+    cfg = _write_cfg(tmp_path, THREE)
+
+    def fake_run(argv, **kwargs):
+        class _Proc:
+            returncode = 0
+            stdout = "large provider output"
+            stderr = ""
+
+        return _Proc()
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("MODELBROKER_SILENT", "1")
     monkeypatch.setattr("broker.runner.subprocess.run", fake_run)
     assert cli.main(["-c", str(cfg), "run", "-t", "reasoning", "do it"]) == 0
     captured = capsys.readouterr()

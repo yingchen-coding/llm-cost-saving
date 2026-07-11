@@ -96,6 +96,8 @@ def _build_parser() -> argparse.ArgumentParser:
                      help="suppress broker routing chatter; print only provider output or errors")
     run.add_argument("--mute", action="store_true",
                      help="print nothing on success; trace still records the run")
+    run.add_argument("--silent", action="store_true",
+                     help="alias for --mute; print nothing on success")
 
     route = sub.add_parser("route", parents=[cfg_after],
                            help="show which model a task would go to (no execution)")
@@ -205,7 +207,12 @@ def _cmd_run(args: argparse.Namespace) -> int:
     failovers = [a.label() for a in result.attempts
                  if a.quota_hit or a.unavailable or a.transient or a.refusal]
     quiet = args.quiet or os.environ.get("MODELBROKER_QUIET", "").lower() in {"1", "true", "yes"}
-    mute = args.mute or os.environ.get("MODELBROKER_MUTE", "").lower() in {"1", "true", "yes"}
+    mute = (
+        args.mute
+        or args.silent
+        or os.environ.get("MODELBROKER_MUTE", "").lower() in {"1", "true", "yes"}
+        or os.environ.get("MODELBROKER_SILENT", "").lower() in {"1", "true", "yes"}
+    )
     if failovers and not quiet and not mute:
         print(f"broker: {', '.join(failovers)} → used {result.provider}", file=sys.stderr)
     if not mute:

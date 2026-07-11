@@ -59,6 +59,9 @@ broker run --quiet -t codegen "write a quicksort in python"
 broker run --mute -t codegen "write a quicksort in python"
 # prints nothing on success; use when another script captures the trace/output.
 
+broker run --silent -t codegen "write a quicksort in python"
+# same as --mute. Environment equivalent: MODELBROKER_SILENT=1.
+
 broker skills
 broker run -t writing --skill stop-slop "rewrite this README section"
 # adds a low-fluff quality contract before routing to the best available provider.

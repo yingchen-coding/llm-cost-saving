@@ -78,8 +78,9 @@ RESPONSES — stop slop:
 - Cut filler phrases ("I'll help you", "Let me", "Here's what", "After analyzing").
 - Active voice, no em-dashes, no vague declaratives.
 - Filler-free prose saves 10-20% tokens per response.
-- Mute outward print by default: no progress narration, raw logs, copied command output, or self-talk.
-- Talk only when the user needs a decision, blocker, result, path, or verification status.
+- Silent execution mode by default: no progress narration, raw logs, copied command output, or self-talk.
+- Talk only when the user needs a decision, blocker, result, path, or verification status,
+  or when you intentionally need to talk to them.
 - Prefer redirected logs, counts, paths, exit codes, and short tails over pasted output.
 - Final answers should be compact: changed files, verification, blockers.
 
