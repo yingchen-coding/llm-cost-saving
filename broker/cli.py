@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import date
 from pathlib import Path
@@ -93,6 +94,8 @@ def _build_parser() -> argparse.ArgumentParser:
     run.add_argument("--timeout", type=float, default=None, help="per-provider timeout (seconds)")
     run.add_argument("--quiet", action="store_true",
                      help="suppress broker routing chatter; print only provider output or errors")
+    run.add_argument("--mute", action="store_true",
+                     help="print nothing on success; trace still records the run")
 
     route = sub.add_parser("route", parents=[cfg_after],
                            help="show which model a task would go to (no execution)")
@@ -201,9 +204,12 @@ def _cmd_run(args: argparse.Namespace) -> int:
         return 1
     failovers = [a.label() for a in result.attempts
                  if a.quota_hit or a.unavailable or a.transient or a.refusal]
-    if failovers and not args.quiet:
+    quiet = args.quiet or os.environ.get("MODELBROKER_QUIET", "").lower() in {"1", "true", "yes"}
+    mute = args.mute or os.environ.get("MODELBROKER_MUTE", "").lower() in {"1", "true", "yes"}
+    if failovers and not quiet and not mute:
         print(f"broker: {', '.join(failovers)} → used {result.provider}", file=sys.stderr)
-    print(result.output, end="" if result.output.endswith("\n") else "\n")
+    if not mute:
+        print(result.output, end="" if result.output.endswith("\n") else "\n")
     return result.exit_code
 
 

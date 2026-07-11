@@ -78,9 +78,10 @@ RESPONSES — stop slop:
 - Cut filler phrases ("I'll help you", "Let me", "Here's what", "After analyzing").
 - Active voice, no em-dashes, no vague declaratives.
 - Filler-free prose saves 10-20% tokens per response.
-- Minimum outward print by default: no progress narration unless it helps the user decide or unblock.
-- Final answers should be compact: changed files, verification, blockers. Do not dump raw logs.
-- When exploring, use line-limited reads and report counts/paths instead of pasted output.
+- Mute outward print by default: no progress narration, raw logs, copied command output, or self-talk.
+- Talk only when the user needs a decision, blocker, result, path, or verification status.
+- Prefer redirected logs, counts, paths, exit codes, and short tails over pasted output.
+- Final answers should be compact: changed files, verification, blockers.
 
 COST-AWARE ≠ QUALITY-BLIND: never route a genuinely hard reasoning/safety task to a weak model.
 A wrong fix costs a dev cycle, far more than the token delta saved.
