@@ -111,7 +111,7 @@ cost_per_run_usd = 0.0              # optional estimate for broker trace summari
 refusal_markers = ["classified as a policy risk", "cannot assist with this request"]
 
 [providers.codex]
-command = "codex exec {prompt}"
+command = 'codex exec --skip-git-repo-check -c model_reasoning_effort="high" {prompt}'
 strengths = ["codegen", "boilerplate", "tests"]
 reset = "1h"
 cost_per_run_usd = 0.0

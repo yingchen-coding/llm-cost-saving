@@ -56,6 +56,7 @@ def test_cli_init_then_route_status(tmp_path, capsys):
     cfg = tmp_path / "broker.toml"
     assert cli.main(["-c", str(cfg), "init"]) == 0
     assert cfg.exists()
+    assert 'model_reasoning_effort="high"' in cfg.read_text(encoding="utf-8")
     # init is idempotent-guarded: a second init refuses rather than clobbering
     assert cli.main(["-c", str(cfg), "init"]) == 2
 

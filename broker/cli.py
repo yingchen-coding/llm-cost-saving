@@ -53,7 +53,7 @@ quota_markers = ["usage limit", "rate limit", "429", "quota", "resets at", "too 
 cost_per_run_usd = 0.0              # optional local estimate used by `broker trace`
 
 [providers.codex]
-command = "codex exec --skip-git-repo-check {prompt}"
+command = 'codex exec --skip-git-repo-check -c model_reasoning_effort="high" {prompt}'
 strengths = ["codegen", "boilerplate", "tests", "quick-edit", "scripts"]
 reset = "1h"
 quota_markers = ["rate limit", "429", "quota", "usage limit", "too many requests", "exceeded"]
