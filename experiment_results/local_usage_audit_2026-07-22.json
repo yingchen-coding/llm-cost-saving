@@ -1,0 +1,34 @@
+{
+  "audit_date": "2026-07-22",
+  "corpus": "private local Claude Code transcript corpus; aggregate only",
+  "method": "API list-price estimate; not an invoice, subscription charge, or realized saving",
+  "assistant_turns": 12894,
+  "records_scanned": 26158,
+  "duplicate_stream_records_removed": 13118,
+  "synthetic_records_skipped": 146,
+  "estimated_cost_usd": 2988.23,
+  "mechanical_turns": 7110,
+  "mechanical_cost_current_usd": 1602.99,
+  "mechanical_cost_at_haiku_usd": 326.25,
+  "estimated_rerouting_opportunity_usd": 1276.74,
+  "estimated_cost_after_rerouting_usd": 1711.49,
+  "estimated_rerouting_opportunity_fraction": 0.4273,
+  "cost_by_tier_usd": {
+    "fable": 309.06,
+    "opus": 2390.85,
+    "sonnet": 285.83,
+    "haiku": 2.49
+  },
+  "limitations": [
+    "The source corpus is private and is not published.",
+    "List-price estimates do not represent subscription billing.",
+    "The rerouting opportunity is an upper-bound candidate, not realized savings.",
+    "A cheaper route still requires task-level outcome-equivalence validation."
+  ],
+  "pricing_sources": {
+    "fable_5": "https://www.anthropic.com/claude/fable",
+    "opus_4_7_4_8": "https://www.anthropic.com/research/claude-opus-4-8",
+    "sonnet_5": "https://www.anthropic.com/news/claude-sonnet-5",
+    "haiku_4_5": "https://www.anthropic.com/claude/haiku"
+  }
+}

@@ -216,6 +216,17 @@ It classifies a turn as mechanical when it's dominated by search/scan/read tool 
 generated text — the exact work `mechanical_tasks` routing sends to a cheap tier. Real transcripts,
 real token counts, list prices you can read in `broker/usage.py`; nothing is invented.
 
+Use `--json` to export a privacy-safe aggregate without transcript paths or message content. The
+2026-07-22 local field audit in `experiment_results/local_usage_audit_2026-07-22.json` found 12,894
+unique assistant turns after removing 13,118 duplicate stream records and skipping 146 synthetic
+records. At published API list prices, it measured a $1,276.74 rerouting opportunity out of a
+$2,988.23 estimate (42.73%). This is an upper-bound candidate, not an invoice or realized saving;
+task-level outcome equivalence is still required before changing routes.
+
+```bash
+broker usage /path/to/transcripts --json
+```
+
 **Daily budget alert.** Add `--today` to count only today's turns and `--threshold` to exit nonzero
 when you're over — so any alerting mechanism (a cron + desktop notification, CI, a webhook) can hook
 it. No platform-specific notification is baked in; the exit code is the signal.

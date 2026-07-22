@@ -2,15 +2,19 @@
 import json
 from datetime import UTC
 
-from broker.usage import analyze, is_mechanical_turn, message_cost, tier_of
+from broker.usage import analyze, is_mechanical_turn, message_cost, prices_for_model, tier_of
 
 
 def test_tier_and_cost():
     assert tier_of("claude-opus-4-8") == "opus"
     assert tier_of("claude-haiku-4-5") == "haiku"
     assert tier_of("claude-sonnet-4-6") == "sonnet"
-    # 1M output tokens on opus = $75
-    assert round(message_cost("opus", {"output_tokens": 1_000_000})) == 75
+    # Current Opus list price is $25/MTok output.
+    assert round(message_cost("opus", {"output_tokens": 1_000_000})) == 25
+    assert prices_for_model("claude-fable-5") == (10.0, 50.0)
+    assert prices_for_model("claude-opus-4-8") == (5.0, 25.0)
+    assert prices_for_model("claude-sonnet-5", "2026-07-22T00:00:00Z") == (2.0, 10.0)
+    assert prices_for_model("claude-sonnet-5", "2026-09-01T00:00:00Z") == (3.0, 15.0)
 
 
 def test_is_mechanical_turn():
@@ -32,7 +36,7 @@ def test_analyze_end_to_end(tmp_path):
     # one opus mechanical turn (search) + one opus reasoning turn
     rows = [
         {"message": {"role": "assistant", "model": "claude-opus-4-8",
-                     "usage": {"input_tokens": 100, "output_tokens": 100},
+                     "usage": {"input_tokens": 100_000, "output_tokens": 100_000},
                      "content": [{"type": "tool_use", "name": "Grep", "input": {"pattern": "x"}}]}},
         {"message": {"role": "assistant", "model": "claude-opus-4-8",
                      "usage": {"input_tokens": 100, "output_tokens": 5000},
@@ -46,6 +50,32 @@ def test_analyze_end_to_end(tmp_path):
     assert rep.total_cost > 0
     assert rep.recoverable > 0                # opus search -> haiku saves money
     assert rep.cost_after < rep.total_cost
+
+
+def test_analyze_deduplicates_stream_blocks_and_skips_synthetic(tmp_path):
+    usage = {"input_tokens": 100, "output_tokens": 200}
+    rows = [
+        {"uuid": "one", "message": {"id": "msg-1", "role": "assistant", "model": "claude-opus-4-8",
+         "usage": usage, "content": [{"type": "tool_use", "name": "Grep", "input": {}}]}},
+        {"uuid": "two", "message": {"id": "msg-1", "role": "assistant", "model": "claude-opus-4-8",
+         "usage": usage, "content": [{"type": "tool_use", "name": "Read", "input": {}}]}},
+        {"uuid": "three", "message": {"id": "msg-2", "role": "assistant", "model": "<synthetic>",
+         "usage": usage, "content": [{"type": "text", "text": "fixture"}]}},
+    ]
+    (tmp_path / "stream.jsonl").write_text("\n".join(json.dumps(row) for row in rows))
+    report = analyze([tmp_path])
+    assert report.turns == 1
+    assert report.mechanical_turns == 1
+    assert report.duplicate_records_removed == 1
+    assert report.synthetic_records_skipped == 1
+
+
+def test_one_hour_cache_writes_use_two_times_input_price():
+    usage = {
+        "cache_creation_input_tokens": 1_000_000,
+        "cache_creation": {"ephemeral_1h_input_tokens": 1_000_000, "ephemeral_5m_input_tokens": 0},
+    }
+    assert message_cost("haiku", usage) == 2.0
 
 
 def test_usage_cli_errors_on_missing_path(capsys):
@@ -82,6 +112,13 @@ def test_usage_cli_threshold_exit(tmp_path, capsys):
     f = tmp_path / "s.jsonl"
     f.write_text(json.dumps({"message": {"role": "assistant", "model": "claude-opus-4-8",
                                          "usage": {"output_tokens": 1_000_000}}}))
-    assert main(["usage", str(f), "--threshold", "10"]) == 2      # $75 > $10
+    assert main(["usage", str(f), "--threshold", "10"]) == 2      # $25 > $10
     assert "OVER" in capsys.readouterr().err
     assert main(["usage", str(f), "--threshold", "1000"]) == 0    # under
+    capsys.readouterr()
+
+    assert main(["usage", str(f), "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["assistant_turns"] == 1
+    assert payload["method"].startswith("API list-price estimate")
+    assert "pricing_sources" in payload

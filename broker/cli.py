@@ -164,6 +164,8 @@ def _build_parser() -> argparse.ArgumentParser:
                        help="count only turns from today (local date) — for a daily budget check")
     usage.add_argument("--threshold", type=float, default=None,
                        help="exit nonzero + print an alert if estimated cost exceeds this USD amount")
+    usage.add_argument("--json", action="store_true",
+                       help="print a privacy-safe aggregate JSON report (no transcript paths or content)")
     sub.add_parser("init", parents=[cfg_after], help="write a starter broker.toml")
     return p
 
@@ -303,7 +305,7 @@ def _cmd_usage(args: argparse.Namespace) -> int:
         return 2
     report = usage_analyze(args.paths, cheap_tier=args.cheap_tier,
                            on_date=date.today() if args.today else None)
-    print(report.render())
+    print(json.dumps(report.to_dict(), indent=2, sort_keys=True) if args.json else report.render())
     if args.threshold is not None and report.total_cost > args.threshold:
         print(f"\N{WARNING SIGN} OVER: estimated ${report.total_cost:,.2f} exceeds threshold "
               f"${args.threshold:,.2f}", file=sys.stderr)

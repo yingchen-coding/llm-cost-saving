@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Make `broker usage` count logical assistant messages instead of repeated stream blocks, exclude
+  synthetic records, apply source-backed model/version pricing and one-hour cache-write pricing,
+  and add a privacy-safe `--json` aggregate export.
 - Add `broker run --skill stop-slop ...` and `broker skills`. The built-in prompt skill wraps a
   request with a concrete, low-fluff quality contract before routing it through the normal provider
   policy.

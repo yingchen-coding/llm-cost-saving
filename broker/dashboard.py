@@ -95,7 +95,7 @@ def render_html(config: Config, trace_path: str | Path, usage: UsageReport | Non
         tier_rows = "".join(
             f"<tr><td>{html.escape(t)}</td><td class='n'>${usage.cost_by_tier[t]:,.2f}</td>"
             f"<td class='n'>{usage.tokens_by_tier.get(t, 0) / 1e6:,.1f}M</td></tr>"
-            for t in ("opus", "sonnet", "haiku") if usage.cost_by_tier.get(t)
+            for t in ("fable", "opus", "sonnet", "haiku") if usage.cost_by_tier.get(t)
         )
         usage_section = f"""
     <h2>Usage (transcripts)</h2>
