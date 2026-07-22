@@ -112,3 +112,29 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/roll/2026-07-20/doc-iniinmvw9681727.shtml
   Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +2:api. Intro: 7月17日至20日的2026世界人工智能大会上，AI云服务商GMI Cloud展示AI Cloud、Cluster Engine等产品，覆盖GPU资源、算力调度等环节。过去企业采购AI云服务重GPU，如今还需处理算力调度等问题。AI Cloud提供英伟达多种GPU资源用于模型训练等。Cluster Engine是算力管理平台，解决GPU有效使用问题。AgentBox是AI Agent部署平台，内置MaaS模型库，可通过单一API密钥调用170+全球顶尖大模型。这反映AI云厂商正从资源供应商向模型和应用层延伸，未来竞争重点或在助企业稳定部署模型和智能体。 (AI生成)
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-22-083000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **谷歌连发三款Gemini模型 Gemini 3.6 Flash就位，主攻AI Agent赛道**
+  Source: https://t.cj.sina.com.cn/articles/view/1899684203/713ae16b001017hl2
+  Signal: Daily Sina collector selected this with score=13, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:安全, +4:token. Intro: 在代码相关基准测试中，新模型减少无效代码迭代，同时升级 CBRN、网络攻击相关安全防护，抵御越狱能力进一步增强。面向高并发场景，谷歌带来轻量化 Gemini 3.5 Flash-Lite，主打极致吞吐量，输出速度可达每秒 350 Token，适配文档批量处理、智能检索等高频调用业务...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **2026/07/22 彭博社：美国加码审查中国AI模型，低成本优势正在改变全球开发者选择**
+  Source: https://video.sina.com.cn/p/finance/2026-07-22/detail-iniispna7979447.d.html
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:开发者, +2:视频. Intro: 1、视频来源：Bloomberg Television，主要讨论：美国拟加强对中国AI模型知识产权与蒸馏问题的审查，以及低成本中国模型对全球开发者选择的影响；2、更多宏观资讯和投资方向，...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **降低“AI成本”大势所趋！Meta要做“模型路由”，复刻OpenRouter**
+  Source: https://finance.sina.com.cn/roll/2026-07-22/doc-iniirshq4759195.shtml
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:路由. Intro: 据报道，为降低AI推理成本，Meta正复刻OpenRouter，开发模型路由工具Switchboard。该工具不仅用于内部降本，未来或对外发布，成为Meta开辟新收入来源的尝试...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **AI眼镜有望成为AI Agent关键入口，消费电子ETF易方达（562950）催化不断**
+  Source: https://cj.sina.com.cn/articles/view/1704103183/65928d0f0200b3q0g
+  Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: 7月22日，截至13:34，消费电子指数下跌1.2%。个股方面，澜起科技涨超2%，工业富联上涨。热门ETF方面，消费电子ETF易方达（562950）当前成交额9976.97万元，换手率6.00%...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **大厂AI入口大战升级，谁是最能干活的桌面Agent？**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704hvxc.html
+  Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: （来源：钛媒体APP）互联网大厂间的AI入口大战打到了桌面端。据《财经》7月21日报道，阿里即将推出千问办公，把QoderWork、悟空、MuleRun三款Agent产品合并成，交给钉钉新任CEO陈宇森负责...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
