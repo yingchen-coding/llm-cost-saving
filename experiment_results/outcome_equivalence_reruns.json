@@ -1,0 +1,37 @@
+{
+  "experiment": "prospective cheap-tier outcome-equivalence on mechanical turns",
+  "design": "Each mechanical task was run by two independent blind subagents over the same real repositories: a CHEAP tier and a PREMIUM tier. Neither agent saw the answer; each had to perform the tool orchestration (ls/grep/read/json) itself. Ground truth was computed deterministically beforehand. Outcome-equivalence = cheap-tier answer equals premium-tier answer equals ground truth.",
+  "tiers": {"cheap": "haiku", "premium": "sonnet"},
+  "note_on_reproducibility": "Ground truth is recomputed from source files pinned by SHA-256 plus a public loopforge revision. The local AgentGuard eval inputs are not redistributed. Per-tier answers are recorded blind runs with the exact prompt.",
+  "source_snapshot": {
+    "agentguard_eval_manifest_sha256": "c2dcaa832b0a957d37b4424a69ca043026b1b6c4056aaa2c768a7a1260d49dbb",
+    "agentguard_trifecta_reach_sha256": "c7c8b142d4567092e85761dab436a23e6107358e015acebd716e03ce59aa7f42",
+    "agentguard_marketplace_sha256": "e968b4b5e549ffe03029131245981b316c2c7f8d7468476202d50ef059516f1c",
+    "loopforge_revision": "a12583c02747a36cb20fb6208649f62f8760e74e",
+    "loopforge_rules_sha256": "2d1d61430db8b4da93a2a5cb159e8fa5a27f634cffcb487dd5dd127262b7f18a"
+  },
+  "rerun_timestamp": "2026-07-22T09:34:01-07:00",
+  "tasks": [
+    {"id": "T1", "prompt": "count files matching eval/*.py in agentguard", "ground_truth": "7", "cheap": "7", "premium": "6", "cheap_tokens": 9810, "premium_tokens": 11177},
+    {"id": "T2", "prompt": "count top-level def lines in eval/trifecta_reach.py", "ground_truth": "5", "cheap": "5", "premium": "5", "cheap_tokens": 23713, "premium_tokens": 34621},
+    {"id": "T3", "prompt": "first import line of eval/trifecta_reach.py", "ground_truth": "from __future__ import annotations", "cheap": "from __future__ import annotations", "premium": "from __future__ import annotations", "cheap_tokens": 25896, "premium_tokens": 34670},
+    {"id": "T4", "prompt": "count @rule(\"L occurrences in loopforge rules.py", "ground_truth": "18", "cheap": "18", "premium": "18", "cheap_tokens": 23629, "premium_tokens": 34655},
+    {"id": "T5", "prompt": "count rows with trifecta_complete=true in marketplace results json", "ground_truth": "38", "cheap": "38", "premium": "38", "cheap_tokens": 23816, "premium_tokens": 34924},
+    {"id": "T6", "prompt": "count total rows in marketplace results json", "ground_truth": "54", "cheap": "54", "premium": "54", "cheap_tokens": 23731, "premium_tokens": 34632}
+  ],
+  "results": {
+    "tasks": 6,
+    "cheap_matches_ground_truth": 6,
+    "premium_matches_ground_truth": 5,
+    "cheap_matches_premium": 5,
+    "outcome_equivalence_rate": 0.8333333333333334,
+    "mean_cheap_tokens": 21766,
+    "mean_premium_tokens": 30780,
+    "token_reduction_at_cheap_tier": 0.29285250162443144
+  },
+  "routing_decision": "No automatic route change: the refreshed premium run missed T1, so full outcome equivalence was not reproduced.",
+  "limitations": [
+    "The local AgentGuard eval inputs are identified by hashes but are not published in this repository.",
+    "This six-task pilot is too small to establish broad model-tier equivalence."
+  ]
+}

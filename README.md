@@ -223,6 +223,11 @@ records. At published API list prices, it measured a $1,276.74 rerouting opportu
 $2,988.23 estimate (42.73%). This is an upper-bound candidate, not an invoice or realized saving;
 task-level outcome equivalence is still required before changing routes.
 
+The refreshed six-task blind-tier pilot in `experiment_results/outcome_equivalence_reruns.json`
+reproduced only 5/6 exact outcomes: the premium run missed one file-count task while the cheap run
+matched the pinned ground truth. The routing gate therefore remains closed; the cost estimate alone
+does not authorize an automatic model change.
+
 ```bash
 broker usage /path/to/transcripts --json
 ```
