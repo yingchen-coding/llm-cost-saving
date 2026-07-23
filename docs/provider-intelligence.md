@@ -138,3 +138,29 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5952915720_162d2490806704hvxc.html
   Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: （来源：钛媒体APP）互联网大厂间的AI入口大战打到了桌面端。据《财经》7月21日报道，阿里即将推出千问办公，把QoderWork、悟空、MuleRun三款Agent产品合并成，交给钉钉新任CEO陈宇森负责...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-22-203000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **百度文心助手任务 Agent 登顶国际权威榜单，超越 Claude、GPT 拿下全球智能体冠军**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704hzvc.html
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +4:评测. Intro: （来源：雷峰网）2026 年 7 月 17 日，百度文心助手任务 Agent，以最高分 94.6%、平均分 94.4% 的成绩，登顶全球工程向 AI 智能体评测榜单 PinchBench v2...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **12关通关看懂AI新闻，token与agent概念解析**
+  Source: https://k.sina.com.cn/article_7879996919_m1d5af35f7033023asy.html
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:token. Intro: “财”访一线丨什么是token、agent，token怎么出海。12关通关后，你就能看懂大部分AI新闻（新华财经）#两个AI演员比内娱待爆艺人都火#...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **美联储预警Anthropic的Mythos模型风险，自身却长达数月无法获取该模型权限**
+  Source: https://finance.sina.com.cn/stock/usstock/c/2026-07-22/doc-iniistua4695594.shtml
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:安全, +3:anthropic. Intro: 今年4月，美联储联合美国财政部召集全美各大头部银行CEO召开特别紧急会议。官方发出警示：一款全新的高阶人工智能模型，或将对美国顶级金融机构构成前所未有的网络安全威胁...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **别让你的 AI Agent 学会掩盖错误**
+  Source: https://k.sina.com.cn/article_5952915705_162d248f906703flhk.html
+  Signal: Daily Sina collector selected this with score=5, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent. Intro: 一条是较少的出厂内置价值观和更多的信任，模型的售出后训练是开放态度的，更依赖于使用者不断的协作调教，是支持原生进化的；另一条是更多的出厂内置价值观和有限度的信任，不支持模型售出后的原生进化...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **17th AOC｜光庭信息吕楠：利用AI Agent简化AUTOSAR系统配置的工程实践**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703kqra.html
+  Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: 在经典平台（CP）和自适应平台（AP）开发中，AUTOSAR基础软件（BSW）的配置由于涉及数百个参数以及复杂的跨模块依赖，历来是一项高度依赖专家经验、耗时且极易出错的系统工程...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
