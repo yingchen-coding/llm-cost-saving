@@ -164,3 +164,47 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5953190046_162d6789e06703kqra.html
   Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: 在经典平台（CP）和自适应平台（AP）开发中，AUTOSAR基础软件（BSW）的配置由于涉及数百个参数以及复杂的跨模块依赖，历来是一项高度依赖专家经验、耗时且极易出错的系统工程...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-23-083000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **SemiAnalysis最新对谈：OpenAI与Anthropic双雄争霸、谷歌掉队，编程吃下近半Token**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703l1oq.html
+  Signal: Daily Sina collector selected this with score=16, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:编程, +4:token, +3:anthropic, +3:openai, +2:api. Intro: （来源：网易科技）生成式 AI 产业正迎来极其关键的商业化拐点——行业重心正从粗放式的“预训练算力堆叠”，全面转向“企业级 ROI 兑现与高毛利 API 战”...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **原来 Kimi K3 叠 Claude Code 还能这么玩**
+  Source: https://finance.sina.com.cn/tech/roll/2026-07-23/doc-iniiufve8336749.shtml
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:编程, +2:kimi, +3:开发者. Intro: AI 编程的竞争，正在从模型能力转向组织能力。简单来说，开发者依然使用 Claude Code 提供的开发体验，让它负责理解项目结构、读取代码文件、修改程序、执行测试以及管理整个编程流程，但真正负责推理和生成代码的模型换成了 Kimi K3...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code集成iOS模拟器：AI直接驱动App开发与测试**
+  Source: https://t.cj.sina.com.cn/articles/view/1278485542/4c34242602002b3wk
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic, +3:开发者. Intro: Anthropic于7月22日宣布，Mac桌面版Claude Code已正式集成iOS模拟器支持，该功能以公测版形式上线。开发者现在可以通过Claude Code直接构建、运行和测试iOS应用，无需依赖屏幕录制或辅助功能权限...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **极光旗下 GPTBots.ai升级客服解决方案：Audio Agent 打通企业通信线路，LINE 客服插件 2.0 同步上线**
+  Source: https://finance.sina.com.cn/stock/bxjj/2026-07-23/doc-iniiusme4600645.shtml
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:成本. Intro: 通过此次升级，企业无需改造现有IT 架构，即可将 AI Agent 能力延伸至语音与即时通讯两大核心客服渠道——更快响应、更广覆盖、更低单次服务成本...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **科大讯飞发布星火Token Factory，打造企业级AI模型智能路由与治理新底座**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704id2u.html
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:token, +3:路由. Intro: （来源：iFLYTEK 科大讯飞集团）AI产业澎湃，越来越多企业开始将人工智能深度融入研发、生产、客服、营销等核心业务场景...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-23-100304 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **AI PPT一改就崩？MemSlides登顶抱抱脸，让Agent记住你的改稿习惯**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704i9xo.html
+  Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: 第一版只是草稿，改稿才是主战场。很多系统已经可以从论文、产品说明或一句主题出发，生成结构完整、视觉上也不算粗糙的初稿。同一篇Transformer论文，可以被讲成基础教学课，也可以被组织成组会汇报、论文精读或技术培训...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Agent突然大更新！狂塞500个技能，网友直呼疯狂**
+  Source: https://t.cj.sina.com.cn/articles/view/5703921756/153faf05c01904i9ve
+  Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: 再加上监管差异和AB测试版本，直接撞上天花板。甚至，还可以直接把整套代码库规范、CI流水线配置、部署目标全塞进一个会话，让agent从写代码到上线一条龙全知道...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **对话FutureTech张梦钊：从“一个人+一群Agent”到超级个体，AI正在重塑创业范式**
+  Source: https://k.sina.com.cn/article_5952915705_162d248f906703fubk.html
+  Signal: Daily Sina collector selected this with score=5, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent. Intro: 随着人工智能产业进入应用深化阶段，行业关注点正在从模型能力竞争逐步转向应用价值创造。在这一趋势下，AI创业竞争的核心也正在从单纯的技术能力比拼，转向对行业认知、场景理解和商业价值创造能力的考验...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
