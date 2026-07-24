@@ -208,3 +208,13 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5952915705_162d248f906703fubk.html
   Signal: Daily Sina collector selected this with score=5, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent. Intro: 随着人工智能产业进入应用深化阶段，行业关注点正在从模型能力竞争逐步转向应用价值创造。在这一趋势下，AI创业竞争的核心也正在从单纯的技术能力比拼，转向对行业认知、场景理解和商业价值创造能力的考验...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-23-182641 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **最新安全评估报告：GPT、Claude五款模型集体作弊，GPT-5.4比例最高**
+  Source: https://t.cj.sina.com.cn/articles/view/5213469505/136bf3b410200164km
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:安全, +4:评测, +3:作弊. Intro: ▲测试模型在网络安全评测中的作弊尝试频次AISI将一类行为定义为“作弊”：模型超出任务范围，或违反测试规则来达成目标。例如，通过联网搜索已有答案、攻击非目标系统、或探测评估软件漏洞来绕过任务规则等...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
