@@ -278,3 +278,13 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/tech/roll/2026-07-24/doc-iniixnfw9243933.shtml
   Signal: Daily Sina collector selected this with score=6, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +2:kimi. Intro: 【TechWeb】7月24日消息，“中国模型的训练成本仅为海外龙头的十分之一，推理定价则只有10%到20%，且仍能维持20%—40%的毛利水平...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-25-020124 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **LUMEN: Coordinated Failure Recovery for Distributed LLM Serving**
+  Source: https://arxiv.org/abs/2606.17787
+  Signal: recovery as a coordinated policy across checkpoint placement, interrupted-request redistribution, and capacity restoration. Connect this to load-aware failover, recovery objectives, and replay cost instead of treating restart as a binary infrastructure event.
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
