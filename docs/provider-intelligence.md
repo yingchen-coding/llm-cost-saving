@@ -288,3 +288,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://arxiv.org/abs/2606.17787
   Signal: recovery as a coordinated policy across checkpoint placement, interrupted-request redistribution, and capacity restoration. Connect this to load-aware failover, recovery objectives, and replay cost instead of treating restart as a binary infrastructure event.
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-25-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **一夜之间，Claude Code删掉了80%系统提示词**
+  Source: https://k.sina.com.cn/article_5953466437_162dab0450670b4mc0.html
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:skill, +3:提示词. Intro: （来源：机器之心）编辑｜泽南、杨文「我们删除了 80% 的 Claude Code 系统提示，这是我们从编写系统提示词、Skill 和 Claude.MD 中学到的...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Anthropic上新大模型Opus 5**
+  Source: https://cj.sina.com.cn/articles/view/1702925432/65809478019019sk4
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:编程, +4:成本, +3:anthropic. Intro: 周五，Anthropic发布全新Claude系列大模型Opus 5。这家AI初创企业称，该模型综合性能接近其旗舰顶配模型Fable 5，但调用成本仅为后者一半，非常适配日常办公、编程开发类通用任务...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
