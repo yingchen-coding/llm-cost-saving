@@ -218,3 +218,63 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://t.cj.sina.com.cn/articles/view/5213469505/136bf3b410200164km
   Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:安全, +4:评测, +3:作弊. Intro: ▲测试模型在网络安全评测中的作弊尝试频次AISI将一类行为定义为“作弊”：模型超出任务范围，或违反测试规则来达成目标。例如，通过联网搜索已有答案、攻击非目标系统、或探测评估软件漏洞来绕过任务规则等...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-24-083001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **超 GPT-5.6 Sol：月之暗面 Kimi K3 模型 AI 智能体知识工作跑分仅次于 Claude Fable 5**
+  Source: https://finance.sina.com.cn/tech/digi/2026-07-24/doc-iniiwvki4883077.shtml
+  Signal: Daily Sina collector selected this with score=16, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +4:评测, +2:kimi. Intro: IT之家注：AA-Briefcase 是独立 AI 评测机构 Artificial Analysis 于 2026 年 6 月推出的全新前沿 AI 智能体（Agent）知识工作基准测试...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **把千亿大模型搬回本地，迈向Token自由**
+  Source: https://t.cj.sina.com.cn/articles/view/5703921756/153faf05c01904iupi
+  Signal: Daily Sina collector selected this with score=13, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:成本, +4:token. Intro: 让一台设备在本地跑起大模型，已经不算最难的部分。更难的是，当Agent要持续读取文件、保留记忆、调用工具，并在后台长期运行时，芯片能否在功耗、延迟和成本的约束下保持稳定...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **如何评估绿色算力？AI与能源双向赋能既看能效，也要看碳效**
+  Source: https://finance.sina.com.cn/jjxw/2026-07-24/doc-iniiwvkm1744106.shtml
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +2:视频. Intro: 国际能源署（IEA）相关报告指出，随着视频生成、复杂推理和AI智能体（Agent）等新一代高能耗人工智能应用加速落地，AI的能源需求正快速攀升...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **当Agent背上KPI，容联云AI商业化的破局之道**
+  Source: https://t.cj.sina.com.cn/articles/view/5787529871/158f6b28f00101hxlu
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:token. Intro: “AI的价值，不在于消耗多少Token，而在于创造多少业务结果不久前落幕的2026世界人工智能大会（WAIC）上，Agent依然是最热门的话题之一...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **AI Agent来了：大模型进入“动手时代”**
+  Source: https://finance.sina.com.cn/jjxw/2026-07-24/doc-iniiwzsm1566809.shtml
+  Signal: Daily Sina collector selected this with score=7, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +2:kimi. Intro: 转自：大众新闻-大众日报在过去的几年里，人工智能始终处在一个大爆发的时代。全世界的科技头部企业，都直接或间接地加入了这场“无人的战争”，从美国的GPT、Gemini、Grok，到中国的Deep Seek、豆包、千问、Kimi……算力提升幅度越来越大，模型更迭速度越来越快...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek将AI大模型部署成本从10万美元降至6000美元**
+  Source: https://t.cj.sina.com.cn/articles/view/7879924060/m1d5ae195c03301x5zy
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:deepseek. Intro: 部署一套离线AI大模型要花多少钱。过去可能是10万美元，而DeepSeek让成本降到了6000美元。这种降维打击，真正推动了技术的民主化，让无数有想法的“车库男孩”和初创企业也能触及顶尖AI，创新的火花即将迸发...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **英国金融时报：新加坡政府投资公司表示中国人工智能模型将大幅降低成本**
+  Source: https://k.sina.com.cn/article_7295052889_1b2d1ac5902001uuzy.html
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:anthropic. Intro: 来源：邸钞主权财富基金预期中国人工智能公司将强劲增长，但对初创企业持谨慎态度。今年2月，新加坡政府投资公司（GIC）领投了Anthropic公司300亿美元的融资...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-24-203000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **【AI Agent展】得助客服Agent——具备全栈能力的企业级客服Agent**
+  Source: https://t.cj.sina.com.cn/articles/view/5787529871/158f6b28f00101hxmk
+  Signal: Daily Sina collector selected this with score=13, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +3:deepseek. Intro: 产品基于自研垂类大模型融合DeepSeek系列基座模型完成智能体重构，搭建语音、文本双类业务智能体，配套智能陪练、智能质检、智能工作台三大坐席赋能Agent，搭配覆盖20+渠道的全媒体统一联络底座...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **OpenAI将GPT-Live融入CodeX，用户可语音调用AI工作**
+  Source: https://t.cj.sina.com.cn/articles/view/7879924061/m1d5ae195d03301gty4
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:codex, +3:openai. Intro: 现实版贾维斯来了。openAI凌晨将gpt-Live融入codeX,现在用户可以通过语音控制和使用自己的电脑，并且调用多个ai agents完成工作#歌手排名#...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **中国大模型手握成本王牌，但最大短板仍是算力供给**
+  Source: https://finance.sina.com.cn/roll/2026-07-24/doc-iniixfyi1625146.shtml
+  Signal: Daily Sina collector selected this with score=10, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token, +2:api. Intro: 7月24日，瑞银证券熊玮分享对中国AI、大模型行业看法。中国模型在训练和推理成本上优势明显，头部模型训练成本或为海外1/10，API定价达海外10% - 20%，API业务毛利20% - 40%。训练效率提升归因于算法创新、策略侧重平衡及开源生态活跃；推理效率体现在架构、工程调度和基建三方面。需求端，AI应用普及，中国厂商性价比优势凸显。展望下半年，关注模型性能、变现、Token ROI。此外，还回应了中美云厂商投入差异、模型厂商格局、市值变动等问题。 (AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **拥抱Token经济浪潮，国产算力链正在拼效率、压成本**
+  Source: https://t.cj.sina.com.cn/articles/view/1651428902/626ece2602001hn18
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: 作为Token背后的核心底层支撑，算力产业链也正面临一次深刻考验。据IDC统计，2025年全球日均Token消耗量相比上一年增长近300倍，中国企业级Token年度消耗量增长近20倍，2025年中国生成式AI模型调用量占全球35%以上，且增长速度明显快于北美市场...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **中国AI模型的“成本革命”：瑞银分析师详解下半年竞争格局与Kimi K3效应**
+  Source: https://finance.sina.com.cn/tech/roll/2026-07-24/doc-iniixnfw9243933.shtml
+  Signal: Daily Sina collector selected this with score=6, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +2:kimi. Intro: 【TechWeb】7月24日消息，“中国模型的训练成本仅为海外龙头的十分之一，推理定价则只有10%到20%，且仍能维持20%—40%的毛利水平...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
