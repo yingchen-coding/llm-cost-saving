@@ -302,3 +302,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://cj.sina.com.cn/articles/view/1702925432/65809478019019sk4
   Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:编程, +4:成本, +3:anthropic. Intro: 周五，Anthropic发布全新Claude系列大模型Opus 5。这家AI初创企业称，该模型综合性能接近其旗舰顶配模型Fable 5，但调用成本仅为后者一半，非常适配日常办公、编程开发类通用任务...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-25-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Codex也断了：OpenAI三线齐崩，Agent时代的宕机账单怎么算**
+  Source: https://t.cj.sina.com.cn/articles/view/7879924061/1d5ae195d02001gxs2
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:codex, +3:openai, +2:api. Intro: 7月25日傍晚，OpenAI的API、ChatGPT、Codex三线同时报错，31个服务组件性能下降，1小时51分钟后恢复...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Kimi K3再引关注，瑞银：中国模型的结构性成本优势有望长期保持**
+  Source: https://finance.sina.com.cn/jjxw/2026-07-26/doc-inikassp3854163.shtml
+  Signal: Daily Sina collector selected this with score=6, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +2:kimi, +3:deepseek, +2:api, -5:股价. Intro: 7月24日，瑞银证券分析师熊玮在分享会上表示，Kimi K3发布使中国大模型受关注，不少投资者称其为第二个“DeepSeek时刻”。中国模型性能缩小与全球领先模型差距，有结构性成本和价格优势，头部模型训练成本约为海外十分之一，API价格是海外10%-20%，厂商仍有20%-40%毛利率。全球竞争中中美有模型竞争力，多模态是中国厂商优势方向，算力是制约瓶颈。二级市场上，行业处于学习和重新定价阶段，股价受新模型发布等催化因素影响。判断模型公司长期竞争力，关键看模型发布及能力。 (AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
