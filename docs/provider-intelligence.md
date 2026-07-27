@@ -316,3 +316,29 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/jjxw/2026-07-26/doc-inikassp3854163.shtml
   Signal: Daily Sina collector selected this with score=6, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +2:kimi, +3:deepseek, +2:api, -5:股价. Intro: 7月24日，瑞银证券分析师熊玮在分享会上表示，Kimi K3发布使中国大模型受关注，不少投资者称其为第二个“DeepSeek时刻”。中国模型性能缩小与全球领先模型差距，有结构性成本和价格优势，头部模型训练成本约为海外十分之一，API价格是海外10%-20%，厂商仍有20%-40%毛利率。全球竞争中中美有模型竞争力，多模态是中国厂商优势方向，算力是制约瓶颈。二级市场上，行业处于学习和重新定价阶段，股价受新模型发布等催化因素影响。判断模型公司长期竞争力，关键看模型发布及能力。 (AI生成)
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-27-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Opus 5发布，砍掉了Claude Code 80%的系统提示词**
+  Source: https://finance.sina.com.cn/roll/2026-07-27/doc-inikfnph9882848.shtml
+  Signal: Daily Sina collector selected this with score=22, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:claude code, +3:cursor, +3:提示词, +4:成本, +4:评测, +3:anthropic. Intro: Anthropic发布Claude Opus 5，性能接近旗舰Fable 5，价格减半。在多项评测中成绩优异，如Frontier - Bench v0.1上性能超Opus 4.8两倍，CursorBench 3.2单任务成本仅一半。科研方面优于Opus 4.8，视觉输出能力也增强。同时，Anthropic将Claude Code系统提示词删减80%以上，编码评测分数未降。团队总结出“上下文工程”新方法论，推翻6条旧经验并给出替代方案，还上线claude doctor命令帮用户优化文件。Opus 5改变了与模型的协作方式，让用户可更信任模型判断。 (AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code狂删80%提示词，Opus 5反手加回去了**
+  Source: https://finance.sina.com.cn/wm/2026-07-27/doc-inikfnpf3134355.shtml
+  Signal: Daily Sina collector selected this with score=17, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:prompt, +3:提示词, +3:anthropic, +3:开发者. Intro: Anthropic宣布删掉Opus 5、Fable 5等模型超80%系统提示词内容，此前Claude Code提示词像《员工行为手册》，指令易冲突，此次删减未带来可测量的性能下降。开发者网友陈成实测发现，从Opus 4.7到Opus 4.8提示词大幅削减，而Opus 5相比Opus 4.8长了约72%。原来Claude Code新模型用精简新Prompt，Opus 5因有新行为习惯，补充了约3755字符的专属内容，用于约束其主动行为。 (AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **从“能对话”到“能交付”：企业级 AI Agent 进入工作流落地阶段**
+  Source: https://finance.sina.com.cn/jjxw/2026-07-27/doc-inikfsvc3051306.shtml
+  Signal: Daily Sina collector selected this with score=10, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体. Intro: 2026 年，企业级 AI 的竞争重点正在变化：评价一套系统，不再只看模型能否生成内容，而是看它能否进入真实业务流程。工信部《“人工智能+信息通信”创新发展实施意见（2026—2028 年）》提出，到 2028 年形成 30 个以上高价值典型场景，打造一批典型应用和特色智能体...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **格创东智WAIC 2026：AI Agent正从问答助手走向执行任务的智能体，制造业成关键落点**
+  Source: https://t.cj.sina.com.cn/articles/view/5675440730/v152485a5a0200259oq
+  Signal: Daily Sina collector selected this with score=10, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体. Intro: 如果说前几届WAIC的核心议题还是模型参数的竞逐、多模态能力的比拼、生成式AI的技术奇观，那么今年，讨论最多的话题变成了Agent架构的工程化落地、具身智能的产业应用、垂直领域大模型的商业化验证...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **算力转向“算账”，Token工厂如何扛起“低成本”大旗**
+  Source: https://k.sina.com.cn/article_5952915705_162d248f906703hi4m.html
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: （来源：中国电子报 中国电子报）打开AI聊天软件、代码助手、智能办公工具，每一次问答、每一段回答生成，背后都在消耗一种叫Token（词元）的“AI流量”...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
