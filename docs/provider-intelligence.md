@@ -342,3 +342,13 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5952915705_162d248f906703hi4m.html
   Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: （来源：中国电子报 中国电子报）打开AI聊天软件、代码助手、智能办公工具，每一次问答、每一段回答生成，背后都在消耗一种叫Token（词元）的“AI流量”...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-27-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **韩国企业引入海外 AI 模型遇成本难题，三星等巨头实施 Token 配额制**
+  Source: https://finance.sina.com.cn/tech/digi/2026-07-28/doc-inikhcky9821610.shtml
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: IT之家 7 月 27 日消息，随着韩国企业加快将海外大模型引入业务流程，它们正面临 AI 词元（Token）使用成本快速攀升的挑战...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
