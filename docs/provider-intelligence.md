@@ -352,3 +352,39 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/tech/digi/2026-07-28/doc-inikhcky9821610.shtml
   Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: IT之家 7 月 27 日消息，随着韩国企业加快将海外大模型引入业务流程，它们正面临 AI 词元（Token）使用成本快速攀升的挑战...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-28-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **我国Token成本优势极为显著**
+  Source: https://finance.sina.com.cn/jjxw/2026-07-28/doc-inikkhki6317237.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=13, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:智能体, +4:成本, +4:token. Intro: 【#我国Token成本优势极为显著#】#北京有望率先引爆Token经济#近日，北京市出台《关于加快智能体引领发展的若干措施》（以下简称《若干措施》）...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **野村研报深度解读：中国大模型演进——规模扩容、智能体融合与成本优化**
+  Source: https://video.sina.com.cn/p/finance/2026-07-28/detail-inikkaai1985122.d.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:智能体, +4:成本, +2:视频. Intro: 野村研报深度解读：中国大模型演进——规模扩容、智能体融合与成本优化
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **灵光App上线“一键部署”功能 支持Codex、Claude Code等AI应用直接发布**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704jvjy.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:codex, +2:api. Intro: （来源：智通财经）智通财经APP获悉，7月27日，灵光App宣布，灵光闪应用“一键部署”功能上线，并向所有用户开放。同时，灵光还开放了包括大模型、搜索、LBS、地图、存储等在内的30余项免费API能力...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-07-29-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **即便Codex与开源模型热度攀升，安索帕Claude Code依旧占据主导**
+  Source: https://finance.sina.com.cn/stock/usstock/c/2026-07-29/doc-iniknmii5831632.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=16, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:claude code, +4:codex, +4:成本, +3:openai. Intro: 安索帕的 AI 工具定价高昂，市场竞争加剧，客户质疑声渐起，但其王牌产品 Claude Code 的龙头地位依旧难以撼动。近几个月，安索帕全面切换按量计费，客户使用成本暴涨；与此同时，竞品 OpenAI 的 Codex 竞争力大幅增强，国产开源模型能力也实现跨越式提升...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **每单位Token成本或将腰斩**
+  Source: https://t.cj.sina.com.cn/articles/view/2258727970/m86a1742203302hi0w?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: 【#AI降本组合拳来了#。每单位#Token成本或将腰斩#】近日，国家发改委、国家能源局正式发布《可再生能源发展“十五五”规划》...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **亚马逊开始控制AI成本：减少调用外部模型 资源转向前沿研究**
+  Source: https://finance.sina.com.cn/roll/2026-07-29/doc-iniknezf0021414.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:anthropic. Intro: 转自：财联社财联社7月29日讯（编辑 马兰）一份内部文件显示，亚马逊已重新设计了人工智能语音助手Alexa，以减少其对Anthropic模型Claude的依赖，降低Alexa的运营成本...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
