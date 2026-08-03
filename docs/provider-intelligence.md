@@ -454,3 +454,29 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://video.sina.com.cn/p/finance/2026-08-02/detail-inikxwhz5047309.d.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +2:kimi, +2:视频. Intro: 1、视频来源：The Diary Of A CEO，主要讨论：All-In嘉宾对大型企业测试Kimi和其他开源模型、推理成本以及AI编码返工成本的观察；2、更多宏观资讯和投资方向，...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-03-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **OpenAI下一代模型Astra曝光，以2000美元算力成本破解十项数学难题**
+  Source: https://finance.sina.com.cn/jjxw/2026-08-03/doc-inikzeam4636957.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=17, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token, +4:tokens, +3:openai, +2:api. Intro: OpenAI当地时间8月1日发布有关数学和理论计算机科学的十项突破，这些成果由其下一代主要模型Astra的内部版本实现。按照Sol API的费率计算，找到这些问题的解决方案所需总词元（tokens）成本约为2000美元...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek模型单日吞下8万亿Token，OpenAI打折追赶**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704lq2u.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:token, +3:deepseek, +3:openai, +2:api. Intro: 与此同时，模型API分发平台OpenRouter最新数据显示，上周（7月27日至8月2日）DeepSeek V4 Flash以7.22万亿Token的周调用量位居第一...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek V4-Flash运行成本远低于全球其他领先模型 较Claude Fable 5便宜超百倍**
+  Source: https://finance.sina.com.cn/stock/estate/integration/2026-08-03/doc-inikzuyp2750170.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token, +3:deepseek. Intro: V4-Flash每百万个输入token收费为0.14美元，每百万个输出token收费0.28美元，估计每次测试平均成本为3美仙...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **研究：DeepSeek V4-Flash运行成本最低 不足Claude Fable 5的1%**
+  Source: https://cj.sina.com.cn/articles/view/1704103183/65928d0f0200b6o7s?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token, +3:deepseek. Intro: Artificial Analysis指出，V4-Flash每100万个输入词元(Token)收费0.14美元，每100万个输出词元收费0.28美元...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **OpenAI下一代模型Astra：10项开放问题新突破，成本仅2000美元**
+  Source: https://t.cj.sina.com.cn/articles/view/1278485542/4c34242602002cijg?from=pcsearch
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:openai. Intro: 一道困扰学界几十年的开放问题，需要多少成本才能取得关键突破。其下一代主要模型Astra的内部版本，在高维几何、编码理论、群论、算术电路复杂性、量子复杂性、格密码学和极值组合等领域，给出了十项新的研究结果...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
