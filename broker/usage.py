@@ -9,6 +9,7 @@ Estimate-based and auditable: it uses linked published list prices and never inv
 from __future__ import annotations
 
 import json
+import math
 from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import date, datetime
@@ -70,16 +71,30 @@ def _parse_timestamp(timestamp: str | None) -> datetime | None:
         return None
 
 
+def _tok(value: Any) -> int:
+    """Coerce a usage token field to a non-negative int, tolerating the garbage real transcripts
+    contain (a string count from a buggy provider, a negative correction, NaN/inf). A single
+    malformed field must never crash `broker usage` or poison the cost sums it feeds — mirrors
+    runtime.py's `_num` for the same class of real-world trace corruption."""
+    try:
+        result = float(value)
+    except (TypeError, ValueError):
+        return 0
+    if not math.isfinite(result):
+        return 0
+    return max(0, int(result))
+
+
 def _cost(prices: tuple[float, float], usage: dict[str, Any]) -> float:
     inp, out = prices
-    it = usage.get("input_tokens", 0) or 0
-    ct = usage.get("cache_creation_input_tokens", 0) or 0
-    rt = usage.get("cache_read_input_tokens", 0) or 0
-    ot = usage.get("output_tokens", 0) or 0
+    it = _tok(usage.get("input_tokens", 0))
+    ct = _tok(usage.get("cache_creation_input_tokens", 0))
+    rt = _tok(usage.get("cache_read_input_tokens", 0))
+    ot = _tok(usage.get("output_tokens", 0))
     cache = usage.get("cache_creation")
     if isinstance(cache, dict):
-        one_hour = cache.get("ephemeral_1h_input_tokens", 0) or 0
-        five_minute = cache.get("ephemeral_5m_input_tokens", 0) or 0
+        one_hour = _tok(cache.get("ephemeral_1h_input_tokens", 0))
+        five_minute = _tok(cache.get("ephemeral_5m_input_tokens", 0))
         unspecified = max(0, ct - one_hour - five_minute)
     else:
         one_hour = five_minute = 0
@@ -264,8 +279,8 @@ def analyze(paths: Iterable[str | Path], cheap_tier: str = "haiku",
                 }
                 content_seen[key] = set()
             aggregate = messages[key]["message"]
-            if (msg.get("usage", {}).get("output_tokens", 0) or 0) > (
-                aggregate.get("usage", {}).get("output_tokens", 0) or 0
+            if _tok(msg.get("usage", {}).get("output_tokens", 0)) > _tok(
+                aggregate.get("usage", {}).get("output_tokens", 0)
             ):
                 aggregate["usage"] = msg["usage"]
             content = msg.get("content")
@@ -289,7 +304,7 @@ def analyze(paths: Iterable[str | Path], cheap_tier: str = "haiku",
         c = model_message_cost(model, usage, rec.get("timestamp"))
         cost_by_tier[t] = cost_by_tier.get(t, 0.0) + c
         tokens_by_tier[t] = tokens_by_tier.get(t, 0) + sum(
-            usage.get(k, 0) or 0 for k in
+            _tok(usage.get(k, 0)) for k in
             ("input_tokens", "output_tokens", "cache_creation_input_tokens", "cache_read_input_tokens")
         )
         turns += 1

@@ -1,8 +1,9 @@
 """Token-cost + mechanical-waste estimation from transcripts."""
 import json
+import math
 from datetime import UTC
 
-from broker.usage import analyze, is_mechanical_turn, message_cost, prices_for_model, tier_of
+from broker.usage import _cost, analyze, is_mechanical_turn, message_cost, prices_for_model, tier_of
 
 
 def test_tier_and_cost():
@@ -122,3 +123,54 @@ def test_usage_cli_threshold_exit(tmp_path, capsys):
     assert payload["assistant_turns"] == 1
     assert payload["method"].startswith("API list-price estimate")
     assert "pricing_sources" in payload
+
+
+def test_cost_tolerates_malformed_token_fields():
+    """Real agent-CLI transcripts occasionally carry a corrupted usage field — a string count from a
+    buggy provider, a negative correction, or a NaN. One bad field must not crash `broker usage` or
+    poison the cost total (NaN propagates through every sum it touches); it should be treated as 0,
+    same grace runtime.py's `_num` already gives malformed trace fields."""
+    prices = (3.0, 15.0)
+    # non-numeric token count must not raise
+    assert _cost(prices, {"input_tokens": "not-a-number", "output_tokens": 200}) == round(200 * 15 / 1_000_000, 10)
+    # a negative token count (corrupted/adjusted record) must not go negative or crash
+    assert _cost(prices, {"input_tokens": -500_000, "output_tokens": 100}) >= 0
+    # NaN/inf must not poison the result
+    assert math.isfinite(_cost(prices, {"input_tokens": float("nan"), "output_tokens": 100}))
+    assert math.isfinite(_cost(prices, {"input_tokens": float("inf"), "output_tokens": 100}))
+
+
+def test_analyze_end_to_end_survives_one_malformed_usage_record(tmp_path):
+    """A single transcript line with a malformed usage field (e.g. a stringified token count from a
+    buggy provider) must not take down the whole `broker usage` report — the other, well-formed
+    turns in the same file still get costed."""
+    rows = [
+        {"message": {"role": "assistant", "model": "claude-opus-4-8",
+                     "usage": {"input_tokens": 100, "output_tokens": 200}}},
+        {"message": {"role": "assistant", "model": "claude-opus-4-8",
+                     "usage": {"input_tokens": "500", "output_tokens": 200}}},
+    ]
+    f = tmp_path / "session.jsonl"
+    f.write_text("\n".join(json.dumps(r) for r in rows))
+    rep = analyze([tmp_path])  # must not raise
+    assert rep.turns == 2
+    assert rep.total_cost > 0
+
+
+def test_analyze_dedup_survives_malformed_output_tokens(tmp_path):
+    """The streaming-dedup comparison keeps whichever re-emitted chunk has the higher
+    output_tokens; a malformed count there (str vs int) used to raise TypeError before the
+    two chunks ever reached _cost(). Same message id as the stream-dedup fixture above."""
+    rows = [
+        {"uuid": "one", "message": {"id": "msg-1", "role": "assistant", "model": "claude-opus-4-8",
+         "usage": {"input_tokens": 100, "output_tokens": "not-a-number"},
+         "content": [{"type": "tool_use", "name": "Grep", "input": {}}]}},
+        {"uuid": "two", "message": {"id": "msg-1", "role": "assistant", "model": "claude-opus-4-8",
+         "usage": {"input_tokens": 100, "output_tokens": 200},
+         "content": [{"type": "tool_use", "name": "Read", "input": {}}]}},
+    ]
+    f = tmp_path / "stream.jsonl"
+    f.write_text("\n".join(json.dumps(r) for r in rows))
+    rep = analyze([tmp_path])  # must not raise
+    assert rep.turns == 1
+    assert rep.total_cost > 0
