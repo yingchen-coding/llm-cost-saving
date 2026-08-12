@@ -564,3 +564,79 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://t.cj.sina.com.cn/articles/view/3948743169/eb5d0a0100101h8lq?from=pcsearch
   Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:成本. Intro: 在AI语音赛道，绝大多数厂商仍在卖“能力”，ASR准确率多少、延迟多低、支持多少种音色。但企业真正关心的从来不是技术参数，而是：这笔投入，到底能帮我多赚多少钱、少花多少成本，能不能给我的客户带来更好的体验...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-07-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Codex超越聊天框：公司级多Agent可视化协作颠覆工作流**
+  Source: https://k.sina.com.cn/article_7096020433_1a6f4add106801lo4w.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:codex, +3:openai. Intro: 近期热搜话题“Codex还没做完的东西把我看傻了”引发热议，OpenAI的Codex以超越传统聊天框的“公司级多Agent可视化协作”半成品形态，彻底颠覆了人类的工作流...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **撞脸Claude，Anthropic没上桌**
+  Source: https://t.cj.sina.com.cn/articles/view/5703921756/153faf05c01904naqe?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:智能体, +3:anthropic, +3:开发者. Intro: AI圈六家巨头，罕见地坐上了同一张桌子。它干的是一件无数AI开发者盼了很久的实事：给AI智能体的插件，定一个统一的「包装盒」，从此一份包走天下，不用再为每家客户端重复打包...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Anthropic 取消 Claude Code 用户的分类器附加费用。**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703or6y.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: Anthropic 取消 Claude Code 用户的分类器附加费用...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-08-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Code重大更新：AI之间能跨窗口私聊了**
+  Source: https://k.sina.com.cn/article_5953466437_162dab0450670b8274.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: （来源：机器之心）机器之心编辑部本周五，Anthropic 官方宣布了 Claude Code 的一个新功能：AI 在不同会话之间，现在可以相互发送消息了...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code v2.1.224现支持AI跨会话消息传递**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704nhti.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: IT之家翻译官方文档介绍如下：Anthropic 表示，这项新功能的最佳使用场景包括移交调查结果、协调并行工作树、获取长时间运行的工作的状态以及跨机器回复...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-11-121137 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Anthropic宣布Claude Code自动模式将于8月14日起默认启用：AI编程进入"少问多做"时代**
+  Source: https://t.cj.sina.com.cn/articles/view/1278485542/4c34242602002d72o?from=pcsearch
+  Signal: Daily Sina collector selected this with score=19, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:编程, +4:安全, +3:anthropic, +3:开发者. Intro: 这意味着AI编程助手将大幅减少向开发者请求手动审批的频率，仅在可能造成不可逆损害时才会暂停操作。公司同时公布了一项覆盖1053名付费测试者的研究数据，显示自动模式在捕捉有害操作方面比人工审查更安全...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code严格限制子代理：防止污染与冲突**
+  Source: https://k.sina.com.cn/article_7096020433_1a6f4add106801lwb2.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=13, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:claude code, +4:成本, +4:token. Intro: Claude Code对子代理表现出“凶”（严格限制），核心是为了防止上下文污染、Token成本失控以及多代理并行导致的代码冲突...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code倒计时5天默认自动模式，多花的钱A社自己掏**
+  Source: https://k.sina.com.cn/article_5952915705_162d248f906703l0aa.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:编程, +3:anthropic. Intro: （来源：量子位）咱就是想问，还有人认真看AI编程工具给的权限审批请求吗。亚马逊谷歌微软等云平台目前仍然是选配，但Anthropic只给他们一个月时间，要把这些渠道也切成默认自动模式...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **中信建投：AI算力需求扩展至推理与Agent执行**
+  Source: https://t.cj.sina.com.cn/articles/view/1644983660/620c756c02001u3u6?from=pcsearch
+  Signal: Daily Sina collector selected this with score=10, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +2:kimi, +3:anthropic. Intro: 观点网讯：8月10日，中信建投研报指出，前沿模型Scaling进入多路径并行阶段。Anthropic Mythos 5、Fable 5被行业估算为8万亿和5万亿参数，Kimi K3总参数达到2.8万亿，字节据报正在预训练最高10万亿参数模型...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Agent经济学拐点：AI Agent电脑操作小时成本已低于离岸人力外包，准确率也更高**
+  Source: https://k.sina.com.cn/article_5953740931_162dee08306703ugt8.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:成本. Intro: （来源：网易科技）AI Agent操控电脑完成实际业务流程，正从概念演示走向规模化生产部署，并在成本与准确率两个维度同时越过关键阈值...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **模型换个Harness就「变笨」？EverMind把自进化从研究推向产品，让AI「越用越聪明」**
+  Source: https://k.sina.com.cn/article_5952915705_162d248f906703l54u.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness. Intro: （来源：机器之心）机器之心发布同一个模型，权重一个参数都不改，只是换一套 Harness，表现就可能大幅波动。这看似是 Agent 工程中的「玄学」，实际上暴露了自进化走向产品必须回答的两个问题：怎样证明改进真实有效，以及怎样获得足够连续、真实、可回溯的数据，让改进能够长期发生...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-11-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **「说 Harness 会被淘汰的，肯定没做过工程」，Kimi 前 CLI 负责人戳破了 AI 圈最大的误解**
+  Source: https://finance.sina.com.cn/tech/roll/2026-08-11/doc-inimyhiz0587685.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +2:kimi, +4:人才, +3:cli, -10:generic_talent_noise. Intro: 只有那些真正在一线写过CLI、调过 Agent Swarm 的人才会知道：模型不能解决一切。这就带来一个圈内都在吵的问题：底层的 Harness 到底会不会消失...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **国产模型涨价，美国模型降价，token价值规律**
+  Source: https://finance.sina.com.cn/roll/2026-08-11/doc-inimyhkf4145275.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:token, +2:kimi, +2:api. Intro: 国产模型正在涨价，美国模型却在降价。年内，智谱已经数次上调API价格，月之暗面推出新模型Kimi-K3后，也将旗舰API定价提高了3倍多...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
