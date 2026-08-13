@@ -640,3 +640,25 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/roll/2026-08-11/doc-inimyhkf4145275.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:token, +2:kimi, +2:api. Intro: 国产模型正在涨价，美国模型却在降价。年内，智谱已经数次上调API价格，月之暗面推出新模型Kimi-K3后，也将旗舰API定价提高了3倍多...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-12-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **OpenAI搬空Claude Code！用户家当一键进Codex，唯独带不走Claude**
+  Source: https://t.cj.sina.com.cn/articles/view/5703921756/153faf05c01904ob46?from=pcsearch
+  Signal: Daily Sina collector selected this with score=19, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:codex, +4:编程, +3:mcp, +3:openai. Intro: AI编程大战，盯上了对手用户的家当。换一个AI编程工具，最贵的从来不是订阅费，而是那个你改了半年的CLAUDE.md，积攒的几十个技巧，MCP服务器上一个个点过来的授权，还有一串闭眼就能敲出来的斜杠命令...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Manage Agents将AI部署速度提升10倍，快速构建生产级AI员工**
+  Source: https://t.cj.sina.com.cn/articles/view/1748548681/m6838bc490330150mg?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +2:视频. Intro: 还在为AI智能体的部署和扩展头疼。官方揭秘Claude Manage Agents，将生产部署速度提升10倍。它为你搞定所有底层难题，让你专注于业务逻辑，快速构建生产级AI员工...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Deepseek harness 内测了，对标codex Claude**
+  Source: https://k.sina.com.cn/article_7811064312_m1d19361f803301p1ks.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +4:codex, +4:harness, +3:deepseek. Intro: Deepseek harness 内测了，对标codex Claude...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **RTX 5090跑200 token/秒：成本大降67%**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704o8ki.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: （来源：快科技）快科技8月12日消息，当地时间8月11日，英伟达宣布为DGX与RTX系统推出一系列重大AI更新。Meta开源的Muse Glimmer模型（300亿参数稠密架构）针对英伟达平台深度优化，在RTX 5090上推理速度超过每秒200个token...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
