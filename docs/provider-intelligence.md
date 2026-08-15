@@ -662,3 +662,41 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5952915720_162d2490806704o8ki.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: （来源：快科技）快科技8月12日消息，当地时间8月11日，英伟达宣布为DGX与RTX系统推出一系列重大AI更新。Meta开源的Muse Glimmer模型（300亿参数稠密架构）针对英伟达平台深度优化，在RTX 5090上推理速度超过每秒200个token...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-14-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **DeepSeek Harness背后的论文：让Agent在运行中改写自己**
+  Source: https://k.sina.com.cn/article_5953466437_162dab0450670b90vw.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=26, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +5:claude code, +4:编程, +4:harness, +3:deepseek. Intro: 它是一个跑在本地的编程智能体，可简称 dsh，读文件、跑命令、改代码、查资料，差不多就类似于 Claude Code。真正让它区别于同类的是设计方式：一切皆插件...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek发布开源Agent产品对标海外Codex与Claude Code**
+  Source: https://k.sina.com.cn/article_7096020433_1a6f4add106801m2fy.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=24, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:codex, +4:harness, +3:deepseek, +3:开发者. Intro: 一、发布概况与核心定位发布时间：2026年8月13日，推出v0.1开发者预览版，并以MIT协议在GitHub全面开源。核心公式：内部定义为“Model+Harness=Agent”，大模型负责思考推理，Harness承担工具调用、任务规划等所有工程化执行工作...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **玩了一夜DeepSeek Harness，我发现它在用《我的世界》的方式干掉Claude Code**
+  Source: https://k.sina.com.cn/article_5953189932_162d6782c06704v81w.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=17, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:harness, +3:deepseek. Intro: 在agent语境里，它指模型之外的那一整套工程外壳——让模型能读文件、调工具、管上下文、失败了重试、连续干活几个小时的系统...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek出手Agent ：Harness开源 一切皆可插件**
+  Source: https://t.cj.sina.com.cn/articles/view/6177707567/m17038562f03301mcji?from=pcsearch
+  Signal: Daily Sina collector selected this with score=17, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +4:harness, +3:deepseek. Intro: DeepSeek出手Agent ：Harness开源 一切皆可插件#DeepSeek首款智能体#...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek 把 Harness 开源了：模型、工具、Agent Loop 全是插件**
+  Source: https://finance.sina.com.cn/roll/2026-08-13/doc-inineuqk3133280.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=16, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:coding, +4:harness, +3:deepseek. Intro: DeepSeek 也明确表示，当前仍有大量细节需要打磨，核心插件和基础接口将在后续快速迭代。连 Agent Loop 都能替换过去几个月，围绕 AI Coding 的讨论正在从模型转向 Harness...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek Harness：以“一切皆插件”理念，开启Agent工程新生态**
+  Source: https://t.cj.sina.com.cn/articles/view/7453185330/1bc3e953200101kxrs?from=pcsearch
+  Signal: Daily Sina collector selected this with score=15, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +3:deepseek, +3:开发者. Intro: 全球开发者迎来新工具：DeepSeek正式推出Harness开发者预览版，并采用MIT协议开源其核心代码。与常规模型开源不同，此次开放的是围绕大模型构建的完整Agent运行框架，涵盖工具调用、任务调度、沙箱隔离等八大核心模块，开发者可通过插件机制自由组合这些功能组件...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek Harness，“杀死”Agent黑箱**
+  Source: https://k.sina.com.cn/article_5953189932_162d6782c06704vaas.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +3:deepseek, +2:api. Intro: 8月12日，没有发布会，没有预告，DeepSeek悄悄更新API文档，编号为“0813”的DeepSeek-V4-Pro正式版模型深夜静默上线...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **OpenAI、Anthropic推出新指标——“cost-per-task”，以更好衡量AI成本**
+  Source: https://finance.sina.com.cn/roll/2026-08-14/doc-ininhnxk4179386.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token, +3:anthropic, +3:openai. Intro: OpenAI与Anthropic正推动AI定价标准从“每token成本”转向“每任务成本（cost-per-task）”，强调高溢价模型能一次性高效完成任务，从而降低综合成本...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
