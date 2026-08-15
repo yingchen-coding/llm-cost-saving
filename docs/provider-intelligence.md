@@ -700,3 +700,21 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/roll/2026-08-14/doc-ininhnxk4179386.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=14, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token, +3:anthropic, +3:openai. Intro: OpenAI与Anthropic正推动AI定价标准从“每token成本”转向“每任务成本（cost-per-task）”，强调高溢价模型能一次性高效完成任务，从而降低综合成本...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-15-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **DeepSeek Harness 开源：一切皆插件、省 Token、Agent 还能改装自己**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703ph40.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=19, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:harness, +4:token, +3:deepseek, +3:开发者. Intro: 一个模型公司，同一天发了一个旗舰模型和一个开源框架。V4 Pro 的事我们已经讲过了，这篇文章聚焦后者——DeepSeek Harness 到底是什么，为什么它值得开发者花时间看一眼，以及它背后那篇论文在说什么...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **智谱GLM-5.3对标Claude、Codex**
+  Source: https://t.cj.sina.com.cn/articles/view/1287656950/4cc015f602701uqcq?from=pcsearch
+  Signal: Daily Sina collector selected this with score=15, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +4:codex, +4:编程, +4:coding, +3:glm. Intro: 大模型竞争正在进入一个新的阶段。过去两年，行业关注点主要集中在模型规模、推理能力、多模态交互以及知识理解能力上。其中，AI Coding（AI编程）正在成为大模型能力比拼的重要战场...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **OpenAI研究员：100%代码已交给AI！Claude重写Python库**
+  Source: https://k.sina.com.cn/article_5953189932_162d6782c06704vb7y.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:openai. Intro: （来源：新智元）新智元报道Claude Code之父曾公开表示，自己两个多月没手写一行代码。OpenAI研究员roon说得更绝：「我不写代码了，100%都是GPT完成的」...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
