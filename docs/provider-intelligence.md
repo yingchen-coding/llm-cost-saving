@@ -718,3 +718,59 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5953189932_162d6782c06704vb7y.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:openai. Intro: （来源：新智元）新智元报道Claude Code之父曾公开表示，自己两个多月没手写一行代码。OpenAI研究员roon说得更绝：「我不写代码了，100%都是GPT完成的」...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-17-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **DeepSeek发布开源Agent Harness，一切皆插件对标OpenAI**
+  Source: https://k.sina.com.cn/article_7857201851_1d45362bb06801geno.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=18, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +3:deepseek, +3:openai, +3:开发者. Intro: 一、产品发布与版本定位发布时间：2026年8月13日晚间正式上线，v0.1开发者预览版面向全球开发者开放测试，并以MIT协议在GitHub全面开源...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **闭源RSI的严父来了：18个Agent自主科研，Kimi K3靠Harness逼近Opus 5**
+  Source: https://finance.sina.com.cn/roll/2026-08-17/doc-ininqxuv7883188.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=16, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +4:harness, +2:kimi. Intro: henry 发自 凹非寺量子位 | 公众号 QbitAI刚刚，闭源RSI的钦点严父来了。开源AI基础设施公司Prime Intellect在最新的一项研究中提出：借助多智能体Harness，可以把监控和具体实现交给更小、更便宜的开源模型，，从而让“AI开发AI”变得更便宜，甚至效果更好...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code对决Codex：速度快10倍，成本低75%**
+  Source: https://t.cj.sina.com.cn/articles/view/2740157611/a3537cab00101lvpm?from=pcsearch
+  Signal: Daily Sina collector selected this with score=13, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:codex, +4:成本. Intro: Nate Herk近期对Codex与Claude Code进行了一场严格的对比测试，旨在评估两者在构建生产级应用时的实际表现...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **让Agent真正“驾驭”云资源：UCloud插件接入DeepSeek Harness**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703pl4k.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +3:deepseek. Intro: （来源：优刻得云计算）刚上线三天的DeepSeek Harness正在快速形成自己的Agent插件生态——其GitHub主仓库已获得超过12万Star，聚集了5700多个插件仓库...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek推出首款Agent产品Harness，一切皆插件**
+  Source: https://k.sina.com.cn/article_7857201851_1d45362bb06801gd7o.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +3:deepseek. Intro: 分工：在这一公式下，模型（Model）负责“思考”，Harness作为“手脚和神经系统”，承担工具调用、任务规划、上下文管理、执行调度等所有工程化落地工作...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-18-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **让 Coding Agent 开始「记住过去」：MemoraX Code 的长期记忆系统**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704p7cy.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=21, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:codex, +4:coding, +3:开发者. Intro: （来源：机器之心Pro）过去一年，Coding Agent 正在迅速改变开发者写代码的方式。Claude Code、Codex 已经可以理解代码库、定位 Bug、跨文件修改代码、运行测试，甚至独立完成复杂开发任务...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **开启Benchmark的Harness时代：15家学术机构联合发布HarnessEval**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703pod4.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=13, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:harness, +4:benchmark. Intro: 模型之外，为什么还需要 Harness。模型之外还有上下文管理、工具调用、记忆、任务拆解、执行环境、权限管理和结果验证。真正决定一个 Agent 能不能稳定完成复杂任务的，是这些组件能否被组织成一套稳定、可执行的工作流系统...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **黑鲸鱼 DeepSeek Harness，从「赛博乐高」变成 Agent Store**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703pnx4.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +3:deepseek. Intro: 「赛博乐高」的概念也已经被社区所接受，已经累积起了超过 5100 个插件与超过 3500 位作者...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Harness决定AI Agent表现关键！华尔街实测千问办公和Workbuddy**
+  Source: https://finance.sina.com.cn/stock/relnews/hk/2026-08-18/doc-inintpir7352573.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness. Intro: Harness优势，足以抵消模型智能的差距。华尔街投行杰富瑞的分析师，最近给市面上八个主流中美AI Agent做了一场实测，看谁真正能把活干好...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Agentic-Native 增长：Zilliz 如何用 AI Agent 支撑超线性业务扩张｜AICon 深圳**
+  Source: https://finance.sina.com.cn/roll/2026-08-18/doc-ininthzy0148174.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:成本. Intro: Agent 时代，哪些方向正在成为行业关键变量。模型参数规模不断突破，推理成本持续下降，开源生态日益繁荣。答案正在从模型能力本身，转向围绕模型构建可规模化的智能系统；从单点能力提升，转向系统工程与组织级落地能力...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **OPPO副总裁唐凯：未来两年，Agent的商业模式将从卖模型、卖Token等，走向卖任务、结果和生产力**
+  Source: https://finance.sina.com.cn/jjxw/2026-08-17/doc-ininruym7689176.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:token. Intro: 新浪科技讯 8月17日下午消息，支付宝AI生态合作伙伴大会在杭州举行。会上，蚂蚁集团CEO韩歆毅、阿里巴巴集团副总裁、千问事业部总裁吴嘉、OPPO副总裁、软件工程系统总裁唐凯及vivo副总裁、AI全球研究院院长周围等嘉宾进行对谈...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
