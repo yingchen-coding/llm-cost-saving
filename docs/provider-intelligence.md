@@ -774,3 +774,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/jjxw/2026-08-17/doc-ininruym7689176.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:token. Intro: 新浪科技讯 8月17日下午消息，支付宝AI生态合作伙伴大会在杭州举行。会上，蚂蚁集团CEO韩歆毅、阿里巴巴集团副总裁、千问事业部总裁吴嘉、OPPO副总裁、软件工程系统总裁唐凯及vivo副总裁、AI全球研究院院长周围等嘉宾进行对谈...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-18-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **人大高瓴、IQuest团队联手，把OpenClaw、Claude Code接进RL训练中**
+  Source: https://finance.sina.com.cn/roll/2026-08-18/doc-ininttrp7356768.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:harness. Intro: Harness也可以直接成为模型学习和提升的环境。作者 | 陈骏达编辑 | 心缘智东西8月18日报道，昨天，中国人民大学高瓴人工智能学院、至知创新研究院团队联合提出了一个面向复杂Agent Harness的黑盒强化学习框架ClawGym II...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **美企改用中国大模型成本降至1/10**
+  Source: https://t.cj.sina.com.cn/articles/view/3266943013/mc2b9982503301neuk?from=pcsearch
+  Signal: Daily Sina collector selected this with score=6, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +2:封. Intro: 【#美企改用中国大模型成本降至1/10#】#美国越封锁中国技术突破越快# 全球用户越来越多地选择中国大模型而非美国产品。以词元计算，当前全球近三分之二人工智能调用量由中国模型承接；全球处理词元总量前五的热门大模型全部来自中国...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
