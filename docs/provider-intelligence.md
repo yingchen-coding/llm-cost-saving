@@ -828,3 +828,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5953466437_162dab0450670b9mw0.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code. Intro: （来源：新智元）新智元报道Claude Code的增长神话，破灭了。最新数据显示，Claude Code早期的爆炸式增长期，已经宣告结束...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-20-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **DeepSeek Harness更新多模态，Codex和Claude Code都能当子代理**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704pi76.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=16, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:codex, +4:harness, +3:deepseek. Intro: （来源：网易智能）# DeepSeek Harness更新多模态，Codex和Claude Code都能当子代理8月20日消息，DeepSeek Harness发布v0.1.0-rc.8预览版...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **大模型 Token 大单：DeepSeek、Qwen、GLM、Kimi、Minimax**
+  Source: https://t.cj.sina.com.cn/articles/view/3172142827/bd130eeb01901c07e?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:token, +2:kimi, +3:deepseek, +3:glm. Intro: 采购范围：为了满足现阶段并支撑未来一段时间内通用技术集团各产业在人工智能领域的研究与应用，现需采购 token 服务。分包情况：中标候选人公示2026 年 8 月 17 日发布中标候选人公示，如下...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
