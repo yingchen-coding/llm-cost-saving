@@ -842,3 +842,49 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://t.cj.sina.com.cn/articles/view/3172142827/bd130eeb01901c07e?from=pcsearch
   Signal: Daily Sina collector selected this with score=12, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:token, +2:kimi, +3:deepseek, +3:glm. Intro: 采购范围：为了满足现阶段并支撑未来一段时间内通用技术集团各产业在人工智能领域的研究与应用，现需采购 token 服务。分包情况：中标候选人公示2026 年 8 月 17 日发布中标候选人公示，如下...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-21-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **DeepSeek开源Harness底座，Agent开发门槛被大幅拉下**
+  Source: https://t.cj.sina.com.cn/articles/view/1899684203/713ae16b001018f7q?from=pcsearch
+  Signal: Daily Sina collector selected this with score=24, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +4:harness, +4:成本, +3:deepseek, +3:开发者. Intro: 深度求索 DeepSeek 正式开源内部 Harness 团队的智能 Agent 开发底座，这套面向代码智能体的框架对外释放，让普通开发者、在校学生可以低成本搭建专属 AI 智能体应用...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **OpenAI开源Codex Harness，开放核心Agent能力**
+  Source: https://t.cj.sina.com.cn/articles/view/5828676220/15b6a8a7c02001id86?from=pcsearch
+  Signal: Daily Sina collector selected this with score=19, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:codex, +4:harness, +3:openai, +3:开发者. Intro: 日前OpenAI方面宣布，全面开源Codex底层核心架构Harness，开发者可以基于Harness将Codex的Agent能力嵌入自有产品、工程工具、运营看板以及财务报表软件，而不再局限于对话窗口...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code 被轻易攻破，仅需一个假工具**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704pnae.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:智能体, +5:claude code, +4:编程. Intro: （来源：新智元）新智元报道用户让 AI 编程助手写个贪吃蛇小游戏，智能体照办了，但同时多跑了一条 curl | bash 命令，把攻击者的脚本下载到本地并执行...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **青少年开发者借助Claude Code为惠普打印机开发macOS原生驱动**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704pttk.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic, +3:开发者. Intro: （来源：IT之家）IT之家8 月21 日消息，据外媒neowin 报道，一名青少年开发者Kuber Mehta 利用Anthropic 的Claude Code，...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-22-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Codex开始“反杀”Claude Code了吗？**
+  Source: https://k.sina.com.cn/article_5953466437_162dab0450670b9wme.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=21, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:codex, +4:编程, +3:openai. Intro: 此前CNBC获得的OpenAI内部数据也显示，公司AI编程与工作类Agent产品已经达到约2000万周活。这个数字延续了过去一个多月的高速增长...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-23-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **让AI Agent「试玩」世界模型，长程目标评测有了新基准PlayWorld**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704q2do.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:评测. Intro: （来源：机器之心）本文第一作者为香港大学博士生丁凯欣。世界模型应该如何评测。然而，要完成这些 “长程操控目标”，不同模型所需的操作序列并不相同...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **小参数AI智能体Faraday，科研复现超越GPT-5.5与Claude Opus 4.8**
+  Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02804001vqy0?from=pcsearch
+  Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:智能体. Intro: 它不光追求准确率，还要学会“研究品味”，挑选值得做的实验...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
