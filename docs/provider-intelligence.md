@@ -898,3 +898,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://t.cj.sina.com.cn/articles/view/7517400647/1c0126e47059093hnc?from=pcsearch
   Signal: Daily Sina collector selected this with score=10, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体. Intro: 本文转自：中国消费者报大模型行业的竞争重心正在从参数和榜单转向场景落地。当AI Agent进入客服、营销、智能硬件和民生服务等真实场景，企业开始关心一个更具体的问题：智能体能否自然地理解用户、及时响应，并把任务真正完成...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-24-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **DeepSeek Harness来了：AI开始制造AI了？**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704q74e.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +3:deepseek. Intro: （来源：钛媒体APP）"第一台超智能机器，将是人类最后一项发明。这个循环的第一步是让机器开始动手改进自己。在7月底内部的四小时发言中，梁文锋将AI的发展比喻成一个个阶梯：LLM—CoT—Agent—持续学习—自我迭代—具身智能...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Anthropic旗舰AI模型遇冷，低成本竞品大行其道**
+  Source: https://finance.sina.com.cn/stock/usstock/c/2026-08-24/doc-inipkmae3026615.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=6, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:anthropic, +3:openai, -4:ipo. Intro: Anthropic美国客户正转向低价替代产品，放弃其最强AI工具，令其IPO前夕高成本商业模式遭质疑。Ramp对7万家企业的消费数据显示，其高价模型Fable5上线两月余消费占比仅11%，不及低价模型Opus5。该公司7月年化营收650亿美元，不及此前预期的800亿美元，年消费10万美元以上客户达6000家，二季度首次实现调整后营业利润，预计下月IPO估值或达2万亿美元。OpenAI低价新模型GPT5.6年化营收已破400亿美元，市场格局生变。(AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
