@@ -888,3 +888,13 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02804001vqy0?from=pcsearch
   Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:智能体. Intro: 它不光追求准确率，还要学会“研究品味”，挑选值得做的实验...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-23-223001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **AI Agent加速落地，百融智能抢占下一代交互入口**
+  Source: https://t.cj.sina.com.cn/articles/view/7517400647/1c0126e47059093hnc?from=pcsearch
+  Signal: Daily Sina collector selected this with score=10, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体. Intro: 本文转自：中国消费者报大模型行业的竞争重心正在从参数和榜单转向场景落地。当AI Agent进入客服、营销、智能硬件和民生服务等真实场景，企业开始关心一个更具体的问题：智能体能否自然地理解用户、及时响应，并把任务真正完成...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
