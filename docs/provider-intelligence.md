@@ -912,3 +912,35 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/stock/usstock/c/2026-08-24/doc-inipkmae3026615.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=6, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:anthropic, +3:openai, -4:ipo. Intro: Anthropic美国客户正转向低价替代产品，放弃其最强AI工具，令其IPO前夕高成本商业模式遭质疑。Ramp对7万家企业的消费数据显示，其高价模型Fable5上线两月余消费占比仅11%，不及低价模型Opus5。该公司7月年化营收650亿美元，不及此前预期的800亿美元，年消费10万美元以上客户达6000家，二季度首次实现调整后营业利润，预计下月IPO估值或达2万亿美元。OpenAI低价新模型GPT5.6年化营收已破400亿美元，市场格局生变。(AI生成)
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-25-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **英伟达新一代算力平台补齐拼图 结合DeepSeek模型Token成本可降35倍**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704qcui.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=21, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +5:智能体, +4:成本, +4:token, +3:deepseek. Intro: （来源：财联社）《科创板日报》8月25日讯（编辑 宋子乔）英伟达硬件演进正加速驶向下一站，为智能体（Agent）打造新一代算力平台...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **AI Agent下一步走向何方？**
+  Source: https://video.sina.com.cn/p/finance/2026-08-25/detail-inipnuhu9747091.d.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=17, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +4:codex, +3:openai. Intro: 来源：@华尔街见闻APP微博AI Agent下一步走向何方。#AI##Agent##智能体##OpenAI##Codex# ​...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **一张图拉开40倍Token成本差，“视力”却输给豆包？**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703q86w.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token, +3:deepseek. Intro: （来源：Tech星球）来源| Tech星球文| 华卫 任雪芸大模型圈里，几乎没有哪家像DeepSeek这样，把“调价”做成了连续剧...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **6个Claude Code神作，Anthropic亲选**
+  Source: https://k.sina.com.cn/article_5953466437_162dab0450670ba61y.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic, +3:开发者. Intro: 这些「神作」来自普通用户，覆盖实用工具、可视化创意和趣味应用。艺术家用 JavaScript 画人脸涂鸦艺术家兼开发者 @mannay 用 JavaScript 生成了一批人脸涂鸦...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-25-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **英伟达Vera Rubin全面投产，每Token成本骤降35倍的背后**
+  Source: https://k.sina.com.cn/article_5953740931_162dee08306703warg.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: 从七颗芯片的异构协同，到机架级的推理软件栈，再到卫星形态的轨道数据中心，英伟达正在把AI工厂从口号变成工程体系——而这套体系的第一性原理，已经变成了电表上的读数...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
