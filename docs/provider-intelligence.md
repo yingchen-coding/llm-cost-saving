@@ -944,3 +944,33 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5953740931_162dee08306703warg.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: 从七颗芯片的异构协同，到机架级的推理软件栈，再到卫星形态的轨道数据中心，英伟达正在把AI工厂从口号变成工程体系——而这套体系的第一性原理，已经变成了电表上的读数...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-26-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **坚决不用行业标准AGENTS.md，Claude Code惹来“封杀令”：Anthropic终于回应了，但开发者更气了**
+  Source: https://t.cj.sina.com.cn/articles/view/1746173800/68147f6801901mulg?from=pcsearch
+  Signal: Daily Sina collector selected this with score=22, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:编程, +2:封, +3:anthropic, +3:开发者. Intro: 作者 | Tina当所有 AI 编程工具都在向行业标准靠拢时，Anthropic 的 Claude Code 偏要特立独行...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **王云鹤创业估值数亿美元，押注多模型 Harness和 Agent-Native Model**
+  Source: https://finance.sina.com.cn/roll/2026-08-26/doc-iniprqcu2233140.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=13, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:harness, +4:token. Intro: 雷峰网独家获悉，AI 基础设施公司基元律动（TokenRhythm）近日完成新一轮融资，截至目前累计融资金额达数千万美金。本轮融资由弘晖基金领投，聚合资本、尚势资本等机构参与...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **全公司禁用Claude Code，CEO放狠话逼宫A社！**
+  Source: https://t.cj.sina.com.cn/articles/view/5703921756/153faf05c01904qkny?from=pcsearch
+  Signal: Daily Sina collector selected this with score=10, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code. Intro: 如果每款工具只读取自家的配置文件，同一份代码库很快就会出现多套规则。同一个项目，一个Agent知道测试怎么跑、哪些目录不能动；另一个Agent却完全没读到这些要求...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **企业AI与Token支出攀升，成本管控成为主线**
+  Source: https://video.sina.com.cn/p/finance/2026-08-26/detail-iniprums2282085.d.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=10, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token, +2:视频. Intro: 这份瑞银（UBS）的研究报告汇总了大型科技企业财务总监对 AI 投资与 Token 开支的最新反馈，显示出企业对人工智能的态度正从盲目投入转向成本管控与效率优化...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Agent Harness开始自动修复：系统级Debug最高提升18.4点**
+  Source: https://k.sina.com.cn/article_5952915705_162d248f906703mg60.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness. Intro: （来源：让你更懂AI的 数据派THU）本文约3000字，建议阅读5分钟失败轨迹变成修复证据。很多 LLM agent 的失败，看起来像是模型没有想明白：工具调错了、上下文漏了、最终答案提前交了...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Shopify CEO考虑禁用Claude Code，因其不兼容AGENTS.md**
+  Source: https://finance.sina.com.cn/tech/roll/2026-08-26/doc-iniprumq5590707.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +3:skill, -5:finance_without_tool_signal. Intro: Shopify CEO Tobi Lütke 考虑在 Shopify 禁用 Claude Code，直到其支持读取 AGENTS.md、.agents/skills 等文件...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
