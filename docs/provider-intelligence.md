@@ -974,3 +974,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/tech/roll/2026-08-26/doc-iniprumq5590707.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +3:skill, -5:finance_without_tool_signal. Intro: Shopify CEO Tobi Lütke 考虑在 Shopify 禁用 Claude Code，直到其支持读取 AGENTS.md、.agents/skills 等文件...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-26-223001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **企查查AI观察：DeepSeek Harness“一切皆插件”，一个 MCP 连接器如何长出 82 张卡片？**
+  Source: https://t.cj.sina.com.cn/articles/view/1426584470/5507f39602001swr6?from=pcsearch
+  Signal: Daily Sina collector selected this with score=15, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:harness, +3:mcp, +3:deepseek. Intro: 从 4 组企查查 MCP 到开放连接器生态，一套可插拔架构如何演绎“道生一，一生二，二生三，三生万物”模型让 Agent 会思考，Harness 让它能把想法变成行动...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **“一套模型+一座Token工厂+一套智能体管控系统”开创优质商业价值**
+  Source: https://finance.sina.com.cn/roll/2026-08-26/doc-inipsezp5931994.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:智能体, +4:token. Intro: 8月26日，商汤集团发布截至2026年6月30日止六个月的中期业绩。集团首次披露经常性收入（Recurring Revenue）11.4亿元，占比39.3%，并首次按国际财务报告准则（IFRS）实现盈利人民币6.2亿元...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
