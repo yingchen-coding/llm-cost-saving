@@ -988,3 +988,27 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/roll/2026-08-26/doc-inipsezp5931994.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:智能体, +4:token. Intro: 8月26日，商汤集团发布截至2026年6月30日止六个月的中期业绩。集团首次披露经常性收入（Recurring Revenue）11.4亿元，占比39.3%，并首次按国际财务报告准则（IFRS）实现盈利人民币6.2亿元...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-27-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **拍AI短剧的成本，被这款免费的视频模型打到地板｜实测Pavo**
+  Source: https://t.cj.sina.com.cn/articles/view/5213469505/136bf3b410010169j2?from=pcsearch
+  Signal: Daily Sina collector selected this with score=6, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +2:视频. Intro: 智东西作者 |江宇编辑 |漠影AI短剧的女主接一条广告，60秒报价25万元。新的门槛落到了两个更现实的问题上：质量和价格。质量这一关，几款头部视频模型已经证明过，画面、动作、一致性都能扛住，也在海内外打响了名声...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **刚刚，Claude Code又进化了，替用户起草「反馈报告」**
+  Source: https://k.sina.com.cn/article_5953740931_162dee08306703whvy.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code. Intro: 当某个功能出现故障、Claude 发现自己犯了错误，或者你告诉它哪里出了问题时，它会自动把相关情况整理成一份报告。Claude Code 会将每份反馈草稿保存在你的本地设备上，路径为：~/.claude/feedback/drafts/...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-27-223001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **众安保险上半年消耗34万亿Token，综合成本率仅改善0.1个点**
+  Source: https://cj.sina.com.cn/articles/view/1887344341/707e96d502001uks2?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: 2026年上半年，众安在线（06060.HK）把“AI”讲到了极致：公司深化了“One AI”战略布局。图为众安在线2026年上半年业绩报告 然而换来的承保效率改善微乎其微，承保综合成本率从2025年上半年的95.6%降至95.5%，同比仅改善0.1个百分点...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
