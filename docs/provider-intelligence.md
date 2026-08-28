@@ -1012,3 +1012,25 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://cj.sina.com.cn/articles/view/1887344341/707e96d502001uks2?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: 2026年上半年，众安在线（06060.HK）把“AI”讲到了极致：公司深化了“One AI”战略布局。图为众安在线2026年上半年业绩报告 然而换来的承保效率改善微乎其微，承保综合成本率从2025年上半年的95.6%降至95.5%，同比仅改善0.1个百分点...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-28-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Harness Continual Learning：持续学习，从模型参数走向Agent Harness**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703qhsu.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=20, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +4:harness, +3:提示词, +3:路由. Intro: （来源：机器之心）长期以来，持续学习主要研究模型参数如何沿任务序列更新，以及系统如何在学习新任务时避免灾难性遗忘。一个部署中的智能体不仅由基础模型决定，还依赖围绕模型运行的一整套 Harness，包括系统提示词、交互记忆、可复用技能、外部工具、工作流与路由策略...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **刚刚，Anthropic发布物理MCP：Claude开始接管真实世界**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704qvpq.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=20, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +3:mcp, +4:安全, +3:anthropic. Intro: （来源：机器之心）机器之心编辑部大语言模型，现在真的长出手了。本周四，Anthropic 宣布推出硬件用 MCP：Model Hardware Standard（MHS），这是一项新标准，用于帮助所有大模型驱动的 AI 智能体（Agent）安全快捷地操纵物理设备...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **AI牛马"永不下班"！OpenAI让智能体自己找活，Claude也开始进实验室**
+  Source: https://k.sina.com.cn/article_5952915705_162d248f906703mlua.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:智能体, +4:codex, +3:openai. Intro: 这句话，已经出现在Codex的公开代码里。在OpenAI正在测试的"Persistentmode"（持久模式）中，Codex完成用户最初交代的任务后，不一定停下...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code 额度回落：Agent 正在制造新的「祖传代码屎山」？**
+  Source: https://finance.sina.com.cn/tech/roll/2026-08-28/doc-inipwaiv5788191.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +3:anthropic, -5:finance_without_tool_signal. Intro: 作者丨郑佳美 编辑丨岑 峰Claude Code 原定于 8 月 19 日结束的 +50% 周额度加成，又被 Anthropic 延长到了 8 月 31 日...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
