@@ -1034,3 +1034,83 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/tech/roll/2026-08-28/doc-inipwaiv5788191.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +3:anthropic, -5:finance_without_tool_signal. Intro: 作者丨郑佳美 编辑丨岑 峰Claude Code 原定于 8 月 19 日结束的 +50% 周额度加成，又被 Anthropic 延长到了 8 月 31 日...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-28-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **DeepSeek Harness被"套路"：一份让AI智能体防线现形的安检报告**
+  Source: https://k.sina.com.cn/article_5952915705_162d248f906703mouk.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:智能体, +4:harness, +3:deepseek. Intro: 传统攻击是你去攻破系统，间接注入是你让系统自己去读一段带毒的内容，然后它自己把自己"攻陷"了...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-29-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Agent记忆新范式Recuris：3B小模型到Claude Opus 5全线暴涨**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704r3jm.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=10, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体. Intro: （来源：机器之心）近年来，大语言模型（LLM）智能体在长程任务中展现出强大潜力，但现有智能体框架在记忆的使用方式与迭代方式上仍面临显著挑战...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **终于，Claude Code打通了桌面端与终端！**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704r33s.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: （来源：新智元）新智元报道终端里干到一半的活，换个窗口就得从头再干一遍。就在刚刚，Anthropic 官宣，Claude Code 桌面端打通了终端会话...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Anthropic 揭示“AI 训练 AI”新方法，比人类研究员成本更低、速度更快**
+  Source: https://finance.sina.com.cn/tech/digi/2026-08-29/doc-inipzanm5343214.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +3:anthropic. Intro: IT之家 8 月 29 日消息，用 AI 模型训练其他 AI 模型，正成为新一代 AI 实验室重点探索的方向。当地时间 28 日，Anthropic 研究员计划的一名研究人员展示了这种思路真正落地后可能呈现的样子...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-08-30-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Code额度「明升实降」：永久涨25%，眼下却少17%**
+  Source: https://t.cj.sina.com.cn/articles/view/3996876140/ee3b7d6c001017n50?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:coding. Intro: 这个周末，Coding Agent 用户同时看到了两种截然不同的「额度调整」。团队感谢用户在过去一段时间里配合测试，并称他们一直在摸索「未来能够可持续提供多少服务」...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **消息称微软收紧AI成本，有员工28天挥霍2.8万美元Token**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704r9r4.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: 作为参考，目前微软全球员工人数超过 22.3 万人，其中约 350 名美国员工自愿提交了自己的月度 AI 使用数据。整体月度使用成本中位数约为 300 美元（现汇率约合 2,024 元人民币），但不同部门之间差异明显...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-01-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Code，省Token费用的教程来了！**
+  Source: https://finance.sina.com.cn/wm/2026-08-31/doc-iniqfear7285560.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:token. Intro: 谁改了接口，群里说一遍；前端、后端、测试分别确认；协调 Agent 再汇总一次，转给所有人。好家伙，活还没干多少，进度倒是同步了三轮...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **【万联计算机 | 行业跟踪】大模型能力与成本协同优化，AI商业化验证持续增强**
+  Source: https://k.sina.com.cn/article_5953740931_162dee08306703x4vy.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:编程, +4:成本, +4:评测. Intro: 阿里千问AI平台上线Qwen3.8-Flash，并同步开源Qwen3.8-Flash-Next。据公司披露，其训练成本仅约为Qwen3.7-Plus的九分之一，并在多项编程及办公任务评测中超过Qwen3.7-Plus和Claude Opus 4.6...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude 越狱后，Anthropic 停掉训练、150 人紧急转岗**
+  Source: https://finance.sina.com.cn/roll/2026-09-01/doc-iniqipiu1574168.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:安全, +4:评测, +3:anthropic. Intro: 事件发生后，Anthropic 一度暂停预发布模型的外部网络安全评测、高风险强化学习环境，并对内部训练基础设施进行重构。Claude 多次越权访问真实系统7 月 30 日，Anthropic 报告了三起 Claude 模型未经授权访问真实计算机系统的事件...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **西湖大学团队提出Code World Model：让Coding Agent成为世界模型的大脑**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704ribo.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +4:coding, +2:视频. Intro: （来源：网易科技）世界模型要做到真正支持开放世界交互，难点并不只是生成一段看起来连贯的视频。在复杂环境中，实体、关系、规则和事件都会持续变化，某个动作产生的影响可能不会立即出现，却会在很长时间后继续改变世界状态...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Anthropic 详解 7·30 安全事件：配置错误致 Claude“入侵”真实企业，已加强沙箱隔离与实时监控**
+  Source: https://finance.sina.com.cn/tech/digi/2026-09-01/doc-iniqhmvz6805076.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:安全, +4:评测, +3:anthropic. Intro: 在安全方面，Anthropic 首先暂停了针对预发布模型的外部网络安全评测，并短暂暂停内部评测，以加强评测环境的隔离和监控（在引入新的安全措施后，该公司已恢复对人工智能模型的外部网络安全测试）...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Anthropic详解7·30安全事件：配置错误致Claude“入侵”真实企业**
+  Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02802001wby2?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:安全, +4:评测, +3:anthropic. Intro: 在安全方面，Anthropic 首先暂停了针对预发布模型的外部网络安全评测，并短暂暂停内部评测，以加强评测环境的隔离和监控...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **工信部：加大大模型、智能体、Token等服务采购力度**
+  Source: https://t.cj.sina.com.cn/articles/view/5993531560/1653e08a802001oavg?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:智能体, +4:token. Intro: 中新经纬8月31日电 工信部网站31日发布《工业和信息化部办公厅关于开展人工智能应用服务商培育专项行动的通知》(下称通知)...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **郭明錤曝五大变革：专攻百万Token推理、成本大降**
+  Source: https://k.sina.cn/article_5952915720_162d2490806704ribi.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: （来源：快科技）快科技9月1日消息，天风国际证券分析师郭明錤近日发布的最新产业调查显示，英伟达已重启Rubin CPX芯片计划，预计2027年第一季度正式投产...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
