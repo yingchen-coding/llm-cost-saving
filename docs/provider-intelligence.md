@@ -1128,3 +1128,25 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5953740931_162dee08306703x7ec.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: （来源：机器之心）论文标题：ClawBench:Can AI Agents Complete Everyday Online Tasks...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-02-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Kimi API已原生支持Codex和Claude Code**
+  Source: https://finance.sina.com.cn/jjxw/2026-09-02/doc-iniqmwqu7583864.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:codex, +2:kimi, +3:anthropic, +3:openai, +2:api, -5:finance_without_tool_signal. Intro: 9月2日，月之暗面宣布，为满足大家在Codex和Claude Code中接入Kimi API的需求，Kimi API现已支持OpenAI的Responses API格式；同时支持Anthropic的Mes...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek为新团队招兵买马 瞄准Claude Code等AI智能体服务**
+  Source: https://finance.sina.com.cn/roll/2026-08-13/doc-ininctas4819833.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:智能体, +5:claude code, +3:招聘, +3:anthropic, +3:deepseek, -5:finance_without_tool_signal. Intro: DeepSeek已开设官方社交媒体账号并发布新团队招聘信息，将专注于帮助开发AI智能体，挑战Anthropic PBC广受欢迎的Claude Code等服务...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **DeepSeek发布Agent领域新产品Harness 官方提示勿与Claude Code对标**
+  Source: https://finance.sina.com.cn/stock/estate/integration/2026-08-19/doc-ininvshv9432897.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:harness, +3:deepseek, -5:finance_without_tool_signal. Intro: 观点网讯：2026年8月19日，DeepSeek发布Agent领域新产品DeepSeek Harness。官方提示，勿将DeepSeek Harness与Claude Code对标...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code将于8月14日默认启用自动模式，可自主执行更长任务并拦截危险操作**
+  Source: https://finance.sina.com.cn/jjxw/2026-08-08/doc-inimqccx9894578.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:编程, +4:安全, -5:finance_without_tool_signal. Intro: Claude当地时间8月7日宣布，编程工具Claude Code将于8月14日起在Pro、Max和Team套餐中默认启用自动模式，以支持更长时间的自主任务运行，并通过自动安全检测减少危险操作...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
