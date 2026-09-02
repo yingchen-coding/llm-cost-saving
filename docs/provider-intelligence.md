@@ -1114,3 +1114,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.cn/article_5952915720_162d2490806704ribi.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:成本, +4:token. Intro: （来源：快科技）快科技9月1日消息，天风国际证券分析师郭明錤近日发布的最新产业调查显示，英伟达已重启Rubin CPX芯片计划，预计2027年第一季度正式投产...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-01-223001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **地球最强大模型也开始强调性价比！Anthropic上新Fable 5.1**
+  Source: https://finance.sina.com.cn/roll/2026-09-02/doc-iniqkkpk1423255.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=15, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:智能体, +4:编程, +4:安全, +4:成本, +3:anthropic, +3:openai, -4:ipo, -4:美股. Intro: 财联社9月2日报道，当地时间周二，Anthropic推出号称全球最先进的编程和知识工作模型Fable 5.1，同步向Mythos权限用户开放同模型但安全防护更宽松的Mythos 5.1。该模型多项基准表现优于上一代Fable 5与GPT-5.6 Sol，智能体能力大幅强化，典型工作负载使用成本较Fable 5低25%，缓存读取价降75%，高智能体任务最高可省45%。此次发布正值Anthropic上市关键节点，公司拟节后公开招股书，有望9月底登陆美股冲击最高IPO募资纪录，而OpenAI随即官宣将推出Astra模型，成为其IPO的潜在不确定因素。(AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude、GPT、Gemini 在真实网站上集体翻车，ClawBench 把 AI agent 打回原形**
+  Source: https://k.sina.com.cn/article_5953740931_162dee08306703x7ec.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=5, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent. Intro: （来源：机器之心）论文标题：ClawBench:Can AI Agents Complete Everyday Online Tasks...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
