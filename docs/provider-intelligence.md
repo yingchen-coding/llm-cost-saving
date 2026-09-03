@@ -1150,3 +1150,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/jjxw/2026-08-08/doc-inimqccx9894578.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:编程, +4:安全, -5:finance_without_tool_signal. Intro: Claude当地时间8月7日宣布，编程工具Claude Code将于8月14日起在Pro、Max和Team套餐中默认启用自动模式，以支持更长时间的自主任务运行，并通过自动安全检测减少危险操作...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-03-103055 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **月之暗面Kimi API兼容Codex与Claude Code 支持多款模型直连**
+  Source: https://finance.sina.com.cn/stock/estate/integration/2026-09-03/doc-iniqpqxy2165814.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=13, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:codex, +2:kimi, +2:api. Intro: 免责声明：本文内容与数据由观点根据公开信息整理，不构成投资建议，使用前请核实...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Anthropic升级Claude Code/Cowork，可后台操控用户Mac**
+  Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02802001whi2?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: 在适配要求方面，官方要求使用 macOS 15 以及更高系统版本，桌面必须保持唤醒状态，Claude Desktop 应用需保持打开...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
