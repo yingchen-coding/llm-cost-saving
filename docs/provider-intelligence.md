@@ -1164,3 +1164,23 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02802001whi2?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: 在适配要求方面，官方要求使用 macOS 15 以及更高系统版本，桌面必须保持唤醒状态，Claude Desktop 应用需保持打开...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-03-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **高德 GrowLoop：构建感性对话的理性 Benchmark**
+  Source: https://finance.sina.com.cn/wm/2026-07-01/doc-inifihnu2978123.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:评测, +4:benchmark. Intro: 作者 | 高德 APP 平台业务中心开放域对话的真人感评测是一个公开的难题——标准难以制定、难以量化、难以统一。为什么这件事这么难把大模型推到数学、代码这种领域很容易确认对错——答案要么算对了要么算错了...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-08-223001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Anthropic内部，20人的Labs，如何玩出MCP、Claude Code、Claude Design……**
+  Source: https://finance.sina.com.cn/roll/2026-09-08/doc-inirauia4783908.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:mcp, +3:anthropic. Intro: 在 Anthropic 内部，一个特殊的小团队Labs，为公司的迅猛崛起立下大功。说它是公司内部孵化器吧，却更像是一个快速转译器，连接前沿模型研究与产品...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
