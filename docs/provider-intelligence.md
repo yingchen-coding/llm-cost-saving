@@ -1184,3 +1184,13 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/roll/2026-09-08/doc-inirauia4783908.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=11, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:mcp, +3:anthropic. Intro: 在 Anthropic 内部，一个特殊的小团队Labs，为公司的迅猛崛起立下大功。说它是公司内部孵化器吧，却更像是一个快速转译器，连接前沿模型研究与产品...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-10-223001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **OpenAI这是拿千禧年难题当Benchmark刷啊**
+  Source: https://finance.sina.com.cn/jjxw/2026-09-11/doc-inirmfea7107012.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:benchmark, +3:openai. Intro: 《纽约时报》最新追访，补出了这场冲突中此前没有披露的细节。其中最关键的一条，是OpenAI更新了关于用户数据的说法：这比OpenAI此前“无法完全排除匿名用户数据曾帮助改进模型”的表态明确得多，也给8月研究成果是否进入模型划出了一条时间线...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
