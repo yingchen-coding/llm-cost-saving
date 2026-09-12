@@ -1194,3 +1194,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/jjxw/2026-09-11/doc-inirmfea7107012.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=7, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:benchmark, +3:openai. Intro: 《纽约时报》最新追访，补出了这场冲突中此前没有披露的细节。其中最关键的一条，是OpenAI更新了关于用户数据的说法：这比OpenAI此前“无法完全排除匿名用户数据曾帮助改进模型”的表态明确得多，也给8月研究成果是否进入模型划出了一条时间线...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-11-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Kimi K2.8 Preview模型全量上线Kimi Code，综合性能接近K3**
+  Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02802001wsiq?from=pcsearch
+  Signal: Daily Sina collector selected this with score=7, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:智能体, +2:kimi. Intro: 官方表示，K2.8 Preview 综合性能接近 K3，思考效率更高。编码与智能体能力全面提升，思考（thinking）效率较 K2.7 Code 显著改善，全部会员档位均开放最高 1M 上下文窗口...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **服贸观澜｜方升-Code 2.0发布，大模型基准测试体系迎来新标准**
+  Source: https://finance.sina.com.cn/jjxw/2026-09-11/doc-inirnnxy7277907.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=5, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:智能体. Intro: （来源：北京商报）2026年，AI大模型正从通用对话走向代码生成、智能体协作等产业落地场景，模型代码能力的标准化评估需求也日益凸显...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
