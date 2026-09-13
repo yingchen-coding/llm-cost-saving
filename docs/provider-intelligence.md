@@ -1208,3 +1208,13 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/jjxw/2026-09-11/doc-inirnnxy7277907.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=5, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:智能体. Intro: （来源：北京商报）2026年，AI大模型正从通用对话走向代码生成、智能体协作等产业落地场景，模型代码能力的标准化评估需求也日益凸显...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-12-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Code之父切尔尼谈AI编程：开发者核心职责是守住代码质量**
+  Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02802001wtwu?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:编程, +3:开发者. Intro: AI 改变了编程工作的分工，工程师越来越多地从亲自写代码转向审查 AI 生成的代码。提交代码的人应该能解释自己提交了什么，代码本身也应该让人类开发者维护起来至少不比以前更难，最好还能更容易...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
