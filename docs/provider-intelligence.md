@@ -1218,3 +1218,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02802001wtwu?from=pcsearch
   Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +4:编程, +3:开发者. Intro: AI 改变了编程工作的分工，工程师越来越多地从亲自写代码转向审查 AI 生成的代码。提交代码的人应该能解释自己提交了什么，代码本身也应该让人类开发者维护起来至少不比以前更难，最好还能更容易...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-15-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **开发者找到办法，脱离Anthropic模型使用Claude Code**
+  Source: https://finance.sina.com.cn/stock/usstock/c/2026-09-15/doc-inirxpis3690238.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=18, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:claude code, +4:成本, +3:anthropic, +3:openai, +3:开发者. Intro: Anthropic 编码工具 Claude Code 负责人鲍里斯・切尔尼，上个月卷入一场网络论战。该事件暴露出：部分开发者正在寻找变通方案，搭配 OpenAI 等竞品的廉价非 Anthropic 模型运行 Claude Code，以此节约成本...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **在多项高难度Benchmark超越GPT-6 Astra，RSIAgent让开源模型自主探索新环境**
+  Source: https://k.sina.com.cn/article_5953189932_162d6782c06704y8f0.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:benchmark. Intro: （来源：机器之心）机器之心编辑部大模型过去几年的能力跃迁，几乎都围绕一个词：Scaling。一个 Agent 真正进入从没见过的软件、工具或者企业系统时，问题往往才刚刚开始...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
