@@ -1232,3 +1232,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5953189932_162d6782c06704y8f0.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=9, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +5:agent, +4:benchmark. Intro: （来源：机器之心）机器之心编辑部大模型过去几年的能力跃迁，几乎都围绕一个词：Scaling。一个 Agent 真正进入从没见过的软件、工具或者企业系统时，问题往往才刚刚开始...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-17-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **刚刚，「国家队」科研版Claude Code，向所有人开放了！**
+  Source: https://k.sina.com.cn/article_5953190046_162d6789e06703sclg.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:pdf. Intro: 敲一句「把登录模块的报错修了」，它自己读代码、自己改逻辑、自己跑测试。十几个标签页，Zotero和Origin疯狂切换，通用大模型的对话框里粘着刚从PDF抠出来的Method部分...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **Claude Code团队讲究啊，这都往外说**
+  Source: https://k.sina.com.cn/article_5952915720_162d2490806704umqi.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=7, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +2:视频. Intro: （来源：量子位）话说。Claude发布了一则Claude code团队如何使用Claude code持续优化Claude code的访谈视频...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
