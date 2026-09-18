@@ -1246,3 +1246,17 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://k.sina.com.cn/article_5952915720_162d2490806704umqi.html?from=pcsearch
   Signal: Daily Sina collector selected this with score=7, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +2:视频. Intro: （来源：量子位）话说。Claude发布了一则Claude code团队如何使用Claude code持续优化Claude code的访谈视频...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-17-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **刚刚，Claude Code放大招！Projects上线，200个Agent不眠不休**
+  Source: https://t.cj.sina.com.cn/articles/view/5703921756/153faf05c01904utfk?from=pcsearch
+  Signal: Daily Sina collector selected this with score=10, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code. Intro: 你在一个对话框里把要干的活说清楚，Claude 自己拆成好几条线程，丢到云端并行开工。官方给它的定位——跟它说话，就像给你的幕僚长交代工作，一次说好几件事，顺序随便...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+- **刚刚，Claude Code大重构！内部3万Agent管理技术免费开放**
+  Source: https://finance.sina.com.cn/wm/2026-09-18/doc-inisfazn8637053.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +3:anthropic, -5:finance_without_tool_signal. Intro: Anthropic全面重构Claude Code项目功能，原生支持多Agent玩法，用户下达目标后Claude可在云端派生多条Git分支并行作业并提PR，新增共享记忆保障Agent上下文对齐。其最新报告显示，内部研发平台日均运行3万个AI Agent，核心AI研发工作26%由Claude主导达AL4级，半年前该占比不足1%。新版Projects目前为beta版，仅向部分Claude Pro和Max云会话用户逐步开放。(AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
