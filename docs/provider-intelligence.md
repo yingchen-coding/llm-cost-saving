@@ -1280,3 +1280,13 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/tech/digi/2026-09-19/doc-inisifyf2710023.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +3:anthropic, -5:finance_without_tool_signal. Intro: IT之家9 月19 日消息，Anthropic 公司Claude Code 团队工程师萨里克·希希帕尔（Thariq Shihipar，网名@trq212）在X 平台发布推文，...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-19-103001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Code全面开放，接入AGENTS.md**
+  Source: https://finance.sina.com.cn/wm/2026-09-19/doc-inisiwwa9871580.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=30, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +5:claude code, +4:编程, +4:harness, +3:anthropic, +3:deepseek, +3:openai, +3:开发者, -5:finance_without_tool_signal. Intro: Claude Code团队核心工程师Thariq在X官宣，2.1.277版本起，项目无CLAUDE.md时Claude将自动读取AGENTS.md。该功能请求在GitHub获5200余点赞、300余留言，票数为仓库第二的四倍，开发者已等待一年多。AGENTS.md是OpenAI2025年8月推出的通用项目说明书格式，已被超6万个开源项目采用，后捐至Linux基金会AAIF。此次更新基于Anthropic新推出的mods定制机制实现，该机制与开源的DeepSeek Harness插件路线不同，二者均推动编程智能体框架去黑箱化。(AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
