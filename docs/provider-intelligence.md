@@ -1260,3 +1260,23 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/wm/2026-09-18/doc-inisfazn8637053.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +3:anthropic, -5:finance_without_tool_signal. Intro: Anthropic全面重构Claude Code项目功能，原生支持多Agent玩法，用户下达目标后Claude可在云端派生多条Git分支并行作业并提PR，新增共享记忆保障Agent上下文对齐。其最新报告显示，内部研发平台日均运行3万个AI Agent，核心AI研发工作26%由Claude主导达AL4级，半年前该占比不足1%。新版Projects目前为beta版，仅向部分Claude Pro和Max云会话用户逐步开放。(AI生成)
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-18-103000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **MiniMax 宣布开源 MiniMax Code CLI**
+  Source: https://finance.sina.com.cn/jjxw/2026-09-18/doc-inishkut3428560.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=14, theme=claim_diligence, lane=claim_gate. Verify exact article before use. Signals: +4:harness, +4:评测, +3:cli, +3:开发者. Intro: 9月18日晚间，MiniMax面向全球开发者开放MiniMax Code CLI v0.4.12版本，该版本以MIT协议开源，它是MiniMax Code客户端的核心组件。在FrontierHarness Eval评测中，该产品取得76.7%的任务通过率，成功任务耗时中位数为4分33秒，两项指标均优于所列公开基线。MiniMax称希望通过harness设计释放模型能力、缩短任务等待时间，此次开源既方便开发者构建可靠企业级应用，也可吸纳社区参与问题排查与修复。(AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-18-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Code 宣布添加支持“AI 通用说明书”AGENTS.md**
+  Source: https://finance.sina.com.cn/tech/digi/2026-09-19/doc-inisifyf2710023.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +3:anthropic, -5:finance_without_tool_signal. Intro: IT之家9 月19 日消息，Anthropic 公司Claude Code 团队工程师萨里克·希希帕尔（Thariq Shihipar，网名@trq212）在X 平台发布推文，...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
