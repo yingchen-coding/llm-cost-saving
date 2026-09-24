@@ -1290,3 +1290,23 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://finance.sina.com.cn/wm/2026-09-19/doc-inisiwwa9871580.shtml?from=pcsearch
   Signal: Daily Sina collector selected this with score=30, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:智能体, +5:claude code, +4:编程, +4:harness, +3:anthropic, +3:deepseek, +3:openai, +3:开发者, -5:finance_without_tool_signal. Intro: Claude Code团队核心工程师Thariq在X官宣，2.1.277版本起，项目无CLAUDE.md时Claude将自动读取AGENTS.md。该功能请求在GitHub获5200余点赞、300余留言，票数为仓库第二的四倍，开发者已等待一年多。AGENTS.md是OpenAI2025年8月推出的通用项目说明书格式，已被超6万个开源项目采用，后捐至Linux基金会AAIF。此次更新基于Anthropic新推出的mods定制机制实现，该机制与开源的DeepSeek Harness插件路线不同，二者均推动编程智能体框架去黑箱化。(AI生成)
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-19-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Code 终于支持 AGENTS.md 了**
+  Source: https://finance.sina.com.cn/roll/2026-09-20/doc-inismzuz2508273.shtml?from=pcsearch
+  Signal: Daily Sina collector selected this with score=12, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:agent, +5:claude code, +4:codex, +3:cursor, -5:finance_without_tool_signal. Intro: Claude Code即将支持AGENTS.md，此前同时使用Claude Code与Cursor、Codex等其他AI工具的团队，为同步上下文常需维护两份雷同Markdown文件，甚至借助软链接、@import取巧。支持后新项目仅需一份AGENTS.md即可适配多款AI工具，告别“双开”维护。原有依赖CLAUDE.md的老项目完全不受影响，原有优先级保持不变。推荐最佳实践为将通用规则写入AGENTS.md，Claude特有配置留存于CLAUDE.md并导入AGENTS，实现一次配置即可支撑多工具协作。(AI生成)
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-23-223000 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Claude Code云会话正式上线，Pro/Max用户可领100~250美元额度**
+  Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02802001x6oe?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: IT之家 9 月 24 日消息，Anthropic 今日宣布 Claude Code 云会话功能结束预览、正式上线。该功能让用户在关闭电脑后，让任务在云端继续运行，并可从浏览器、手机、桌面应用或终端查看和接管...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
