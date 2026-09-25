@@ -1310,3 +1310,13 @@ record and pass a local eval before it changes provider order, cost policy, or f
   Source: https://t.cj.sina.com.cn/articles/view/1826017320/6cd6d02802001x6oe?from=pcsearch
   Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: IT之家 9 月 24 日消息，Anthropic 今日宣布 Claude Code 云会话功能结束预览、正式上线。该功能让用户在关闭电脑后，让任务在云端继续运行，并可从浏览器、手机、桌面应用或终端查看和接管...
   Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
+
+## Intake: 2026-09-24-223001 Sina Signals
+
+These are public-news intake signals, not routing decisions. Each item must become an evidence
+record and pass a local eval before it changes provider order, cost policy, or fallback behavior.
+
+- **Anthropic这回撒钱了！Claude Code最高白送250美元**
+  Source: https://k.sina.com.cn/article_5953740931_162dee0830670404w8.html?from=pcsearch
+  Signal: Daily Sina collector selected this with score=8, theme=tool_implementation, lane=local_skill_or_tool. Verify exact article before use. Signals: +5:claude code, +3:anthropic. Intro: 领到手的也别高兴太早，额度在 11 月 5 日下午 3 点清零。这笔钱的由头，是 Claude Code 的云端会话正式转正...
+  Routing use: track as provider/cost/capability pressure; do not auto-promote without a local benchmark.
